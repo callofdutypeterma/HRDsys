@@ -18,6 +18,7 @@ if(isset($_POST['submit'])){
     $subject = $_POST['subject'];
     $notes = $_POST['notes'];
 
+    /*
     echo "職稱：$jobtitle<br/>";
     echo "姓名：$name<br/>";
     echo "擬授課學期別：$semester<br/>";
@@ -27,6 +28,7 @@ if(isset($_POST['submit'])){
     echo "每週時數：$hours<br/>";
     echo "必選修：$subject<br/>";
     echo "備註：$notes<br/>";
+    */
  
     $insertSql = "INSERT INTO units (jobtitle,name,semester,jobname,semnum,classname,hours,subject,notes) VALUES ('$jobtitle','$name', '$semester','$jobname','$semnum','$classname','$hours','$subject','$notes')";
     $status = mysqli_query($connect, $insertSql);
@@ -41,9 +43,11 @@ if(isset($_POST['submit'])){
 $result = mysqli_query($connect, "SELECT * FROM units;");
 
 if ($result == true || isset($_POST['submit'])==true) {
-    printf("Select returned %d rows.\n", mysqli_num_rows($result));
 
     if (mysqli_num_rows($result) > 0) {
+        
+        printf("有 %d 筆資料\n", mysqli_num_rows($result));
+
         // output data of each row
         while($row = mysqli_fetch_assoc($result)) {
         echo "
@@ -85,7 +89,7 @@ if ($result == true || isset($_POST['submit'])==true) {
         ";
         }
     } else {
-        echo "0 results";
+        echo "無資料";
     }
 
     /* free result set */
@@ -100,21 +104,21 @@ if ($result == true || isset($_POST['submit'])==true) {
     <title></title>
 </head>
 <body>
-    <li>Simple PDF with default Header and Footer: [<a href="example_006.php" title="PDF [new window]" target="_blank">PDF</a>]</li>
+    <li>[<a href="example.php" title="PDF [new window]" target="_blank">PDF</a>]</li>
     <form action="" method="post">
         
     
         <table border="1" align="center">
 	
 	        <tr>
-		        <td><p>職稱</p><input type="text"  name="jobtitle" style="border:0px;"></td>
+		        <td><p>職稱</p><input type="text"  name="jobtitle"></td>
                 <td><p>姓名</p><input type="text" name="name"></td>
-                <td><p>擬授課學期別</p><input type="radio" name="semester" value="1">全學年<input type="radio" name="semester" value="2">上學期<input type="radio" name="semester" value="3">下學期</td>
+                <td><p>擬授課學期別</p><input type="radio" name="semester" value="全學年">全學年<input type="radio" name="semester" value="上學期">上學期<input type="radio" name="semester" value="下學期">下學期</td>
                 <td><p>專職單位及職稱</p><input type="text" name="jobname"></td>
                 <td>授課學期<input type="number" name="semnum" min="1" max="2"></td>
-                <td>授課名稱(或「指導研究生」)<input type="text" name="classname"></td>
+                <td><input type="radio" name="classname">授課名稱<input type="text" name="classname"><br><input type="radio" name="classname" value="指導研究生">指導研究生</td>
                 <td>每週時數<input type="number" name="hours" min="1" max="4"></td>
-                <td><p>必選修</p><input type="radio" name="subject" value="1">必<input type="radio" name="subject" value="2">選</td>
+                <td><p>必選修</p><input type="radio" name="subject" value="必">必<input type="radio" name="subject" value="選">選</td>
 	        </tr>
             
             <tr>
@@ -128,7 +132,7 @@ if ($result == true || isset($_POST['submit'])==true) {
 
     </form>
 
-    <button onClick="GFG_Fun()"> click here </button>
+    <!--<button onClick="GFG_Fun()"> click here </button>
     
     <script> 
         var down = document.getElementById("GFG_DOWN"); 
@@ -206,7 +210,7 @@ if ($result == true || isset($_POST['submit'])==true) {
             .appendChild(form); 
         } 
     </script>
-
+    
     <button id="1" onClick="reply_click(this.id)">B1</button>
     <button id="2" onClick="reply_click(this.id)">B2</button>
     <button id="3" onClick="reply_click(this.id)">B3</button>
@@ -216,7 +220,7 @@ if ($result == true || isset($_POST['submit'])==true) {
       {
           alert(clicked_id);
       }
-    </script>
+    </script>-->
 
 </body>
 </html>

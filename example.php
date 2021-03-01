@@ -142,7 +142,7 @@ $pdf->writeHTML($htmlc, false, 0, false, false, 'L');
 $pdf->lastPage();
 
 //Close and output PDF document
-$pdf->Output('example_006.pdf', 'I');
+$pdf->Output('example.pdf', 'I');
 
 //============================================================+
 // END OF FILE

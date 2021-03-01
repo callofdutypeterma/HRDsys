@@ -12,9 +12,11 @@ $connect = mysqli_connect($host,$user,$passwd,$database);
 
 //設定連線編碼，防止中文字亂碼
 mysqli_query($connect, "SET NAMES 'utf8'");
- 
+
+/* 
 if(!$connect){
     echo '連線失敗';
 }else{
     echo '連線成功';
 }
+*/
