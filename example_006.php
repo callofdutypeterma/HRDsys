@@ -72,7 +72,7 @@ if($result = mysqli_query($link, $sql)){
 mysqli_close($link);
 
 // create some HTML content
-$html = '
+$htmla = '
 <table border="1" align="center">
 	
 	<tr>
@@ -94,35 +94,38 @@ $html = '
 		<td>每週時數</td>
 		<td>必選修</td>
 	</tr>
-	
-	<tr>
-		<td>'.$jobtitle[0].'</td>
-		<td>'.$name[0].'</td>
-		<td>'.$semester[0].'</td>
-		<td>'.$jobname[0].'</td>
-		<td>'.$semnum[0].'</td>
-		<td>'.$classname[0].'</td>
-		<td>'.$hours[0].'</td>
-		<td>'.$subject[0].'</td>
-		<td>'.$notes[0].'</td>
-	</tr>
 
-	<tr>
-		<td>'.$jobtitle[1].'</td>
-		<td>'.$name[1].'</td>
-		<td>'.$semester[1].'</td>
-		<td>'.$jobname[1].'</td>
-		<td>'.$semnum[1].'</td>
-		<td>'.$classname[1].'</td>
-		<td>'.$hours[1].'</td>
-		<td>'.$subject[1].'</td>
-		<td>'.$notes[1].'</td>
-	</tr>
+</table>
+';
+$pdf->writeHTML($htmla, false, 0, false, false, 'L');
+
+for($j = 0; $j < $i; $j++){
+
+	$htmlb = '
+	<table border="1" align="center">
+
+		<tr>
+			<td>'.$jobtitle[$j].'</td>
+			<td>'.$name[$j].'</td>
+			<td>'.$semester[$j].'</td>
+			<td>'.$jobname[$j].'</td>
+			<td>'.$semnum[$j].'</td>
+			<td>'.$classname[$j].'</td>
+			<td>'.$hours[$j].'</td>
+			<td>'.$subject[$j].'</td>
+			<td>'.$notes[$j].'</td>
+		</tr>
+
+	</table>
+	';
+	$pdf->writeHTML($htmlb, false, 0, false, false, 'L');
+}
+$htmlc = '
+<table border="1" align="center">
 
 	<tr>
 		<td colspan="9" align="left">系所主管：                          院長：                             人數：  2人<br>系級教評會 109年 　   月 　   日 108學年度第 2 學期第  次會議審議通過<br>院級教評會 109年 　   月 　   日 108學年度第 2 學期第  次會議報告(審議)通過</td>
 	</tr>
-
 
 </table>
 備註：<br>
@@ -132,7 +135,8 @@ $html = '
 四、本名冊請於109年5月6日前，由各院級單位彙送人事室。<br>
 ';
 // output the HTML content
-$pdf->writeHTML($html, true, false, true, false, 'L');
+
+$pdf->writeHTML($htmlc, false, 0, false, false, 'L');
 
 // reset pointer to the last page
 $pdf->lastPage();

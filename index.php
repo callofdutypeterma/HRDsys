@@ -4,8 +4,7 @@
 
 //header("Content-type:text/html;charset=utf-8");
 
-
-
+include('connect.php');
 
 if(isset($_POST['submit'])){
     
@@ -28,21 +27,69 @@ if(isset($_POST['submit'])){
     echo "每週時數：$hours<br/>";
     echo "必選修：$subject<br/>";
     echo "備註：$notes<br/>";
-
-    include('connect.php');
- 
-    //設定連線編碼，防止中文字亂碼
-    $connect->query("SET NAMES 'utf8'");
  
     $insertSql = "INSERT INTO units (jobtitle,name,semester,jobname,semnum,classname,hours,subject,notes) VALUES ('$jobtitle','$name', '$semester','$jobname','$semnum','$classname','$hours','$subject','$notes')";
-    //呼叫query方法(SQL語法)
-    $status = $connect->query($insertSql);
+    $status = mysqli_query($connect, $insertSql);
  
     if ($status) {
         echo '新增成功';
     } else {
         echo "錯誤: " . $insertSql . "<br>" . $connect->error;
     }
+}
+
+$result = mysqli_query($connect, "SELECT * FROM units;");
+
+if ($result == true || isset($_POST['submit'])==true) {
+    printf("Select returned %d rows.\n", mysqli_num_rows($result));
+
+    if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        while($row = mysqli_fetch_assoc($result)) {
+        echo "
+        
+        <table border='1' align='center'>
+	
+	        <tr>
+		        <th rowspan='2'>職稱</th>
+		        <th rowspan='2'>姓名</th>
+		        <th rowspan='2'>擬授課學期別</th>
+		        <th rowspan='2'>專職單位及職稱</th>
+		        <th colspan='4'>再聘情形</th>
+		        <th rowspan='2'>備註</th>
+                <th rowspan='3'><button type='button'>修改</button></th>
+                <th rowspan='3'><button type='button'>刪除</button></th>
+	        </tr>
+
+	        <tr>
+		        <td>授課學期</td>
+		        <td>授課名稱</td>
+		        <td>每週時數</td>
+		        <td>必選修</td>
+	        </tr>
+	
+	        <tr>
+		        <td>".$row["jobtitle"]."</td>
+                <td>".$row["name"]."</td>
+		        <td>".$row["semester"]."</td>
+		        <td>".$row["jobname"]."</td>
+		        <td>".$row["semnum"]."</td>
+		        <td>".$row["classname"]."</td>
+		        <td>".$row["hours"]."</td>
+		        <td>".$row["subject"]."</td>
+		        <td>".$row["notes"]."</td>
+	        </tr>
+
+        </table>
+        
+        ";
+        }
+    } else {
+        echo "0 results";
+    }
+
+    /* free result set */
+    mysqli_free_result($result);
 }
 ?>
 
@@ -60,7 +107,7 @@ if(isset($_POST['submit'])){
         <table border="1" align="center">
 	
 	        <tr>
-		        <td><p>職稱</p><input type="text"  name="jobtitle"></td>
+		        <td><p>職稱</p><input type="text"  name="jobtitle" style="border:0px;"></td>
                 <td><p>姓名</p><input type="text" name="name"></td>
                 <td><p>擬授課學期別</p><input type="radio" name="semester" value="1">全學年<input type="radio" name="semester" value="2">上學期<input type="radio" name="semester" value="3">下學期</td>
                 <td><p>專職單位及職稱</p><input type="text" name="jobname"></td>
@@ -158,6 +205,17 @@ if(isset($_POST['submit'])){
             document.getElementsByTagName("body")[0] 
             .appendChild(form); 
         } 
+    </script>
+
+    <button id="1" onClick="reply_click(this.id)">B1</button>
+    <button id="2" onClick="reply_click(this.id)">B2</button>
+    <button id="3" onClick="reply_click(this.id)">B3</button>
+    
+    <script type="text/javascript">
+      function reply_click(clicked_id)
+      {
+          alert(clicked_id);
+      }
     </script>
 
 </body>
