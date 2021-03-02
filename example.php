@@ -25,12 +25,16 @@ $pdf->SetFont($fontname, '', 12, '', false);
 // add a page
 $pdf->AddPage();
 
+include('connect.php');
+
+/*
 $link = mysqli_connect("localhost", "root", "root", "mysys");
  
 // Check connection
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
+*/
 
 $i=0;
 $id = null;
@@ -46,7 +50,7 @@ $notes = null;
 
 // Attempt select query execution
 $sql = "SELECT * FROM units";
-if($result = mysqli_query($link, $sql)){
+if($result = mysqli_query($connect, $sql)){
     
 	while($row = mysqli_fetch_array($result)){
 		$id[$i]=$row['id'];
@@ -65,11 +69,11 @@ if($result = mysqli_query($link, $sql)){
     mysqli_free_result($result);
     
 } else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($connect);
 }
  
 // Close connection
-mysqli_close($link);
+mysqli_close($connect);
 
 // create some HTML content
 $htmla = '

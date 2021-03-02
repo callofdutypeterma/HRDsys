@@ -40,6 +40,7 @@ if(isset($_POST['submit'])){
     }
 }
 
+$i=0;
 $result = mysqli_query($connect, "SELECT * FROM units;");
 
 if ($result == true || isset($_POST['submit'])==true) {
@@ -61,7 +62,7 @@ if ($result == true || isset($_POST['submit'])==true) {
 		        <th rowspan='2'>專職單位及職稱</th>
 		        <th colspan='4'>再聘情形</th>
 		        <th rowspan='2'>備註</th>
-                <th rowspan='3'><button type='button'>修改</button></th>
+                <th rowspan='3'><button id='$i' onClick='reply_click(this.id)'>修改</button></th>
                 <th rowspan='3'><button type='button'>刪除</button></th>
 	        </tr>
 
@@ -87,6 +88,7 @@ if ($result == true || isset($_POST['submit'])==true) {
         </table>
         
         ";
+        $i++;
         }
     } else {
         echo "無資料";
@@ -214,13 +216,13 @@ if ($result == true || isset($_POST['submit'])==true) {
     <button id="1" onClick="reply_click(this.id)">B1</button>
     <button id="2" onClick="reply_click(this.id)">B2</button>
     <button id="3" onClick="reply_click(this.id)">B3</button>
-    
+    -->
     <script type="text/javascript">
       function reply_click(clicked_id)
       {
           alert(clicked_id);
       }
-    </script>-->
+    </script>
 
 </body>
 </html>
