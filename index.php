@@ -53,7 +53,7 @@ if ($result == true || isset($_POST['submit'])==true) {
         while($row = mysqli_fetch_assoc($result)) {
         echo "
         
-        <table border='1' align='center'>
+        <table border='1' width='60%' align='center'>
 	
 	        <tr>
 		        <th rowspan='2'>職稱</th>
@@ -62,7 +62,7 @@ if ($result == true || isset($_POST['submit'])==true) {
 		        <th rowspan='2'>專職單位及職稱</th>
 		        <th colspan='4'>再聘情形</th>
 		        <th rowspan='2'>備註</th>
-                <th rowspan='3'><button id='$i' onClick='reply_click(this.id)'>修改</button></th>
+                <th rowspan='3'><button id='mod$i' onClick='reply_click(this.id)'>修改</button></th>
                 <th rowspan='3'><button type='button'>刪除</button></th>
 	        </tr>
 
@@ -74,7 +74,7 @@ if ($result == true || isset($_POST['submit'])==true) {
 	        </tr>
 	
 	        <tr>
-		        <td>".$row["jobtitle"]."</td>
+		        <td><input type='text' name='jobtitle$i' value='".$row["jobtitle"]."'></td>
                 <td>".$row["name"]."</td>
 		        <td>".$row["semester"]."</td>
 		        <td>".$row["jobname"]."</td>
