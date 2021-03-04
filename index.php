@@ -40,52 +40,64 @@ if(isset($_POST['submit'])){
     }
 }
 
-$i=0;
 $result = mysqli_query($connect, "SELECT * FROM units;");
 
-if ($result == true || isset($_POST['submit'])==true) {
+if ($result == true || isset($_POST['submit'])==true || isset($_POST['delete'])==true) {
+
+    if(isset($_POST['delete'])==true){
+        
+        $deleteSql = "DELETE FROM units WHERE id = 10;";
+        mysqli_query($connect, $deleteSql);
+        $result = mysqli_query($connect, "SELECT * FROM units;");
+    }
 
     if (mysqli_num_rows($result) > 0) {
         
         printf("有 %d 筆資料\n", mysqli_num_rows($result));
 
         // output data of each row
+        $i=0;
+
         while($row = mysqli_fetch_assoc($result)) {
         echo "
         
-        <table border='1' width='60%' align='center'>
-	
-	        <tr>
-		        <th rowspan='2'>職稱</th>
-		        <th rowspan='2'>姓名</th>
-		        <th rowspan='2'>擬授課學期別</th>
-		        <th rowspan='2'>專職單位及職稱</th>
-		        <th colspan='4'>再聘情形</th>
-		        <th rowspan='2'>備註</th>
-                <th rowspan='3'><button id='mod$i' onClick='reply_click(this.id)'>修改</button></th>
-                <th rowspan='3'><button type='button'>刪除</button></th>
-	        </tr>
+        <form action='' method='post'>
 
-	        <tr>
-		        <td>授課學期</td>
-		        <td>授課名稱</td>
-		        <td>每週時數</td>
-		        <td>必選修</td>
-	        </tr>
+            <table border='1' width='60%' align='center'>
 	
-	        <tr>
-		        <td><input type='text' name='jobtitle$i' value='".$row["jobtitle"]."'></td>
-                <td>".$row["name"]."</td>
-		        <td>".$row["semester"]."</td>
-		        <td>".$row["jobname"]."</td>
-		        <td>".$row["semnum"]."</td>
-		        <td>".$row["classname"]."</td>
-		        <td>".$row["hours"]."</td>
-		        <td>".$row["subject"]."</td>
-		        <td>".$row["notes"]."</td>
-	        </tr>
+	            <tr>
+		            <th rowspan='2'>職稱</th>
+		            <th rowspan='2'>姓名</th>
+		            <th rowspan='2'>擬授課學期別</th>
+		            <th rowspan='2'>專職單位及職稱</th>
+		            <th colspan='4'>再聘情形</th>
+		            <th rowspan='2'>備註</th>
+                    <th rowspan='3'><button id='mod$i' onClick='reply_click(this.id)'>修改</button></th>
+                    <th rowspan='3'><input type='submit' name='delete' id='del$i' value='刪除'></th>
+	            </tr>
 
-        </table>
+	            <tr>
+		            <td>授課學期</td>
+		            <td>授課名稱</td>
+		            <td>每週時數</td>
+		            <td>必選修</td>
+	            </tr>
+	
+	            <tr>
+		            <td><input type='text' name='jobtitle$i' value='".$row["jobtitle"]."'></td>
+                    <td>".$row["name"]."</td>
+		            <td>".$row["semester"]."</td>
+		            <td>".$row["jobname"]."</td>
+		            <td>".$row["semnum"]."</td>
+		            <td>".$row["classname"]."</td>
+		            <td>".$row["hours"]."</td>
+		            <td>".$row["subject"]."</td>
+		            <td>".$row["notes"]."</td>
+	            </tr>
+
+            </table>
+
+        </form>
         
         ";
         $i++;
