@@ -5,6 +5,13 @@
 //header("Content-type:text/html;charset=utf-8");
 
 include('connect.php');
+$m1 = 2;
+$m2 = 1;
+${'m' . $m2} = 3;
+
+echo "$m1<br>";
+
+
 
 if(isset($_POST['submit'])){
     
@@ -59,48 +66,49 @@ if ($result == true || isset($_POST['submit'])==true || isset($_POST['delete'])=
         $i=0;
 
         while($row = mysqli_fetch_assoc($result)) {
-        echo "
+            
+            echo "
         
-        <form action='' method='post'>
+            <form action='' method='post'>
 
-            <table border='1' width='60%' align='center'>
+                <table border='1' width='60%' align='center'>
 	
-	            <tr>
-		            <th rowspan='2'>職稱</th>
-		            <th rowspan='2'>姓名</th>
-		            <th rowspan='2'>擬授課學期別</th>
-		            <th rowspan='2'>專職單位及職稱</th>
-		            <th colspan='4'>再聘情形</th>
-		            <th rowspan='2'>備註</th>
-                    <th rowspan='3'><button id='mod$i' onClick='reply_click(this.id)'>修改</button></th>
-                    <th rowspan='3'><input type='submit' name='delete' id='del$i' value='刪除'></th>
-	            </tr>
+	                <tr>
+		                <th rowspan='2'>職稱</th>
+		                <th rowspan='2'>姓名</th>
+		                <th rowspan='2'>擬授課學期別</th>
+		                <th rowspan='2'>專職單位及職稱</th>
+		                <th colspan='4'>再聘情形</th>
+		                <th rowspan='2'>備註</th>
+                        <th rowspan='3'><button id='mod$i' onClick='reply_click(this.id)'>修改</button></th>
+                        <th rowspan='3'><input type='submit' name='delete' id='del$i' value='刪除'></th>
+	                </tr>
 
-	            <tr>
-		            <td>授課學期</td>
-		            <td>授課名稱</td>
-		            <td>每週時數</td>
-		            <td>必選修</td>
-	            </tr>
+	                <tr>
+		                <td>授課學期</td>
+		                <td>授課名稱</td>
+		                <td>每週時數</td>
+		                <td>必選修</td>
+	                </tr>
 	
-	            <tr>
-		            <td><input type='text' name='jobtitle$i' value='".$row["jobtitle"]."'></td>
-                    <td>".$row["name"]."</td>
-		            <td>".$row["semester"]."</td>
-		            <td>".$row["jobname"]."</td>
-		            <td>".$row["semnum"]."</td>
-		            <td>".$row["classname"]."</td>
-		            <td>".$row["hours"]."</td>
-		            <td>".$row["subject"]."</td>
-		            <td>".$row["notes"]."</td>
-	            </tr>
+	                <tr>
+		                <td><input type='text' name='jobtitle$i' value='".$row["jobtitle"]."'></td>
+                        <td>".$row["name"]."</td>
+		                <td>".$row["semester"]."</td>
+		                <td>".$row["jobname"]."</td>
+		                <td>".$row["semnum"]."</td>
+		                <td>".$row["classname"]."</td>
+		                <td>".$row["hours"]."</td>
+		                <td>".$row["subject"]."</td>
+		                <td>".$row["notes"]."</td>
+	                </tr>
 
-            </table>
+                </table>
 
-        </form>
+            </form>
         
-        ";
-        $i++;
+            ";
+            $i++;
         }
     } else {
         echo "無資料";
