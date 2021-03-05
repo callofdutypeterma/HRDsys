@@ -1,17 +1,110 @@
 ﻿<!DOCTYPE html>
 
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <title>兼任續聘系統</title>
+</head>
+<body>
+
+    <select name="pets" id="mySelect" onchange="myFunction()">
+        <option>-----------請選擇你的單位-----------</option>
+        <option value="library">01 圖書館                           </option>
+        <option>02 總教學中心                       </option>
+        <option value="units">03 體育室                           </option>
+        <option>04 通識教育中心                     </option>
+        <option>05 語言中心                         </option>
+        <option>06 太空及遙測研究中心               </option>
+        <option>07 光電科學研究中心                 </option>
+        <option>08 環境研究中心                     </option>
+        <option>09 通訊系統研究中心                 </option>
+        <option>10 臺灣經濟發展研究中心             </option>
+        <option>11 人文研究中心                     </option>
+        <option>12 數據分析方法研究中心             </option>
+        <option>13 前瞻科技研究中心                 </option>
+        <option>14 聯合研究中心                     </option>
+        <option>15 軟體研究中心                     </option>
+        <option>16 災害防治研究中心                 </option>
+        <option>17 學習科技研究中心                 </option>
+        <option>18 奈米科技研究中心                 </option>
+        <option>19 全球定位科學與應用研究中心       </option>
+        <option>20 新世代光驅動電池模組研究中心     </option>
+        <option>21 文學院                           </option>
+        <option>22 中國文學系                       </option>
+        <option>23 英美語文學系                     </option>
+        <option>24 法國語文學系                     </option>
+        <option>25 哲學研究所                       </option>
+        <option>26 歷史研究所                       </option>
+        <option>27 藝術學研究所                     </option>
+        <option>28 學習與教學研究所                 </option>
+        <option>29 師資培育中心                     </option>
+        <option>30 文學院學士班                     </option>
+        <option>31 理學院                           </option>
+        <option>32 數學系                           </option>
+        <option>33 物理學系                         </option>
+        <option>34 化學學系                         </option>
+        <option>35 統計研究所                       </option>
+        <option>36 光電科學與工程學系               </option>
+        <option>37 天文研究所                       </option>
+        <option>38 工學院                           </option>
+        <option>39 土木工程學系                     </option>
+        <option>40 機械工程學系                     </option>
+        <option>41 能源工程研究所                   </option>
+        <option>42 化學工程與材料工程學系           </option>
+        <option>43 營建管理研究所                   </option>
+        <option>44 環境工程研究所                   </option>
+        <option>45 材料科學與工程研究所             </option>
+        <option>46 管理學院                         </option>
+        <option>47 企業管理學系                     </option>
+        <option>48 產業經濟研究所                   </option>
+        <option>49 資訊管理學系                     </option>
+        <option>50 經濟學系                         </option>
+        <option>51 工業管理研究所                   </option>
+        <option>52 人力資源管理研究所               </option>
+        <option>53 財務金融學系                     </option>
+        <option>54 會計研究所                       </option>
+        <option>55 資訊電機學院                     </option>
+        <option>56 電機工程學系                     </option>
+        <option>57 資訊工程學系                     </option>
+        <option>58 通訊工程學系                     </option>
+        <option>59 網路學習科技研究所               </option>
+        <option>60 地球科學學院                     </option>
+        <option>61 地球科學學系                     </option>
+        <option>62 大氣科學學系                     </option>
+        <option>63 太空科學與工程學系               </option>
+        <option>64 應用地質研究所                   </option>
+        <option>65 水文與海洋科學研究所             </option>
+        <option>66 客家學院                         </option>
+        <option>67 法律與政府研究所                 </option>
+        <option>68 客家語文暨社會科學學系           </option>
+        <option>69 生醫理工學院                     </option>
+        <option>70 生命科學系                       </option>
+        <option>71 生醫科學與工程學系               </option>
+        <option>72 認知神經科學研究所               </option>
+        <option>73 高能與強場物理研究中心           </option>
+        <option>74 太空科學與科技研究中心           </option>
+        <option>75 新世代光驅動電池模組研究中心     </option>
+        <option>76 地震災害鏈風險評估及管理研究中心 </option>
+        <option>77 環境監測技術聯合中心             </option>
+        <option>78 認知智慧與精準健康照護研究中心   </option>
+    </select><br>
+
+    <script>
+        function myFunction() {
+          var x = document.getElementById("mySelect").value;
+          //document.getElementById("demo").innerHTML = "You selected: " + x;
+          window.location.href = 'index.php?myselect='+ x;
+        }
+    </script>
+
 <?php
 
 //header("Content-type:text/html;charset=utf-8");
 
 include('connect.php');
-$m1 = 2;
-$m2 = 1;
-${'m' . $m2} = 3;
 
-echo "$m1<br>";
-
-
+//${'m' . $m2} = 3;
 
 if(isset($_POST['submit'])){
     
@@ -47,16 +140,16 @@ if(isset($_POST['submit'])){
     }
 }
 
-$result = mysqli_query($connect, "SELECT * FROM units;");
+//$sql = "SELECT * FROM units;";
+//$result = mysqli_query($connect, $sql);
 
-if ($result == true || isset($_POST['submit'])==true || isset($_POST['delete'])==true) {
+if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 
-    if(isset($_POST['delete'])==true){
-        
-        $deleteSql = "DELETE FROM units WHERE id = 10;";
-        mysqli_query($connect, $deleteSql);
-        $result = mysqli_query($connect, "SELECT * FROM units;");
-    }
+$myselect = $_GET['myselect'];
+echo $myselect;
+
+$sql = "SELECT * FROM ".$myselect.";";
+$result = mysqli_query($connect, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         
@@ -65,12 +158,8 @@ if ($result == true || isset($_POST['submit'])==true || isset($_POST['delete'])=
         // output data of each row
         $i=0;
 
-        while($row = mysqli_fetch_assoc($result)) {
-            
-            echo "
+        echo "
         
-            <form action='' method='post'>
-
                 <table border='1' width='60%' align='center'>
 	
 	                <tr>
@@ -80,8 +169,8 @@ if ($result == true || isset($_POST['submit'])==true || isset($_POST['delete'])=
 		                <th rowspan='2'>專職單位及職稱</th>
 		                <th colspan='4'>再聘情形</th>
 		                <th rowspan='2'>備註</th>
-                        <th rowspan='3'><button id='mod$i' onClick='reply_click(this.id)'>修改</button></th>
-                        <th rowspan='3'><input type='submit' name='delete' id='del$i' value='刪除'></th>
+                        <th rowspan='2' colspan='2'>動作</th>
+                        
 	                </tr>
 
 	                <tr>
@@ -90,6 +179,14 @@ if ($result == true || isset($_POST['submit'])==true || isset($_POST['delete'])=
 		                <td>每週時數</td>
 		                <td>必選修</td>
 	                </tr>
+
+        ";
+
+        while($row = mysqli_fetch_assoc($result)) {
+            
+            ${'id' . $i} = $row["id"];
+            
+            echo "
 	
 	                <tr>
 		                <td><input type='text' name='jobtitle$i' value='".$row["jobtitle"]."'></td>
@@ -101,15 +198,19 @@ if ($result == true || isset($_POST['submit'])==true || isset($_POST['delete'])=
 		                <td>".$row["hours"]."</td>
 		                <td>".$row["subject"]."</td>
 		                <td>".$row["notes"]."</td>
+                        <td><button id='mod$i' onClick='reply_click(this.id)'>修改</button></th>
+                        <td><a href='delete.php?id=".$row['id']."' class='del_btn'>刪除</a></th>
 	                </tr>
 
-                </table>
-
-            </form>
-        
             ";
             $i++;
         }
+
+        echo "
+        
+                </table>
+        
+        ";
     } else {
         echo "無資料";
     }
@@ -119,17 +220,8 @@ if ($result == true || isset($_POST['submit'])==true || isset($_POST['delete'])=
 }
 ?>
 
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <link href="styles/style.css" rel="stylesheet" type="text/css">
-    <title></title>
-</head>
-<body>
-    <li>[<a href="example.php" title="PDF [new window]" target="_blank">PDF</a>]</li>
     <form action="" method="post">
         
-    
         <table border="1" align="center">
 	
 	        <tr>
@@ -150,7 +242,7 @@ if ($result == true || isset($_POST['submit'])==true || isset($_POST['delete'])=
         </table>
 
         <p><input type="submit" name="submit" value="送出資料"></p>
-
+        <a href="example.php" title="PDF [new window]" target="_blank" class="pdf">匯出PDF</a>
 
     </form>
 
