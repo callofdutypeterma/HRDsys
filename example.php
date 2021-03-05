@@ -36,6 +36,8 @@ if($link === false){
 }
 */
 
+$myselect = $_GET['myselect'];
+
 $i=0;
 $id = null;
 $jobtitle = null;
@@ -49,7 +51,7 @@ $subject = null;
 $notes = null;
 
 // Attempt select query execution
-$sql = "SELECT * FROM units";
+$sql = "SELECT * FROM $myselect";
 if($result = mysqli_query($connect, $sql)){
     
 	while($row = mysqli_fetch_array($result)){
@@ -80,23 +82,23 @@ $htmla = '
 <table border="1" align="center">
 	
 	<tr>
-		<td colspan="9" ><font size="16">國立中央大學109學年度  體育室  推薦再聘兼任教研人員名冊</font></td>
+		<td colspan="9" ><font size="16">國立中央大學109學年度  '.$myselect.'  推薦再聘兼任教研人員名冊</font></td>
 	</tr>
 
 	<tr>
-		<th rowspan="2"><font size="6"><small color="#FFFFFF">small<br></small></font>職稱</th>
-		<th rowspan="2">姓名</th>
-		<th rowspan="2">擬授課學期別</th>
-		<th rowspan="2">專職單位及職稱</th>
-		<th colspan="4">再聘情形</th>
-		<th rowspan="2">備註</th>
+		<th rowspan="2" width="12%"><font size="6"><small color="#FFFFFF">small<br></small></font>職稱</th>
+		<th rowspan="2" width="12%">姓名</th>
+		<th rowspan="2" width="12%">擬授課學期別</th>
+		<th rowspan="2" width="12%">專職單位及職稱</th>
+		<th colspan="4" width="40%">再聘情形</th>
+		<th rowspan="2" width="12%">備註</th>
 	</tr>
 
 	<tr>
-		<td>授課學期</td>
-		<td>授課名稱</td>
-		<td>每週時數</td>
-		<td>必選修</td>
+		<td width="6%">授課學期</td>
+		<td width="22%">授課名稱</td>
+		<td width="6%">每週時數</td>
+		<td width="6%">必選修</td>
 	</tr>
 
 </table>
@@ -109,15 +111,15 @@ for($j = 0; $j < $i; $j++){
 	<table border="1" align="center">
 
 		<tr>
-			<td>'.$jobtitle[$j].'</td>
-			<td>'.$name[$j].'</td>
-			<td>'.$semester[$j].'</td>
-			<td>'.$jobname[$j].'</td>
-			<td>'.$semnum[$j].'</td>
-			<td>'.$classname[$j].'</td>
-			<td>'.$hours[$j].'</td>
-			<td>'.$subject[$j].'</td>
-			<td>'.$notes[$j].'</td>
+			<td width="12%">'.$jobtitle[$j].'</td>
+			<td width="12%">'.$name[$j].'</td>
+			<td width="12%">'.$semester[$j].'</td>
+			<td width="12%">'.$jobname[$j].'</td>
+			<td width="6%">'.$semnum[$j].'</td>
+			<td width="22%">'.$classname[$j].'</td>
+			<td width="6%">'.$hours[$j].'</td>
+			<td width="6%">'.$subject[$j].'</td>
+			<td width="12%">'.$notes[$j].'</td>
 		</tr>
 
 	</table>
@@ -128,7 +130,7 @@ $htmlc = '
 <table border="1" align="center">
 
 	<tr>
-		<td colspan="9" align="left">系所主管：                          院長：                             人數：  2人<br>系級教評會 109年 　   月 　   日 108學年度第 2 學期第  次會議審議通過<br>院級教評會 109年 　   月 　   日 108學年度第 2 學期第  次會議報告(審議)通過</td>
+		<td colspan="9" align="left">系所承辦人：<font color="#FFFFFF">馬碩廷測試</font>單位主管：<font color="#FFFFFF">馬碩廷測試</font>院級主管：<font color="#FFFFFF">馬碩廷測試</font>人數：  人<br>系級教評會 109年 　   月 　   日 108學年度第 2 學期第  次會議審議通過<br>院級教評會 109年 　   月 　   日 108學年度第 2 學期第  次會議報告(審議)通過</td>
 	</tr>
 
 </table>

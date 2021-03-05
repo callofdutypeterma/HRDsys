@@ -7,13 +7,15 @@
     <title>兼任續聘系統</title>
 </head>
 <body>
-
+    
+    <a href='index.php' class='index'>回首頁</a><br>
+    
     <select name="pets" id="mySelect" onchange="myFunction()">
         <option>-----------請選擇你的單位-----------</option>
         <option value="library">01 圖書館                           </option>
         <option>02 總教學中心                       </option>
         <option value="units">03 體育室                           </option>
-        <option>04 通識教育中心                     </option>
+        <option value="ge">04 通識教育中心                     </option>
         <option>05 語言中心                         </option>
         <option>06 太空及遙測研究中心               </option>
         <option>07 光電科學研究中心                 </option>
@@ -106,6 +108,11 @@ include('connect.php');
 
 //${'m' . $m2} = 3;
 
+if (isset($_GET['myselect'])==true) {
+
+    $myselect = $_GET['myselect'];
+}
+
 if(isset($_POST['submit'])){
     
     $jobtitle = $_POST['jobtitle'];
@@ -130,7 +137,7 @@ if(isset($_POST['submit'])){
     echo "備註：$notes<br/>";
     */
  
-    $insertSql = "INSERT INTO units (jobtitle,name,semester,jobname,semnum,classname,hours,subject,notes) VALUES ('$jobtitle','$name', '$semester','$jobname','$semnum','$classname','$hours','$subject','$notes')";
+    $insertSql = "INSERT INTO $myselect (jobtitle,name,semester,jobname,semnum,classname,hours,subject,notes) VALUES ('$jobtitle','$name', '$semester','$jobname','$semnum','$classname','$hours','$subject','$notes')";
     $status = mysqli_query($connect, $insertSql);
  
     if ($status) {
@@ -145,11 +152,10 @@ if(isset($_POST['submit'])){
 
 if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 
-$myselect = $_GET['myselect'];
-echo $myselect;
+    echo $myselect;
 
-$sql = "SELECT * FROM ".$myselect.";";
-$result = mysqli_query($connect, $sql);
+    $sql = "SELECT * FROM ".$myselect.";";
+    $result = mysqli_query($connect, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         
@@ -169,7 +175,7 @@ $result = mysqli_query($connect, $sql);
 		                <th rowspan='2'>專職單位及職稱</th>
 		                <th colspan='4'>再聘情形</th>
 		                <th rowspan='2'>備註</th>
-                        <th rowspan='2' colspan='2'>動作</th>
+                        <th rowspan='2'>動作</th>
                         
 	                </tr>
 
@@ -189,7 +195,7 @@ $result = mysqli_query($connect, $sql);
             echo "
 	
 	                <tr>
-		                <td><input type='text' name='jobtitle$i' value='".$row["jobtitle"]."'></td>
+		                <td>".$row["jobtitle"]."</td>
                         <td>".$row["name"]."</td>
 		                <td>".$row["semester"]."</td>
 		                <td>".$row["jobname"]."</td>
@@ -198,8 +204,8 @@ $result = mysqli_query($connect, $sql);
 		                <td>".$row["hours"]."</td>
 		                <td>".$row["subject"]."</td>
 		                <td>".$row["notes"]."</td>
-                        <td><button id='mod$i' onClick='reply_click(this.id)'>修改</button></th>
-                        <td><a href='delete.php?id=".$row['id']."' class='del_btn'>刪除</a></th>
+                        
+                        <td><a href='delete.php?id=".$row['id']."&myselect=".$myselect."' class='del_btn'>刪除</a></th>
 	                </tr>
 
             ";
@@ -207,18 +213,13 @@ $result = mysqli_query($connect, $sql);
         }
 
         echo "
-        
                 </table>
-        
         ";
     } else {
         echo "無資料";
     }
 
-    /* free result set */
-    mysqli_free_result($result);
-}
-?>
+    echo'
 
     <form action="" method="post">
         
@@ -241,11 +242,17 @@ $result = mysqli_query($connect, $sql);
 
         </table>
 
-        <p><input type="submit" name="submit" value="送出資料"></p>
-        <a href="example.php" title="PDF [new window]" target="_blank" class="pdf">匯出PDF</a>
+        <p><input type="submit" name="submit" value="新增資料"></p>
+        <a href="example.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出PDF</a>
 
     </form>
+    ';
 
+    /* free result set */
+    //mysqli_free_result($result);
+}
+    
+?>
     <!--<button onClick="GFG_Fun()"> click here </button>
     
     <script> 
