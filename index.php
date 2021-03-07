@@ -238,16 +238,16 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 	        <tr>
 		        <td rowspan="2"><p>職稱</p><input type="text"  name="jobtitle"></td>
                 <td rowspan="2"><p>姓名</p><input type="text" name="name"></td>
-                <td rowspan="2"><p>擬授課學期別</p><input type="radio" name="semester" value="全學年">全學年<input type="radio" name="semester" value="上學期">上學期<input type="radio" name="semester" value="下學期">下學期</td>
+                <td rowspan="2"><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick=""><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
                 <td rowspan="2"><p>專職單位及職稱</p><input type="text" name="jobname"></td>
-                <td>授課學期<input type="number" name="semnum" value="1" min="1" max="2"></td>
+                <td>授課學期<input id="semnuma" type="number" name="semnum" min="1" max="2"></td>
                 <td><input type="radio" name="classname">授課名稱<input type="text" name="classname"><br><input type="radio" name="classname" value="指導研究生">指導研究生</td>
                 <td>每週時數<input type="number" name="hours" min="1" max="4"></td>
                 <td><p>必選修</p><input type="radio" name="subject" value="必">必<input type="radio" name="subject" value="選">選</td>
 	        </tr>
             
             <tr>
-                <td>授課學期<input type="number" name="semnum" value="2" min="1" max="2"></td>
+                <td>授課學期<input id="semnumb" type="number" name="semnum" min="1" max="2"></td>
                 <td><input type="radio" name="classname">授課名稱<input type="text" name="classname"><br><input type="radio" name="classname" value="指導研究生">指導研究生</td>
                 <td>每週時數<input type="number" name="hours" min="1" max="4"></td>
                 <td><p>必選修</p><input type="radio" name="subject" value="必">必<input type="radio" name="subject" value="選">選</td>
@@ -354,10 +354,21 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
     <button id="3" onClick="reply_click(this.id)">B3</button>
     -->
     <script type="text/javascript">
-      function reply_click(clicked_id)
-      {
-          alert(clicked_id);
-      }
+          function reply_click(clicked_id)
+          {
+              alert(clicked_id);
+          }
+
+          function selectFirst() {
+            document.getElementById("semnuma").value = 1;
+            document.getElementById("semnumb").value = "";
+          }
+
+          function selectSecond() {
+            document.getElementById("semnuma").value = "";
+            document.getElementById("semnumb").value = 2;
+          }
+
     </script>
     </div>
 </body>
