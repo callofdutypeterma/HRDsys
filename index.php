@@ -8,7 +8,11 @@
 </head>
 <body>
     
+    <div class="wrap">
+
     <a href='index.php' class='index'>回首頁</a><br>
+
+    <H1>兼任續聘系統</H1>
     
     <select name="pets" id="mySelect" onchange="myFunction()">
         <option>-----------請選擇你的單位-----------</option>
@@ -108,9 +112,14 @@ include('connect.php');
 
 //${'m' . $m2} = 3;
 
+$myselect = "";
+
 if (isset($_GET['myselect'])==true) {
 
     $myselect = $_GET['myselect'];
+    $exportecl = "select * from $myselect into outfile 'd:/test.xls';";
+    mysqli_query($connect, $exportecl);
+    
 }
 
 if(isset($_POST['submit'])){
@@ -192,6 +201,8 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
             
             ${'id' . $i} = $row["id"];
             
+            $str = str_replace("\r\n","<br>", $row["notes"]);
+
             echo "
 	
 	                <tr>
@@ -203,8 +214,7 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 		                <td>".$row["classname"]."</td>
 		                <td>".$row["hours"]."</td>
 		                <td>".$row["subject"]."</td>
-		                <td>".$row["notes"]."</td>
-                        
+		                <td>".$str."</td>
                         <td><a href='delete.php?id=".$row['id']."&myselect=".$myselect."' class='del_btn'>刪除</a></th>
 	                </tr>
 
@@ -223,21 +233,28 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 
     <form action="" method="post">
         
-        <table border="1" align="center">
+        <table border="1" align="center" style="text-align: left;">
 	
 	        <tr>
-		        <td><p>職稱</p><input type="text"  name="jobtitle"></td>
-                <td><p>姓名</p><input type="text" name="name"></td>
-                <td><p>擬授課學期別</p><input type="radio" name="semester" value="全學年">全學年<input type="radio" name="semester" value="上學期">上學期<input type="radio" name="semester" value="下學期">下學期</td>
-                <td><p>專職單位及職稱</p><input type="text" name="jobname"></td>
-                <td>授課學期<input type="number" name="semnum" min="1" max="2"></td>
+		        <td rowspan="2"><p>職稱</p><input type="text"  name="jobtitle"></td>
+                <td rowspan="2"><p>姓名</p><input type="text" name="name"></td>
+                <td rowspan="2"><p>擬授課學期別</p><input type="radio" name="semester" value="全學年">全學年<input type="radio" name="semester" value="上學期">上學期<input type="radio" name="semester" value="下學期">下學期</td>
+                <td rowspan="2"><p>專職單位及職稱</p><input type="text" name="jobname"></td>
+                <td>授課學期<input type="number" name="semnum" value="1" min="1" max="2"></td>
                 <td><input type="radio" name="classname">授課名稱<input type="text" name="classname"><br><input type="radio" name="classname" value="指導研究生">指導研究生</td>
                 <td>每週時數<input type="number" name="hours" min="1" max="4"></td>
                 <td><p>必選修</p><input type="radio" name="subject" value="必">必<input type="radio" name="subject" value="選">選</td>
 	        </tr>
             
             <tr>
-                <td colspan="8"><p>備註</p><input type="text" name="notes"></td>
+                <td>授課學期<input type="number" name="semnum" value="2" min="1" max="2"></td>
+                <td><input type="radio" name="classname">授課名稱<input type="text" name="classname"><br><input type="radio" name="classname" value="指導研究生">指導研究生</td>
+                <td>每週時數<input type="number" name="hours" min="1" max="4"></td>
+                <td><p>必選修</p><input type="radio" name="subject" value="必">必<input type="radio" name="subject" value="選">選</td>
+            </tr>
+
+            <tr>
+                <td colspan="8"><p>備註</p><textarea name="notes" rows="4" cols="50"></textarea></td>
             </tr>
 
         </table>
@@ -342,6 +359,6 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
           alert(clicked_id);
       }
     </script>
-
+    </div>
 </body>
 </html>

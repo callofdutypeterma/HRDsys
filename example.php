@@ -86,7 +86,7 @@ $htmla = '
 	</tr>
 
 	<tr>
-		<th rowspan="2" width="12%"><font size="6"><small color="#FFFFFF">small<br></small></font>職稱</th>
+		<th rowspan="2" width="12%"><font size="6"><small color="#FFFFFF">small</small><br></font>職稱</th>
 		<th rowspan="2" width="12%">姓名</th>
 		<th rowspan="2" width="12%">擬授課學期別</th>
 		<th rowspan="2" width="12%">專職單位及職稱</th>
@@ -130,7 +130,7 @@ $htmlc = '
 <table border="1" align="center">
 
 	<tr>
-		<td colspan="9" align="left">系所承辦人：<font color="#FFFFFF">馬碩廷測試</font>單位主管：<font color="#FFFFFF">馬碩廷測試</font>院級主管：<font color="#FFFFFF">馬碩廷測試</font>人數：  人<br>系級教評會 109年 　   月 　   日 108學年度第 2 學期第  次會議審議通過<br>院級教評會 109年 　   月 　   日 108學年度第 2 學期第  次會議報告(審議)通過</td>
+		<td colspan="9" align="left"><small color="#FFFFFF">small</small><br>系所承辦人：<font color="#FFFFFF">天天都在測試中</font>單位主管：<font color="#FFFFFF">天天都在測試中</font>院級主管：<font color="#FFFFFF">天天都在測試中</font>人數：  人<br><small color="#FFFFFF">small</small><br>系級教評會 109年 　   月 　   日 108學年度第 2 學期第  次會議審議通過<br><small color="#FFFFFF">small</small><br>院級教評會 109年 　   月 　   日 108學年度第 2 學期第  次會議報告(審議)通過</td>
 	</tr>
 
 </table>
