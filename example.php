@@ -9,7 +9,7 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Nicola Asuni');
-$pdf->SetTitle('TCPDF Example 006');
+$pdf->SetTitle('PDF Example');
 $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
@@ -28,6 +28,19 @@ $pdf->AddPage();
 include('connect.php');
 
 $myselect = $_GET['myselect'];
+
+$officeName = "";
+
+switch ($myselect) {
+	case "pe_office":
+		$officeName = "體育室";
+		break;
+	case "library":
+		$officeName = "圖書館";
+		break;
+	
+  
+}
 
 $i=0;
 $id = null;
@@ -81,7 +94,7 @@ $htmla = '
 <table border="1" align="center">
 	
 	<tr>
-		<td colspan="9" ><font size="16">國立中央大學109學年度  '.$myselect.'  推薦再聘兼任教研人員名冊</font></td>
+		<td colspan="9" ><font size="16">國立中央大學110學年度  '.$officeName.'  推薦再聘兼任教研人員名冊</font></td>
 	</tr>
 
 	<tr>

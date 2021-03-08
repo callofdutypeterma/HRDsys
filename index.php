@@ -16,9 +16,9 @@
     
     <select name="pets" id="mySelect" onchange="myFunction()">
         <option>-----------請選擇你的單位-----------</option>
-        <option value="library">01 圖書館                           </option>
+        <option value="library" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "library") echo "selected='selected'";?> >01 圖書館                           </option>
         <option>02 總教學中心                       </option>
-        <option value="units" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "units") echo "selected='selected'";?> >03 體育室                           </option>
+        <option value="pe_office" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "pe_office") echo "selected='selected'";?> >03 體育室                           </option>
         <option value="ge">04 通識教育中心                     </option>
         <option>05 語言中心                         </option>
         <option>06 太空及遙測研究中心               </option>
@@ -246,16 +246,16 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
                 <td rowspan="2"><p>專職單位及職稱</p><input type="text" name="jobname"></td>
                 
                 <td>授課學期<input id="SEMNoA" type="number" name="SEMNoA" min="1" max="2" readonly></td>
-                <td><input id="classNameA" type="radio" name="classNameA">授課名稱<input id="classNameInputA" type="text" name="classNameA"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生">指導研究生</td>
-                <td>每週時數<input id="hoursA" type="number" name="hoursA" min="1" max="4"></td>
-                <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必">必<input id="requiredA" type="radio" name="subjectA" value="選">選</td>
+                <td><input id="classNameA" type="radio" name="classNameA"><label for="classNameA">授課名稱</label><input id="classNameInputA" type="text" name="classNameA"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生"><label for="GradA">指導研究生</label></td>
+                <td>每週時數<input id="hoursA" type="number" name="hoursA" min="0" max="4"></td>
+                <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必"><label for="compulsoryA">必</label><input id="requiredA" type="radio" name="subjectA" value="選"><label for="requiredA">選</label></td>
 	        </tr>
             
             <tr>
                 <td>授課學期<input id="SEMNoB" type="number" name="SEMNoB" min="1" max="2" readonly></td>
-                <td><input id="classNameB" type="radio" name="classNameB">授課名稱<input id="classNameInputB" type="text" name="classNameB"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生">指導研究生</td>
-                <td>每週時數<input id="hoursB" type="number" name="hoursB" min="1" max="4"></td>
-                <td><p>必選修</p><input id="compulsoryB" type="radio" name="subjectB" value="必">必<input id="requiredB" type="radio" name="subjectB" value="選">選</td>
+                <td><input id="classNameB" type="radio" name="classNameB"><label for="classNameB">授課名稱</label><input id="classNameInputB" type="text" name="classNameB"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生"><label for="GradB">指導研究生</label></td>
+                <td>每週時數<input id="hoursB" type="number" name="hoursB" min="0" max="4"></td>
+                <td><p>必選修</p><input id="compulsoryB" type="radio" name="subjectB" value="必"><label for="compulsoryB">必</label><input id="requiredB" type="radio" name="subjectB" value="選"><label for="requiredB">選</label></td>
             </tr>
 
             <tr>
@@ -277,10 +277,6 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 ?>
     
     <script type="text/javascript">
-          function reply_click(clicked_id)
-          {
-              alert(clicked_id);
-          }
 
           function selectFirst() {
             document.getElementById("SEMNoA").value = 1;
