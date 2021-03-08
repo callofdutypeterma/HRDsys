@@ -27,15 +27,6 @@ $pdf->AddPage();
 
 include('connect.php');
 
-/*
-$link = mysqli_connect("localhost", "root", "root", "mysys");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
-*/
-
 $myselect = $_GET['myselect'];
 
 $i=0;
@@ -44,10 +35,14 @@ $jobtitle = null;
 $name = null;
 $semester = null;
 $jobname = null;
-$semnum = null;
-$classname = null;
-$hours = null;
-$subject = null;
+$SEMNoA = null;
+$classNameA = null;
+$hoursA = null;
+$subjectA = null;
+$SEMNoB = null;
+$classNameB = null;
+$hoursB = null;
+$subjectB = null;
 $notes = null;
 
 // Attempt select query execution
@@ -56,14 +51,18 @@ if($result = mysqli_query($connect, $sql)){
     
 	while($row = mysqli_fetch_array($result)){
 		$id[$i]=$row['id'];
-		$jobtitle[$i]=$row['jobtitle'];
+		$jobtitle[$i]=$row['job_title'];
 		$name[$i]=$row['name'];
 		$semester[$i]=$row['semester'];
-		$jobname[$i]=$row['jobname'];
-		$semnum[$i]=$row['semnum'];
-		$classname[$i]=$row['classname'];
-		$hours[$i]=$row['hours'];
-		$subject[$i]=$row['subject'];
+		$jobname[$i]=$row['job_name'];
+		$SEMNoA[$i]=$row['first_semester'];
+		$classNameA[$i]=$row['first_class_name'];
+		$hoursA[$i]=$row['first_class_hours'];
+		$subjectA[$i]=$row['first_class_subject'];
+		$SEMNoB[$i]=$row['second_semester'];
+		$classNameB[$i]=$row['second_class_name'];
+		$hoursB[$i]=$row['second_class_hours'];
+		$subjectB[$i]=$row['second_class_subject'];
 		$notes[$i]=$row['notes'];
 		$i++;
     }
@@ -111,15 +110,22 @@ for($j = 0; $j < $i; $j++){
 	<table border="1" align="center">
 
 		<tr>
-			<td width="12%">'.$jobtitle[$j].'</td>
-			<td width="12%">'.$name[$j].'</td>
-			<td width="12%">'.$semester[$j].'</td>
-			<td width="12%">'.$jobname[$j].'</td>
-			<td width="6%">'.$semnum[$j].'</td>
-			<td width="22%">'.$classname[$j].'</td>
-			<td width="6%">'.$hours[$j].'</td>
-			<td width="6%">'.$subject[$j].'</td>
-			<td width="12%">'.$notes[$j].'</td>
+			<td rowspan="2" width="12%">'.$jobtitle[$j].'</td>
+			<td rowspan="2" width="12%">'.$name[$j].'</td>
+			<td rowspan="2" width="12%">'.$semester[$j].'</td>
+			<td rowspan="2" width="12%">'.$jobname[$j].'</td>
+			<td width="6%">'.$SEMNoA[$j].'</td>
+			<td width="22%">'.$classNameA[$j].'</td>
+			<td width="6%">'.$hoursA[$j].'</td>
+			<td width="6%">'.$subjectA[$j].'</td>
+			<td rowspan="2" width="12%">'.$notes[$j].'</td>
+		</tr>
+
+		<tr>
+			<td width="6%">'.$SEMNoB[$j].'</td>
+			<td width="22%">'.$classNameB[$j].'</td>
+			<td width="6%">'.$hoursB[$j].'</td>
+			<td width="6%">'.$subjectB[$j].'</td>
 		</tr>
 
 	</table>

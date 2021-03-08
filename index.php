@@ -12,13 +12,13 @@
 
     <a href='index.php' class='index'>回首頁</a><br>
 
-    <H1>兼任續聘系統</H1>
+    <H1>國立中央大學110學年度再聘兼任及續合聘教研人員系統</H1>
     
     <select name="pets" id="mySelect" onchange="myFunction()">
         <option>-----------請選擇你的單位-----------</option>
         <option value="library">01 圖書館                           </option>
         <option>02 總教學中心                       </option>
-        <option value="units">03 體育室                           </option>
+        <option value="units" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "units") echo "selected='selected'";?> >03 體育室                           </option>
         <option value="ge">04 通識教育中心                     </option>
         <option>05 語言中心                         </option>
         <option>06 太空及遙測研究中心               </option>
@@ -99,7 +99,6 @@
     <script>
         function myFunction() {
           var x = document.getElementById("mySelect").value;
-          //document.getElementById("demo").innerHTML = "You selected: " + x;
           window.location.href = 'index.php?myselect='+ x;
         }
     </script>
@@ -114,13 +113,14 @@ include('connect.php');
 
 $myselect = "";
 
+
 if (isset($_GET['myselect'])==true) {
 
     $myselect = $_GET['myselect'];
-    $exportecl = "select * from $myselect into outfile 'd:/test.xls';";
-    mysqli_query($connect, $exportecl);
-    
+    //$exportecl = "select * from $myselect into outfile 'd:/test.xls';";
+    //mysqli_query($connect, $exportecl);
 }
+
 
 if(isset($_POST['submit'])){
     
@@ -128,25 +128,25 @@ if(isset($_POST['submit'])){
     $name = $_POST['name'];
     $semester = $_POST['semester'];
     $jobname = $_POST['jobname'];
-    $semnum = $_POST['semnum'];
-    $classname = $_POST['classname'];
-    $hours = $_POST['hours'];
-    $subject = $_POST['subject'];
+    $SEMNoA = $_POST['SEMNoA'];
+    $classNameA = $_POST['classNameA'];
+    $hoursA = $_POST['hoursA'];
+    if(isset($_POST['subjectA'])){
+        $subjectA = $_POST['subjectA'];
+    }else{
+        $subjectB = "無";
+    }
+    $SEMNoB = $_POST['SEMNoB'];
+    $classNameB = $_POST['classNameB'];
+    $hoursB = $_POST['hoursB'];
+    if(isset($_POST['subjectB'])){
+        $subjectB = $_POST['subjectB'];
+    }else{
+        $subjectB = "無";
+    }
     $notes = $_POST['notes'];
-
-    /*
-    echo "職稱：$jobtitle<br/>";
-    echo "姓名：$name<br/>";
-    echo "擬授課學期別：$semester<br/>";
-    echo "專職單位及職稱：$jobname<br/>";
-    echo "授課學期：$semnum<br/>";
-    echo "授課名稱：$classname<br/>";
-    echo "每週時數：$hours<br/>";
-    echo "必選修：$subject<br/>";
-    echo "備註：$notes<br/>";
-    */
  
-    $insertSql = "INSERT INTO $myselect (jobtitle,name,semester,jobname,semnum,classname,hours,subject,notes) VALUES ('$jobtitle','$name', '$semester','$jobname','$semnum','$classname','$hours','$subject','$notes')";
+    $insertSql = "INSERT INTO $myselect (job_title,name,semester,job_name,first_semester,first_class_name,first_class_hours,first_class_subject,second_semester,second_class_name,second_class_hours,second_class_subject,notes) VALUES ('$jobtitle','$name', '$semester','$jobname','$SEMNoA','$classNameA','$hoursA','$subjectA','$SEMNoB','$classNameB','$hoursB','$subjectB','$notes')";
     $status = mysqli_query($connect, $insertSql);
  
     if ($status) {
@@ -155,9 +155,6 @@ if(isset($_POST['submit'])){
         echo "錯誤: " . $insertSql . "<br>" . $connect->error;
     }
 }
-
-//$sql = "SELECT * FROM units;";
-//$result = mysqli_query($connect, $sql);
 
 if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 
@@ -175,25 +172,25 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 
         echo "
         
-                <table border='1' width='60%' align='center'>
+            <table border='1' width='60%' align='center'>
 	
-	                <tr>
-		                <th rowspan='2'>職稱</th>
-		                <th rowspan='2'>姓名</th>
-		                <th rowspan='2'>擬授課學期別</th>
-		                <th rowspan='2'>專職單位及職稱</th>
-		                <th colspan='4'>再聘情形</th>
-		                <th rowspan='2'>備註</th>
-                        <th rowspan='2'>動作</th>
+	            <tr>
+		            <th rowspan='2'>職稱</th>
+		            <th rowspan='2'>姓名</th>
+		            <th rowspan='2'>擬授課學期別</th>
+		            <th rowspan='2'>專職單位及職稱</th>
+		            <th colspan='4'>再聘情形</th>
+		            <th rowspan='2'>備註</th>
+                    <th rowspan='2'>動作</th>
                         
-	                </tr>
+	            </tr>
 
-	                <tr>
-		                <td>授課學期</td>
-		                <td>授課名稱</td>
-		                <td>每週時數</td>
-		                <td>必選修</td>
-	                </tr>
+	            <tr>
+		            <td>授課學期</td>
+		            <td>授課名稱</td>
+		            <td>每週時數</td>
+		            <td>必選修</td>
+	            </tr>
 
         ";
 
@@ -205,18 +202,25 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 
             echo "
 	
-	                <tr>
-		                <td>".$row["jobtitle"]."</td>
-                        <td>".$row["name"]."</td>
-		                <td>".$row["semester"]."</td>
-		                <td>".$row["jobname"]."</td>
-		                <td>".$row["semnum"]."</td>
-		                <td>".$row["classname"]."</td>
-		                <td>".$row["hours"]."</td>
-		                <td>".$row["subject"]."</td>
-		                <td>".$str."</td>
-                        <td><a href='delete.php?id=".$row['id']."&myselect=".$myselect."' class='del_btn'>刪除</a></th>
-	                </tr>
+	            <tr>
+		            <td rowspan='2'>".$row["job_title"]."</td>
+                    <td rowspan='2'>".$row["name"]."</td>
+		            <td rowspan='2'>".$row["semester"]."</td>
+		            <td rowspan='2'>".$row["job_name"]."</td>
+		            <td>".$row["first_semester"]."</td>
+		            <td>".$row["first_class_name"]."</td>
+		            <td>".$row["first_class_hours"]."</td>
+		            <td>".$row["first_class_subject"]."</td>
+                    <td rowspan='2'>".$str."</td>
+                    <td rowspan='2'><a href='delete.php?id=".$row['id']."&myselect=".$myselect."' class='del_btn'>刪除</a></th>
+                </tr>
+
+                <tr>
+                    <td>".$row["second_semester"]."</td>
+		            <td>".$row["second_class_name"]."</td>
+		            <td>".$row["second_class_hours"]."</td>
+		            <td>".$row["second_class_subject"]."</td>
+	            </tr>
 
             ";
             $i++;
@@ -238,19 +242,20 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 	        <tr>
 		        <td rowspan="2"><p>職稱</p><input type="text"  name="jobtitle"></td>
                 <td rowspan="2"><p>姓名</p><input type="text" name="name"></td>
-                <td rowspan="2"><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick=""><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
+                <td rowspan="2"><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
                 <td rowspan="2"><p>專職單位及職稱</p><input type="text" name="jobname"></td>
-                <td>授課學期<input id="semnuma" type="number" name="semnum" min="1" max="2"></td>
-                <td><input type="radio" name="classname">授課名稱<input type="text" name="classname"><br><input type="radio" name="classname" value="指導研究生">指導研究生</td>
-                <td>每週時數<input type="number" name="hours" min="1" max="4"></td>
-                <td><p>必選修</p><input type="radio" name="subject" value="必">必<input type="radio" name="subject" value="選">選</td>
+                
+                <td>授課學期<input id="SEMNoA" type="number" name="SEMNoA" min="1" max="2" readonly></td>
+                <td><input id="classNameA" type="radio" name="classNameA">授課名稱<input id="classNameInputA" type="text" name="classNameA"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生">指導研究生</td>
+                <td>每週時數<input id="hoursA" type="number" name="hoursA" min="1" max="4"></td>
+                <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必">必<input id="requiredA" type="radio" name="subjectA" value="選">選</td>
 	        </tr>
             
             <tr>
-                <td>授課學期<input id="semnumb" type="number" name="semnum" min="1" max="2"></td>
-                <td><input type="radio" name="classname">授課名稱<input type="text" name="classname"><br><input type="radio" name="classname" value="指導研究生">指導研究生</td>
-                <td>每週時數<input type="number" name="hours" min="1" max="4"></td>
-                <td><p>必選修</p><input type="radio" name="subject" value="必">必<input type="radio" name="subject" value="選">選</td>
+                <td>授課學期<input id="SEMNoB" type="number" name="SEMNoB" min="1" max="2" readonly></td>
+                <td><input id="classNameB" type="radio" name="classNameB">授課名稱<input id="classNameInputB" type="text" name="classNameB"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生">指導研究生</td>
+                <td>每週時數<input id="hoursB" type="number" name="hoursB" min="1" max="4"></td>
+                <td><p>必選修</p><input id="compulsoryB" type="radio" name="subjectB" value="必">必<input id="requiredB" type="radio" name="subjectB" value="選">選</td>
             </tr>
 
             <tr>
@@ -270,89 +275,7 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 }
     
 ?>
-    <!--<button onClick="GFG_Fun()"> click here </button>
     
-    <script> 
-        var down = document.getElementById("GFG_DOWN"); 
-            
-        // Create a break line element 
-        var br = document.createElement("br");  
-        function GFG_Fun() { 
-                
-            // Create a form synamically 
-            var form = document.createElement("form"); 
-            form.setAttribute("method", "post"); 
-            form.setAttribute("action", "submit.php"); 
-  
-            // Create an input element for Full Name 
-            var FN = document.createElement("input"); 
-            FN.setAttribute("type", "text"); 
-            FN.setAttribute("name", "FullName"); 
-            FN.setAttribute("placeholder", "Full Name"); 
-  
-            // Create an input element for date of birth 
-            var DOB = document.createElement("input"); 
-            DOB.setAttribute("type", "text"); 
-            DOB.setAttribute("name", "dob"); 
-            DOB.setAttribute("placeholder", "DOB"); 
-  
-            // Create an input element for emailID 
-            var EID = document.createElement("input"); 
-            EID.setAttribute("type", "text"); 
-            EID.setAttribute("name", "emailID"); 
-            EID.setAttribute("placeholder", "E-Mail ID"); 
-  
-            // Create an input element for password 
-            var PWD = document.createElement("input"); 
-            PWD.setAttribute("type", "password"); 
-            PWD.setAttribute("name", "password"); 
-            PWD.setAttribute("placeholder", "Password"); 
-  
-            // Create an input element for retype-password 
-            var RPWD = document.createElement("input"); 
-            RPWD.setAttribute("type", "password"); 
-            RPWD.setAttribute("name", "reTypePassword"); 
-            RPWD.setAttribute("placeholder", "ReEnter Password"); 
-  
-            // create a submit button 
-            var s = document.createElement("input"); 
-            s.setAttribute("type", "submit"); 
-            s.setAttribute("value", "Submit"); 
-                  
-            // Append the full name input to the form 
-            form.appendChild(FN);  
-                  
-            // Inserting a line break 
-            form.appendChild(br.cloneNode());  
-                  
-            // Append the DOB to the form 
-            form.appendChild(DOB);  
-            form.appendChild(br.cloneNode());  
-                  
-            // Append the emailID to the form 
-            form.appendChild(EID);  
-            form.appendChild(br.cloneNode());  
-                  
-            // Append the Password to the form 
-            form.appendChild(PWD);  
-            form.appendChild(br.cloneNode());  
-                  
-            // Append the ReEnterPassword to the form 
-            form.appendChild(RPWD);  
-            form.appendChild(br.cloneNode());  
-                  
-            // Append the submit button to the form 
-            form.appendChild(s);  
-  
-            document.getElementsByTagName("body")[0] 
-            .appendChild(form); 
-        } 
-    </script>
-    
-    <button id="1" onClick="reply_click(this.id)">B1</button>
-    <button id="2" onClick="reply_click(this.id)">B2</button>
-    <button id="3" onClick="reply_click(this.id)">B3</button>
-    -->
     <script type="text/javascript">
           function reply_click(clicked_id)
           {
@@ -360,13 +283,92 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
           }
 
           function selectFirst() {
-            document.getElementById("semnuma").value = 1;
-            document.getElementById("semnumb").value = "";
+            document.getElementById("SEMNoA").value = 1;
+            document.getElementById("SEMNoB").value = "";
+            document.getElementById("classNameInputB").value = "";
+            document.getElementById("hoursB").value = "";
+
+            //document.getElementById("SEMNoA").readOnly = false;
+            document.getElementById("SEMNoA").style.backgroundColor = "#FFF";
+            document.getElementById("classNameA").disabled = false;
+            document.getElementById("GradA").disabled = false;
+            document.getElementById("classNameInputA").readOnly = false;
+            document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
+            document.getElementById("hoursA").readOnly = false;
+            document.getElementById("hoursA").style.backgroundColor = "#FFF";
+            document.getElementById("compulsoryA").disabled = false;
+            document.getElementById("requiredA").disabled = false;
+
+            //document.getElementById("SEMNoB").readOnly = true;
+            document.getElementById("SEMNoB").style.backgroundColor = "#ccc";
+            document.getElementById("classNameB").disabled = true;
+            document.getElementById("GradB").disabled = true;
+            document.getElementById("classNameInputB").readOnly = true;
+            document.getElementById("classNameInputB").style.backgroundColor = "#ccc";
+            document.getElementById("hoursB").readOnly = true;
+            document.getElementById("hoursB").style.backgroundColor = "#ccc";
+            document.getElementById("compulsoryB").disabled = true;
+            document.getElementById("requiredB").disabled = true;
           }
 
           function selectSecond() {
-            document.getElementById("semnuma").value = "";
-            document.getElementById("semnumb").value = 2;
+            document.getElementById("SEMNoA").value = "";
+            document.getElementById("SEMNoA").value = "";
+            document.getElementById("classNameInputA").value = "";
+            document.getElementById("hoursA").value = "";
+            document.getElementById("SEMNoB").value = 2;
+
+            //document.getElementById("SEMNoA").readOnly = true;
+            document.getElementById("SEMNoA").style.backgroundColor = "#ccc";
+            document.getElementById("classNameA").disabled = true;
+            document.getElementById("GradA").disabled = true;
+            document.getElementById("classNameInputA").readOnly = true;
+            document.getElementById("classNameInputA").style.backgroundColor = "#ccc";
+            document.getElementById("hoursA").readOnly = true;
+            document.getElementById("hoursA").style.backgroundColor = "#ccc";
+            document.getElementById("compulsoryA").disabled = true;
+            document.getElementById("requiredA").disabled = true;
+
+            //document.getElementById("SEMNoB").readOnly = false;
+            document.getElementById("SEMNoB").style.backgroundColor = "#FFF";
+            document.getElementById("classNameB").disabled = false;
+            document.getElementById("GradB").disabled = false;
+            document.getElementById("classNameInputB").readOnly = false;
+            document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
+            document.getElementById("hoursB").readOnly = false;
+            document.getElementById("hoursB").style.backgroundColor = "#FFF";
+            document.getElementById("compulsoryB").disabled = false;
+            document.getElementById("requiredB").disabled = false;
+            
+
+          }
+
+          function selectAll() {
+            document.getElementById("SEMNoA").value = 1;
+            document.getElementById("SEMNoB").value = 2;
+
+            //document.getElementById("SEMNoA").readOnly = false;
+            document.getElementById("SEMNoA").style.backgroundColor = "#FFF";
+            document.getElementById("classNameA").disabled = false;
+            document.getElementById("GradA").disabled = false;
+            document.getElementById("classNameInputA").readOnly = false;
+            document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
+            document.getElementById("hoursA").readOnly = false;
+            document.getElementById("hoursA").style.backgroundColor = "#FFF";
+            document.getElementById("compulsoryA").disabled = false;
+            document.getElementById("requiredA").disabled = false;
+
+            //document.getElementById("SEMNoB").readOnly = false;
+            document.getElementById("SEMNoB").style.backgroundColor = "#FFF";
+            document.getElementById("classNameB").disabled = false;
+            document.getElementById("GradB").disabled = false;
+            document.getElementById("classNameInputB").readOnly = false;
+            document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
+            document.getElementById("hoursB").readOnly = false;
+            document.getElementById("hoursB").style.backgroundColor = "#FFF";
+            document.getElementById("compulsoryB").disabled = false;
+            document.getElementById("requiredB").disabled = false;
+
           }
 
     </script>
