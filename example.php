@@ -8,10 +8,15 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nicola Asuni');
+$pdf->SetAuthor('Peter Ma');
 $pdf->SetTitle('PDF Example');
 $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+
+//$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'test', '', array(0,0,0), array(0,0,0));
+//$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+//$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+//$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 
 // remove default header/footer
 $pdf->setPrintHeader(false);
@@ -67,7 +72,7 @@ if($result = mysqli_query($connect, $sql)){
 		$jobtitle[$i]=$row['job_title'];
 		$name[$i]=$row['name'];
 		$semester[$i]=$row['semester'];
-		$jobname[$i]=$row['job_name'];
+		$jobname[$i]=str_replace("\r\n","<br>", $row["job_name"]);;
 		$SEMNoA[$i]=$row['first_semester'];
 		$classNameA[$i]=$row['first_class_name'];
 		$hoursA[$i]=$row['first_class_hours'];
@@ -76,7 +81,7 @@ if($result = mysqli_query($connect, $sql)){
 		$classNameB[$i]=$row['second_class_name'];
 		$hoursB[$i]=$row['second_class_hours'];
 		$subjectB[$i]=$row['second_class_subject'];
-		$notes[$i]=$row['notes'];
+		$notes[$i]=str_replace("\r\n","<br>", $row["notes"]);
 		$i++;
     }
     // Free result set

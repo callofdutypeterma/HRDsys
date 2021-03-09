@@ -12,9 +12,9 @@
 
     <a href='index.php' class='index'>回首頁</a><br>
 
-    <H1>國立中央大學110學年度再聘兼任及續合聘教研人員系統</H1>
+    <H1>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</H1>
     
-    <select name="pets" id="mySelect" onchange="myFunction()">
+    <select name="pets" id="mySelect" onchange="mySelect()">
         <option>-----------請選擇你的單位-----------</option>
         <option value="library" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "library") echo "selected='selected'";?> >01 圖書館                           </option>
         <option>02 總教學中心                       </option>
@@ -96,13 +96,6 @@
         <option>78 認知智慧與精準健康照護研究中心   </option>
     </select><br>
 
-    <script>
-        function myFunction() {
-          var x = document.getElementById("mySelect").value;
-          window.location.href = 'index.php?myselect='+ x;
-        }
-    </script>
-
 <?php
 
 //header("Content-type:text/html;charset=utf-8");
@@ -134,7 +127,7 @@ if(isset($_POST['submit'])){
     if(isset($_POST['subjectA'])){
         $subjectA = $_POST['subjectA'];
     }else{
-        $subjectB = "無";
+        $subjectA = "無";
     }
     $SEMNoB = $_POST['SEMNoB'];
     $classNameB = $_POST['classNameB'];
@@ -157,6 +150,44 @@ if(isset($_POST['submit'])){
 }
 
 if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
+
+    echo'
+        <p>
+        <form action="" method="post">
+        
+            <table border="1" align="center" style="text-align: left;">
+	
+	            <tr>
+		            <td rowspan="2"><p>職稱</p><input type="text"  name="jobtitle"></td>
+                    <td rowspan="2"><p>姓名</p><input type="text" name="name"></td>
+                    <td rowspan="2"><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
+                    <td rowspan="2"><p>專職單位及職稱</p><textarea name="jobname" rows="4" cols="50"></textarea></td>
+                
+                    <td>授課學期<input id="SEMNoA" type="number" name="SEMNoA" min="1" max="2" readonly></td>
+                    <td><input id="classNameA" type="radio" name="classNameA" onclick="selectClassNameA()"><label for="classNameA">授課名稱</label><input id="classNameInputA" type="text" name="classNameA"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生" onclick="selectGradA()"><label for="GradA">指導研究生</label></td>
+                    <td>每週時數<input id="hoursA" type="number" name="hoursA" min="0" max="4"></td>
+                    <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必"><label for="compulsoryA">必</label><input id="requiredA" type="radio" name="subjectA" value="選"><label for="requiredA">選</label></td>
+	            </tr>
+            
+                <tr>
+                    <td>授課學期<input id="SEMNoB" type="number" name="SEMNoB" min="1" max="2" readonly></td>
+                    <td><input id="classNameB" type="radio" name="classNameB" onclick="selectClassNameB()"><label for="classNameB">授課名稱</label><input id="classNameInputB" type="text" name="classNameB"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生" onclick="selectGradB()"><label for="GradB">指導研究生</label></td>
+                    <td>每週時數<input id="hoursB" type="number" name="hoursB" min="0" max="4"></td>
+                    <td><p>必選修</p><input id="compulsoryB" type="radio" name="subjectB" value="必"><label for="compulsoryB">必</label><input id="requiredB" type="radio" name="subjectB" value="選"><label for="requiredB">選</label></td>
+                </tr>
+
+                <tr>
+                    <td colspan="8"><p>備註</p><textarea name="notes" rows="4" cols="50"></textarea></td>
+                </tr>
+
+            </table>
+
+            <p><input type="submit" name="submit" value="新增資料"></p>
+            
+        </form>
+        </p>
+
+    ';
 
     echo $myselect;
 
@@ -198,7 +229,8 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
             
             ${'id' . $i} = $row["id"];
             
-            $str = str_replace("\r\n","<br>", $row["notes"]);
+            $stra = str_replace("\r\n","<br>", $row["job_name"]);
+            $strb = str_replace("\r\n","<br>", $row["notes"]);
 
             echo "
 	
@@ -206,12 +238,12 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 		            <td rowspan='2'>".$row["job_title"]."</td>
                     <td rowspan='2'>".$row["name"]."</td>
 		            <td rowspan='2'>".$row["semester"]."</td>
-		            <td rowspan='2'>".$row["job_name"]."</td>
+		            <td rowspan='2'>".$stra."</td>
 		            <td>".$row["first_semester"]."</td>
 		            <td>".$row["first_class_name"]."</td>
 		            <td>".$row["first_class_hours"]."</td>
 		            <td>".$row["first_class_subject"]."</td>
-                    <td rowspan='2'>".$str."</td>
+                    <td rowspan='2'>".$strb."</td>
                     <td rowspan='2'><a href='delete.php?id=".$row['id']."&myselect=".$myselect."' class='del_btn'>刪除</a></th>
                 </tr>
 
@@ -226,49 +258,15 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
             $i++;
         }
 
-        echo "
+        echo '
                 </table>
-        ";
+            <p><a href="example.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出PDF</a></p>
+        ';
     } else {
         echo "無資料";
     }
 
-    echo'
-
-    <form action="" method="post">
-        
-        <table border="1" align="center" style="text-align: left;">
-	
-	        <tr>
-		        <td rowspan="2"><p>職稱</p><input type="text"  name="jobtitle"></td>
-                <td rowspan="2"><p>姓名</p><input type="text" name="name"></td>
-                <td rowspan="2"><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
-                <td rowspan="2"><p>專職單位及職稱</p><input type="text" name="jobname"></td>
-                
-                <td>授課學期<input id="SEMNoA" type="number" name="SEMNoA" min="1" max="2" readonly></td>
-                <td><input id="classNameA" type="radio" name="classNameA"><label for="classNameA">授課名稱</label><input id="classNameInputA" type="text" name="classNameA"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生"><label for="GradA">指導研究生</label></td>
-                <td>每週時數<input id="hoursA" type="number" name="hoursA" min="0" max="4"></td>
-                <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必"><label for="compulsoryA">必</label><input id="requiredA" type="radio" name="subjectA" value="選"><label for="requiredA">選</label></td>
-	        </tr>
-            
-            <tr>
-                <td>授課學期<input id="SEMNoB" type="number" name="SEMNoB" min="1" max="2" readonly></td>
-                <td><input id="classNameB" type="radio" name="classNameB"><label for="classNameB">授課名稱</label><input id="classNameInputB" type="text" name="classNameB"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生"><label for="GradB">指導研究生</label></td>
-                <td>每週時數<input id="hoursB" type="number" name="hoursB" min="0" max="4"></td>
-                <td><p>必選修</p><input id="compulsoryB" type="radio" name="subjectB" value="必"><label for="compulsoryB">必</label><input id="requiredB" type="radio" name="subjectB" value="選"><label for="requiredB">選</label></td>
-            </tr>
-
-            <tr>
-                <td colspan="8"><p>備註</p><textarea name="notes" rows="4" cols="50"></textarea></td>
-            </tr>
-
-        </table>
-
-        <p><input type="submit" name="submit" value="新增資料"></p>
-        <a href="example.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出PDF</a>
-
-    </form>
-    ';
+    
 
     /* free result set */
     //mysqli_free_result($result);
@@ -278,94 +276,143 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
     
     <script type="text/javascript">
 
-          function selectFirst() {
-            document.getElementById("SEMNoA").value = 1;
-            document.getElementById("SEMNoB").value = "";
-            document.getElementById("classNameInputB").value = "";
-            document.getElementById("hoursB").value = "";
+        function mySelect() {
+          var x = document.getElementById("mySelect").value;
+          window.location.href = 'index.php?myselect='+ x;
+        }
 
-            //document.getElementById("SEMNoA").readOnly = false;
-            document.getElementById("SEMNoA").style.backgroundColor = "#FFF";
-            document.getElementById("classNameA").disabled = false;
-            document.getElementById("GradA").disabled = false;
-            document.getElementById("classNameInputA").readOnly = false;
-            document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
-            document.getElementById("hoursA").readOnly = false;
-            document.getElementById("hoursA").style.backgroundColor = "#FFF";
-            document.getElementById("compulsoryA").disabled = false;
-            document.getElementById("requiredA").disabled = false;
+        function selectFirst() {
+        document.getElementById("SEMNoA").value = 1;
+        document.getElementById("hoursA").value = "";
+        document.getElementById("SEMNoB").value = 0;
+        document.getElementById("classNameInputB").value = "";
+        document.getElementById("hoursB").value = 0;
+        //document.getElementById("SEMNoA").readOnly = false;
+        document.getElementById("SEMNoA").style.backgroundColor = "#FFF";
+        document.getElementById("classNameA").disabled = false;
+        document.getElementById("GradA").disabled = false;
+        document.getElementById("classNameInputA").readOnly = false;
+        document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
+        document.getElementById("hoursA").readOnly = false;
+        document.getElementById("hoursA").style.backgroundColor = "#FFF";
+        document.getElementById("compulsoryA").disabled = false;
+        document.getElementById("requiredA").disabled = false;
+        //document.getElementById("SEMNoB").readOnly = true;
+        document.getElementById("SEMNoB").style.backgroundColor = "#ccc";
+        document.getElementById("classNameB").disabled = true;
+        document.getElementById("GradB").disabled = true;
+        document.getElementById("classNameInputB").readOnly = true;
+        document.getElementById("classNameInputB").style.backgroundColor = "#ccc";
+        document.getElementById("hoursB").readOnly = true;
+        document.getElementById("hoursB").style.backgroundColor = "#ccc";
+        document.getElementById("compulsoryB").disabled = true;
+        document.getElementById("compulsoryB").checked = false;
+        document.getElementById("requiredB").disabled = true;
+        document.getElementById("requiredB").checked = false;
+        }
 
-            //document.getElementById("SEMNoB").readOnly = true;
-            document.getElementById("SEMNoB").style.backgroundColor = "#ccc";
-            document.getElementById("classNameB").disabled = true;
-            document.getElementById("GradB").disabled = true;
-            document.getElementById("classNameInputB").readOnly = true;
-            document.getElementById("classNameInputB").style.backgroundColor = "#ccc";
-            document.getElementById("hoursB").readOnly = true;
-            document.getElementById("hoursB").style.backgroundColor = "#ccc";
-            document.getElementById("compulsoryB").disabled = true;
-            document.getElementById("requiredB").disabled = true;
-          }
+        function selectSecond() {
+        document.getElementById("SEMNoA").value = 0;
+        document.getElementById("classNameInputA").value = "";
+        document.getElementById("hoursA").value = 0;
+        document.getElementById("SEMNoB").value = 2;
+        document.getElementById("hoursB").value = "";
+        //document.getElementById("SEMNoA").readOnly = true;
+        document.getElementById("SEMNoA").style.backgroundColor = "#ccc";
+        document.getElementById("classNameA").disabled = true;
+        document.getElementById("GradA").disabled = true;
+        document.getElementById("classNameInputA").readOnly = true;
+        document.getElementById("classNameInputA").style.backgroundColor = "#ccc";
+        document.getElementById("hoursA").readOnly = true;
+        document.getElementById("hoursA").style.backgroundColor = "#ccc";
+        document.getElementById("compulsoryA").disabled = true;
+        document.getElementById("compulsoryA").checked = false;
+        document.getElementById("requiredA").disabled = true;
+        document.getElementById("requiredA").checked = false;
+        //document.getElementById("SEMNoB").readOnly = false;
+        document.getElementById("SEMNoB").style.backgroundColor = "#FFF";
+        document.getElementById("classNameB").disabled = false;
+        document.getElementById("GradB").disabled = false;
+        document.getElementById("classNameInputB").readOnly = false;
+        document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
+        document.getElementById("hoursB").readOnly = false;
+        document.getElementById("hoursB").style.backgroundColor = "#FFF";
+        document.getElementById("compulsoryB").disabled = false;
+        document.getElementById("requiredB").disabled = false; 
+        }
 
-          function selectSecond() {
-            document.getElementById("SEMNoA").value = "";
-            document.getElementById("SEMNoA").value = "";
-            document.getElementById("classNameInputA").value = "";
-            document.getElementById("hoursA").value = "";
-            document.getElementById("SEMNoB").value = 2;
+        function selectAll() {
+        document.getElementById("SEMNoA").value = 1;
+        document.getElementById("SEMNoB").value = 2;
+        document.getElementById("hoursA").value = "";
+        document.getElementById("hoursB").value = "";
+        //document.getElementById("SEMNoA").readOnly = false;
+        document.getElementById("SEMNoA").style.backgroundColor = "#FFF";
+        document.getElementById("classNameA").disabled = false;
+        document.getElementById("GradA").disabled = false;
+        document.getElementById("classNameInputA").readOnly = false;
+        document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
+        document.getElementById("hoursA").readOnly = false;
+        document.getElementById("hoursA").style.backgroundColor = "#FFF";
+        document.getElementById("compulsoryA").disabled = false;
+        document.getElementById("requiredA").disabled = false;
+        //document.getElementById("SEMNoB").readOnly = false;
+        document.getElementById("SEMNoB").style.backgroundColor = "#FFF";
+        document.getElementById("classNameB").disabled = false;
+        document.getElementById("GradB").disabled = false;
+        document.getElementById("classNameInputB").readOnly = false;
+        document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
+        document.getElementById("hoursB").readOnly = false;
+        document.getElementById("hoursB").style.backgroundColor = "#FFF";
+        document.getElementById("compulsoryB").disabled = false;
+        document.getElementById("requiredB").disabled = false;
+        }
 
-            //document.getElementById("SEMNoA").readOnly = true;
-            document.getElementById("SEMNoA").style.backgroundColor = "#ccc";
-            document.getElementById("classNameA").disabled = true;
-            document.getElementById("GradA").disabled = true;
-            document.getElementById("classNameInputA").readOnly = true;
-            document.getElementById("classNameInputA").style.backgroundColor = "#ccc";
-            document.getElementById("hoursA").readOnly = true;
-            document.getElementById("hoursA").style.backgroundColor = "#ccc";
-            document.getElementById("compulsoryA").disabled = true;
-            document.getElementById("requiredA").disabled = true;
+        function selectGradA() {
+        document.getElementById("classNameInputA").readOnly = true;
+        document.getElementById("classNameInputA").style.backgroundColor = "#ccc";
+        document.getElementById("classNameInputA").value = "";
+        document.getElementById("hoursA").readOnly = true;
+        document.getElementById("hoursA").style.backgroundColor = "#ccc";
+        document.getElementById("hoursA").value = 0;
+        document.getElementById("compulsoryA").disabled = true;
+        document.getElementById("compulsoryA").checked = false;
+        document.getElementById("requiredA").disabled = true;
+        document.getElementById("requiredA").checked = false;
+        }
 
-            //document.getElementById("SEMNoB").readOnly = false;
-            document.getElementById("SEMNoB").style.backgroundColor = "#FFF";
-            document.getElementById("classNameB").disabled = false;
-            document.getElementById("GradB").disabled = false;
-            document.getElementById("classNameInputB").readOnly = false;
-            document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
-            document.getElementById("hoursB").readOnly = false;
-            document.getElementById("hoursB").style.backgroundColor = "#FFF";
-            document.getElementById("compulsoryB").disabled = false;
-            document.getElementById("requiredB").disabled = false;
-            
+        function selectClassNameA() {
+        document.getElementById("classNameInputA").readOnly = false;
+        document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
+        document.getElementById("hoursA").readOnly = false;
+        document.getElementById("hoursA").style.backgroundColor = "#FFF";
+        document.getElementById("hoursA").value = "";
+        document.getElementById("compulsoryA").disabled = false;
+        document.getElementById("requiredA").disabled = false;
+        }
 
-          }
+        function selectGradB() {
+        document.getElementById("classNameInputB").readOnly = true;
+        document.getElementById("classNameInputB").style.backgroundColor = "#ccc";
+        document.getElementById("classNameInputB").value = "";
+        document.getElementById("hoursB").readOnly = true;
+        document.getElementById("hoursB").style.backgroundColor = "#ccc";
+        document.getElementById("hoursB").value = 0;
+        document.getElementById("compulsoryB").disabled = true;
+        document.getElementById("compulsoryB").checked = false;
+        document.getElementById("requiredB").disabled = true;
+        document.getElementById("requiredB").checked = false;
+        }
 
-          function selectAll() {
-            document.getElementById("SEMNoA").value = 1;
-            document.getElementById("SEMNoB").value = 2;
-
-            //document.getElementById("SEMNoA").readOnly = false;
-            document.getElementById("SEMNoA").style.backgroundColor = "#FFF";
-            document.getElementById("classNameA").disabled = false;
-            document.getElementById("GradA").disabled = false;
-            document.getElementById("classNameInputA").readOnly = false;
-            document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
-            document.getElementById("hoursA").readOnly = false;
-            document.getElementById("hoursA").style.backgroundColor = "#FFF";
-            document.getElementById("compulsoryA").disabled = false;
-            document.getElementById("requiredA").disabled = false;
-
-            //document.getElementById("SEMNoB").readOnly = false;
-            document.getElementById("SEMNoB").style.backgroundColor = "#FFF";
-            document.getElementById("classNameB").disabled = false;
-            document.getElementById("GradB").disabled = false;
-            document.getElementById("classNameInputB").readOnly = false;
-            document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
-            document.getElementById("hoursB").readOnly = false;
-            document.getElementById("hoursB").style.backgroundColor = "#FFF";
-            document.getElementById("compulsoryB").disabled = false;
-            document.getElementById("requiredB").disabled = false;
-
-          }
+        function selectClassNameB() {
+        document.getElementById("classNameInputB").readOnly = false;
+        document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
+        document.getElementById("hoursB").readOnly = false;
+        document.getElementById("hoursB").style.backgroundColor = "#FFF";
+        document.getElementById("hoursB").value = "";
+        document.getElementById("compulsoryB").disabled = false;
+        document.getElementById("requiredB").disabled = false;
+        }
 
     </script>
     </div>
