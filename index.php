@@ -155,7 +155,7 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         <p>
         <form action="" method="post">
         
-            <table border="1" align="center" style="text-align: left;">
+            <table border="1" width="90%" align="center" style="text-align: left;">
 	
 	            <tr>
 		            <td rowspan="2"><p>職稱</p><input type="text"  name="jobtitle"></td>
@@ -227,7 +227,8 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 
         while($row = mysqli_fetch_assoc($result)) {
             
-            ${'id' . $i} = $row["id"];
+            ${'id_' . $i} = $row["id"];
+            echo ${'id_' . $i};
             
             $stra = str_replace("\r\n","<br>", $row["job_name"]);
             $strb = str_replace("\r\n","<br>", $row["notes"]);
@@ -413,6 +414,10 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         document.getElementById("compulsoryB").disabled = false;
         document.getElementById("requiredB").disabled = false;
         }
+
+        var x = "<?php echo "$myselect" ?>";
+
+        document.write("<table border='1' width='60%' align='center'><tr><th rowspan='2'>職稱</th><th rowspan='2'>姓名</th><th rowspan='2'>擬授課學期別</th><th rowspan='2'>專職單位及職稱</th><th colspan='4'>"+x+"</th><th rowspan='2'>備註</th><th rowspan='2'>動作</th>   </tr></table>");
 
     </script>
     </div>
