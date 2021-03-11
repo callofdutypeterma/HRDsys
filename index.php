@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <link href="styles/style.css" rel="stylesheet" type="text/css">
-    <title>兼任續聘系統</title>
+    <title>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</title>
 </head>
 <body>
     
@@ -203,7 +203,7 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 
         echo "
         
-            <table border='1' width='60%' align='center'>
+            <table border='1' width='70%' align='center'>
 	
 	            <tr>
 		            <th rowspan='2'>職稱</th>
@@ -228,7 +228,6 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         while($row = mysqli_fetch_assoc($result)) {
             
             ${'id_' . $i} = $row["id"];
-            echo ${'id_' . $i};
             
             $stra = str_replace("\r\n","<br>", $row["job_name"]);
             $strb = str_replace("\r\n","<br>", $row["notes"]);
@@ -415,10 +414,6 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         document.getElementById("compulsoryB").disabled = false;
         document.getElementById("requiredB").disabled = false;
         }
-
-        var x = "<?php echo "$myselect" ?>";
-
-        document.write("<table border='1' width='60%' align='center'><tr><th rowspan='2'>職稱</th><th rowspan='2'>姓名</th><th rowspan='2'>擬授課學期別</th><th rowspan='2'>專職單位及職稱</th><th colspan='4'>"+x+"</th><th rowspan='2'>備註</th><th rowspan='2'>動作</th>   </tr></table>");
 
     </script>
     </div>
