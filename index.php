@@ -158,7 +158,7 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
             <table border="1" width="90%" align="center" style="text-align: left;">
 	
 	            <tr>
-		            <td rowspan="2"><p>職稱</p><input type="text"  name="jobtitle"></td>
+		            <td rowspan="2"><p>職稱</p><input type="text" name="jobtitle"></td>
                     <td rowspan="2"><p>姓名</p><input type="text" name="name"></td>
                     <td rowspan="2"><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
                     <td rowspan="2"><p>專職單位及職稱</p><textarea name="jobname" rows="4" cols="50"></textarea></td>
@@ -212,7 +212,7 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 		            <th rowspan='2'>專職單位及職稱</th>
 		            <th colspan='4'>再聘情形</th>
 		            <th rowspan='2'>備註</th>
-                    <th rowspan='2'>動作</th>
+                    <th rowspan='2' colspan='2'>動作</th>
                         
 	            </tr>
 
@@ -245,7 +245,8 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 		            <td>".$row["first_class_hours"]."</td>
 		            <td>".$row["first_class_subject"]."</td>
                     <td rowspan='2'>".$strb."</td>
-                    <td rowspan='2'><a href='delete.php?id=".$row['id']."&myselect=".$myselect."' class='del_btn'>刪除</a></th>
+                    <td rowspan='2'><a href='edit.php?id=".$row['id']."&myselect=".$myselect."' class='edit_btn'>修改</a></td>
+                    <td rowspan='2'><a href='delete.php?id=".$row['id']."&myselect=".$myselect."' class='del_btn'>刪除</a></td>
                 </tr>
 
                 <tr>
