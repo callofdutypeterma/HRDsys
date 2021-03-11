@@ -64,7 +64,7 @@ $subjectB = null;
 $notes = null;
 
 // Attempt select query execution
-$sql = "SELECT * FROM $myselect WHERE job_title NOT LIKE '合聘%'";
+$sql = "SELECT * FROM $myselect WHERE job_title LIKE '合聘%'";
 if($result = mysqli_query($connect, $sql)){
     
 	while($row = mysqli_fetch_array($result)){

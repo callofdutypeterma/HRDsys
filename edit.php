@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<div class="wrap">
 
 <?php
 
@@ -64,7 +65,28 @@ if(isset($_POST['submit'])){
         <table border="1" width="90%" align="center" style="text-align: left;">
 	
 	        <tr>
-		        <td rowspan="2"><p>職稱</p><input type="text" name="jobtitle" value="<?php echo $row['job_title'] ?>"></td>
+		        <td rowspan="2"><p>職稱</p>
+                    <select name="jobtitle">
+                        <option value="講師級專技人員" <?php if(strcmp($row['job_title'],'講師級專技人員')==0) echo 'selected'; ?> >講師級專技人員           </option>
+                        <option value="講師" <?php if(strcmp($row['job_title'],'講師')==0) echo 'selected'; ?> >講師                     </option>
+                        <option value="教授級專業技術人員" <?php if(strcmp($row['job_title'],'教授級專業技術人員')==0) echo 'selected'; ?> >教授級專業技術人員       </option>
+                        <option value="教授" <?php if(strcmp($row['job_title'],'教授')==0) echo 'selected'; ?> >教授                     </option>
+                        <option value="副教授級專技人員" <?php if(strcmp($row['job_title'],'副教授級專技人員')==0) echo 'selected'; ?> >副教授級專技人員         </option>
+                        <option value="副教授" <?php if(strcmp($row['job_title'],'副教授')==0) echo 'selected'; ?> >副教授                   </option>
+                        <option value="研究員">研究員                   </option>
+                        <option value="副研究員">副研究員                 </option>
+                        <option value="助理教授級專技人員">助理教授級專技人員       </option>
+                        <option value="助理教授">助理教授                 </option>
+                        <option value="助理研究員">助理研究員               </option>
+                        <option value="合聘教授級專業技術人員">合聘教授級專業技術人員   </option>
+                        <option value="合聘教授">合聘教授                 </option>
+                        <option value="合聘副教授級專業技術人員">合聘副教授級專業技術人員 </option>
+                        <option value="合聘副教授">合聘副教授               </option>
+                        <option value="合聘研究員">合聘研究員               </option>
+                        <option value="合聘助理教授">合聘助理教授             </option>
+                        <option value="合聘助理研究員">合聘助理研究員           </option>
+                    </select>
+                </td>
                 <td rowspan="2"><p>姓名</p><input type="text" name="name" value="<?php echo $row['name'] ?>"></td>
                 <td rowspan="2"><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" <?php if(strcmp($row['semester'],'全學年')==0) echo 'checked'; ?> onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" <?php if(strcmp($row['semester'],'上學期')==0) echo 'checked'; ?> onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" <?php if(strcmp($row['semester'],'下學期')==0) echo 'checked'; ?> onclick="selectSecond()"><label for="second">下學期</label></td>
                 <td rowspan="2"><p>專職單位及職稱</p><textarea name="jobname" rows="4" cols="50"><?php echo $row['job_name'] ?></textarea></td>
@@ -88,12 +110,10 @@ if(isset($_POST['submit'])){
 
         </table>
 
-        <p><input type="submit" name="submit" value="修改資料"></p>
+        <p><input type="submit" name="submit" value="修改資料"> <a href="index.php?myselect=<?php echo $myselect; ?>" class="cancel_btn" >取消</a></p>
             
     </form>
 </p>
-
-<a href="index.php?myselect=<?php echo $myselect; ?>" >取消</a>
 
 <script type="text/javascript">
 
@@ -231,6 +251,8 @@ if(isset($_POST['submit'])){
     }
 
 </script>
+
+</div>
 
 </body>
 </html>

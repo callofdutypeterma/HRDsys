@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <link rel="SHORTCUT ICON" href="/assets/images/NCU.ico" />
     <title>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</title>
 </head>
 <body>
     
     <div class="wrap">
 
-    <a href='index.php' class='index'>回首頁</a><br>
+    <a href='/' class='index'>回首頁</a><br>
 
     <H1>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</H1>
     
@@ -158,7 +159,28 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
             <table border="1" width="90%" align="center" style="text-align: left;">
 	
 	            <tr>
-		            <td rowspan="2"><p>職稱</p><input type="text" name="jobtitle"></td>
+		            <td rowspan="2"><p>職稱</p>
+                    <select name="jobtitle">
+                        <option value="講師級專技人員">講師級專技人員           </option>
+                        <option value="講師">講師                     </option>
+                        <option value="教授級專業技術人員">教授級專業技術人員       </option>
+                        <option value="教授">教授                     </option>
+                        <option value="副教授級專技人員">副教授級專技人員         </option>
+                        <option value="副教授">副教授                   </option>
+                        <option value="研究員">研究員                   </option>
+                        <option value="副研究員">副研究員                 </option>
+                        <option value="助理教授級專技人員">助理教授級專技人員       </option>
+                        <option value="助理教授">助理教授                 </option>
+                        <option value="助理研究員">助理研究員               </option>
+                        <option value="合聘教授級專業技術人員">合聘教授級專業技術人員   </option>
+                        <option value="合聘教授">合聘教授                 </option>
+                        <option value="合聘副教授級專業技術人員">合聘副教授級專業技術人員 </option>
+                        <option value="合聘副教授">合聘副教授               </option>
+                        <option value="合聘研究員">合聘研究員               </option>
+                        <option value="合聘助理教授">合聘助理教授             </option>
+                        <option value="合聘助理研究員">合聘助理研究員           </option>
+                    </select>
+                    </td>
                     <td rowspan="2"><p>姓名</p><input type="text" name="name"></td>
                     <td rowspan="2"><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
                     <td rowspan="2"><p>專職單位及職稱</p><textarea name="jobname" rows="4" cols="50"></textarea></td>
@@ -261,7 +283,8 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 
         echo '
                 </table>
-            <p><a href="example.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出PDF</a></p>
+            <p><a href="example.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出兼任PDF</a></p>
+            <p><a href="exampleB.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出合聘PDF</a></p>
         ';
     } else {
         echo "無資料";
