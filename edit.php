@@ -110,7 +110,7 @@ if(isset($_POST['submit'])){
 
         </table>
 
-        <p><input type="submit" name="submit" value="修改資料"> <a href="index.php?myselect=<?php echo $myselect; ?>" class="cancel_btn" >取消</a></p>
+        <p><input type="submit" name="submit" value="儲存"> <a href="index.php?myselect=<?php echo $myselect; ?>" class="cancel_btn" >取消</a></p>
             
     </form>
 </p>

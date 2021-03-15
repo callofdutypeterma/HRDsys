@@ -12,9 +12,12 @@
     <div class="wrap">
 
     <a href='/' class='index'>回首頁</a><br>
+    <!--<a href='excel.php'>EXCEL</a><br>-->
 
     <H1>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</H1>
-    
+
+    <div class="select-style">
+
     <select name="pets" id="mySelect" onchange="mySelect()">
         <option>-----------請選擇你的單位-----------</option>
         <option value="library" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "library") echo "selected='selected'";?> >01 圖書館                           </option>
@@ -97,6 +100,8 @@
         <option>78 認知智慧與精準健康照護研究中心   </option>
     </select><br>
 
+    </div>
+
 <?php
 
 //header("Content-type:text/html;charset=utf-8");
@@ -106,6 +111,10 @@ include('connect.php');
 //${'m' . $m2} = 3;
 
 $myselect = "";
+
+//echo $_SERVER['REMOTE_ADDR']."<br>";
+//echo $_SERVER['HTTP_X_FORWARDED_FOR']."<br>";
+echo "你的ip：".$_SERVER['HTTP_X_REAL_IP']."<br>";
 
 
 if (isset($_GET['myselect'])==true) {
@@ -161,24 +170,28 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 	            <tr>
 		            <td rowspan="2"><p>職稱</p>
                     <select name="jobtitle">
-                        <option value="講師級專技人員">講師級專技人員           </option>
-                        <option value="講師">講師                     </option>
-                        <option value="教授級專業技術人員">教授級專業技術人員       </option>
-                        <option value="教授">教授                     </option>
-                        <option value="副教授級專技人員">副教授級專技人員         </option>
-                        <option value="副教授">副教授                   </option>
-                        <option value="研究員">研究員                   </option>
-                        <option value="副研究員">副研究員                 </option>
-                        <option value="助理教授級專技人員">助理教授級專技人員       </option>
-                        <option value="助理教授">助理教授                 </option>
-                        <option value="助理研究員">助理研究員               </option>
-                        <option value="合聘教授級專業技術人員">合聘教授級專業技術人員   </option>
-                        <option value="合聘教授">合聘教授                 </option>
-                        <option value="合聘副教授級專業技術人員">合聘副教授級專業技術人員 </option>
-                        <option value="合聘副教授">合聘副教授               </option>
-                        <option value="合聘研究員">合聘研究員               </option>
-                        <option value="合聘助理教授">合聘助理教授             </option>
-                        <option value="合聘助理研究員">合聘助理研究員           </option>
+                        <option value="兼任講師">兼任講師                   </option>
+                        <option value="兼任講師級專業技術人員">兼任講師級專業技術人員     </option>
+                        <option value="兼任助理教授">兼任助理教授               </option>
+                        <option value="兼任助理教授級專業技術人員">兼任助理教授級專業技術人員 </option>
+                        <option value="兼任副教授">兼任副教授                 </option>
+                        <option value="兼任副教授級專業技術人員">兼任副教授級專業技術人員   </option>
+                        <option value="兼任教授">兼任教授                   </option>
+                        <option value="兼任教授級專業技術人員">兼任教授級專業技術人員     </option>
+                        <option value="兼任助理研究員">兼任助理研究員             </option>
+                        <option value="兼任副研究員">兼任副研究員               </option>
+                        <option value="兼任研究員">兼任研究員                 </option>
+                        <option value="合聘講師">合聘講師                   </option>
+                        <option value="合聘講師級專業技術人員">合聘講師級專業技術人員     </option>
+                        <option value="合聘助理教授">合聘助理教授               </option>
+                        <option value="合聘助理教授級專業技術人員">合聘助理教授級專業技術人員 </option>
+                        <option value="合聘副教授">合聘副教授                 </option>
+                        <option value="合聘副教授級專業技術人員">合聘副教授級專業技術人員   </option>
+                        <option value="合聘教授">合聘教授                   </option>
+                        <option value="合聘教授級專業技術人員">合聘教授級專業技術人員     </option>
+                        <option value="合聘助理研究員">合聘助理研究員             </option>
+                        <option value="合聘副研究員">合聘副研究員               </option>
+                        <option value="合聘研究員">合聘研究員                 </option>
                     </select>
                     </td>
                     <td rowspan="2"><p>姓名</p><input type="text" name="name"></td>
