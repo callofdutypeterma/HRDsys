@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="themes/easydropdown.css"/>
     <link rel="SHORTCUT ICON" href="/assets/images/NCU.ico" />
     <title>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="src/jquery.easydropdown.js"></script>
 </head>
 <body>
-    
+
     <div class="wrap">
 
     <a href='/' class='index'>回首頁</a><br>
@@ -16,9 +19,11 @@
 
     <H1>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</H1>
 
-    <div class="select-style">
+    <br>
 
-    <select name="pets" id="mySelect" onchange="mySelect()">
+    <!--<div class="select-style">-->
+
+    <select name="pets" id="mySelect" onchange="mySelect()" class="dropdown" data-settings='{"cutOff": 12}'>
         <option>-----------請選擇你的單位-----------</option>
         <option value="library" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "library") echo "selected='selected'";?> >01 圖書館                           </option>
         <option>02 總教學中心                       </option>
@@ -99,8 +104,8 @@
         <option>77 環境監測技術聯合中心             </option>
         <option>78 認知智慧與精準健康照護研究中心   </option>
     </select><br>
-
-    </div>
+    
+    <!--</div>-->
 
 <?php
 
@@ -168,7 +173,7 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
             <table border="1" width="90%" align="center" style="text-align: left;">
 	
 	            <tr>
-		            <td rowspan="2"><p>職稱</p>
+		            <td><p>職稱</p>
                     <select name="jobtitle">
                         <option value="兼任講師">兼任講師                   </option>
                         <option value="兼任講師級專業技術人員">兼任講師級專業技術人員     </option>
@@ -194,16 +199,19 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
                         <option value="合聘研究員">合聘研究員                 </option>
                     </select>
                     </td>
-                    <td rowspan="2"><p>姓名</p><input type="text" name="name"></td>
-                    <td rowspan="2"><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
-                    <td rowspan="2"><p>專職單位及職稱</p><textarea name="jobname" rows="4" cols="50"></textarea></td>
-                
+                    <td><p>姓名</p><input type="text" name="name"></td>
+                    <td><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
+                    <td><p>專職單位及職稱</p><textarea name="jobname" rows="4" cols="50"></textarea></td>  
+	            </tr>
+            
+                <tr>
                     <td>授課學期<input id="SEMNoA" type="number" name="SEMNoA" min="1" max="2" readonly></td>
                     <td><input id="classNameA" type="radio" name="classNameA" onclick="selectClassNameA()"><label for="classNameA">授課名稱</label><input id="classNameInputA" type="text" name="classNameA"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生" onclick="selectGradA()"><label for="GradA">指導研究生</label></td>
                     <td>每週時數<input id="hoursA" type="number" name="hoursA" min="0" max="4"></td>
                     <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必"><label for="compulsoryA">必</label><input id="requiredA" type="radio" name="subjectA" value="選"><label for="requiredA">選</label></td>
-	            </tr>
-            
+                    <td rowspan="2"><p>備註</p><textarea name="notes" rows="4" cols="50"></textarea></td>
+                </tr>
+
                 <tr>
                     <td>授課學期<input id="SEMNoB" type="number" name="SEMNoB" min="1" max="2" readonly></td>
                     <td><input id="classNameB" type="radio" name="classNameB" onclick="selectClassNameB()"><label for="classNameB">授課名稱</label><input id="classNameInputB" type="text" name="classNameB"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生" onclick="selectGradB()"><label for="GradB">指導研究生</label></td>
@@ -212,13 +220,11 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
                 </tr>
 
                 <tr>
-                    <td colspan="8"><p>備註</p><textarea name="notes" rows="4" cols="50"></textarea></td>
+                    <td colspan="5" style="text-align: center"><p><input type="submit" name="submit" value="新增資料"></p></td>
                 </tr>
 
             </table>
 
-            <p><input type="submit" name="submit" value="新增資料"></p>
-            
         </form>
         </p>
 

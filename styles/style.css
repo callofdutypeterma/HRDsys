@@ -1,16 +1,12 @@
 .wrap {
     margin: 0 auto;
+    padding: 0;
     text-align: center;
 }
 
-.left, .center, .right {
-    border: 1px solid black;
-    height: 100px;
-    width: 300px;
-    float: left;
-    margin: 10px;
-    padding: 10px;
-    background: pink;
+ul, li {
+    margin: 0;
+    padding: 0;
 }
 
 .del_btn {
@@ -62,7 +58,7 @@
     width: 240px;
     border-radius: 3px;
     overflow: hidden;
-    background: #fafafa url("img/icon-select.png") no-repeat 90% 50%;
+    margin: 0 auto;
 }
 
 .select-style select {
@@ -72,10 +68,8 @@
     box-shadow: none;
     background: transparent;
     background-image: none;
-    -webkit-appearance: none;
 }
 
 .select-style select:focus {
     outline: none;
 }
-
