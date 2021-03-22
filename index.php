@@ -5,12 +5,14 @@
     <meta charset="UTF-8" />
     <link href="styles/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="themes/easydropdown.css"/>
-    <link rel="SHORTCUT ICON" href="/assets/images/NCU.ico" />
+    <link rel="SHORTCUT ICON" href="assets/images/NCU.ico" />
     <title>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="src/jquery.easydropdown.js"></script>
 </head>
 <body>
+    
+    <?php $myIP = "192.168.43.51"; ?>
 
     <div class="wrap">
 
@@ -23,8 +25,8 @@
 
     <!--<div class="select-style">-->
 
-    <select name="pets" id="mySelect" onchange="mySelect()" class="dropdown" data-settings='{"cutOff": 12}'>
-        <option>-----------請選擇你的單位-----------</option>
+    <select name="pets" id="mySelect" onchange="mySelect()" class="dropdown" data-settings='{"cutOff": 12}'>    
+        <option class="label">-----------請選擇你的單位-----------</option>
         <option value="library" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "library") echo "selected='selected'";?> >01 圖書館                           </option>
         <option>02 總教學中心                       </option>
         <option value="pe_office" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "pe_office") echo "selected='selected'";?> >03 體育室                           </option>
@@ -34,7 +36,7 @@
         <option>07 光電科學研究中心                 </option>
         <option>08 環境研究中心                     </option>
         <option>09 通訊系統研究中心                 </option>
-        <option>10 臺灣經濟發展研究中心             </option>
+        <?php if(substr($myIP, 0, 10) === "192.168.42") echo"<option>10 臺灣經濟發展研究中心             </option>"; ?>
         <option>11 人文研究中心                     </option>
         <option>12 數據分析方法研究中心             </option>
         <option>13 前瞻科技研究中心                 </option>
@@ -135,6 +137,8 @@ if(isset($_POST['submit'])){
     $jobtitle = $_POST['jobtitle'];
     $name = $_POST['name'];
     $semester = $_POST['semester'];
+    $serviceSchool = $_POST['serviceSchool'];
+    $serviceUnit = $_POST['serviceUnit'];
     $jobname = $_POST['jobname'];
     $SEMNoA = $_POST['SEMNoA'];
     $classNameA = $_POST['classNameA'];
@@ -154,7 +158,7 @@ if(isset($_POST['submit'])){
     }
     $notes = $_POST['notes'];
  
-    $insertSql = "INSERT INTO $myselect (job_title,name,semester,job_name,first_semester,first_class_name,first_class_hours,first_class_subject,second_semester,second_class_name,second_class_hours,second_class_subject,notes) VALUES ('$jobtitle','$name', '$semester','$jobname','$SEMNoA','$classNameA','$hoursA','$subjectA','$SEMNoB','$classNameB','$hoursB','$subjectB','$notes')";
+    $insertSql = "INSERT INTO $myselect (job_title,name,semester,service_school,service_unit,job_name,first_semester,first_class_name,first_class_hours,first_class_subject,second_semester,second_class_name,second_class_hours,second_class_subject,notes) VALUES ('$jobtitle','$name', '$semester','$serviceSchool','$serviceUnit','$jobname','$SEMNoA','$classNameA','$hoursA','$subjectA','$SEMNoB','$classNameB','$hoursB','$subjectB','$notes')";
     $status = mysqli_query($connect, $insertSql);
  
     if ($status) {
@@ -170,7 +174,7 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         <p>
         <form action="" method="post">
         
-            <table border="1" width="90%" align="center" style="text-align: left;">
+            <table border="1" width="90%" align="center" style="border-collapse: collapse; text-align: left; background-color: #DCDCDC;">
 	
 	            <tr>
 		            <td><p>職稱</p>
@@ -201,26 +205,38 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
                     </td>
                     <td><p>姓名</p><input type="text" name="name"></td>
                     <td><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
-                    <td><p>專職單位及職稱</p><textarea name="jobname" rows="4" cols="50"></textarea></td>  
+                    <td><p>本職服務機關學校</p><input type="text" name="serviceSchool"></td>
+                    <td><p>本職服務單位</p><input type="text" name="serviceUnit"></td>
+                    <td><p>本職職稱</p><textarea name="jobname" rows="4" cols="40"></textarea></td>  
 	            </tr>
-            
+                
                 <tr>
-                    <td>授課學期<input id="SEMNoA" type="number" name="SEMNoA" min="1" max="2" readonly></td>
-                    <td><input id="classNameA" type="radio" name="classNameA" onclick="selectClassNameA()"><label for="classNameA">授課名稱</label><input id="classNameInputA" type="text" name="classNameA"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生" onclick="selectGradA()"><label for="GradA">指導研究生</label></td>
-                    <td>每週時數<input id="hoursA" type="number" name="hoursA" min="0" max="4"></td>
-                    <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必"><label for="compulsoryA">必</label><input id="requiredA" type="radio" name="subjectA" value="選"><label for="requiredA">選</label></td>
-                    <td rowspan="2"><p>備註</p><textarea name="notes" rows="4" cols="50"></textarea></td>
+                    <td colspan="6">
+                        <table border="0" width="100%" align="center" style="border-collapse: collapse; text-align: left;">
+                            <tr>
+                                <td>授課學期<input id="SEMNoA" type="number" name="SEMNoA" min="1" max="2" readonly></td>
+                                <td><input id="classNameA" type="radio" name="classNameA" onclick="selectClassNameA()"><label for="classNameA">授課名稱</label><input id="classNameInputA" type="text" name="classNameA"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生" onclick="selectGradA()"><label for="GradA">指導研究生</label></td>
+                                <td>每週時數<input id="hoursA" type="number" name="hoursA" min="0" max="4"></td>
+                                <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必"><label for="compulsoryA">必</label><input id="requiredA" type="radio" name="subjectA" value="選"><label for="requiredA">選</label></td>
+                            </tr>
+
+                            <tr>
+                                <td>授課學期<input id="SEMNoB" type="number" name="SEMNoB" min="1" max="2" readonly></td>
+                                <td><input id="classNameB" type="radio" name="classNameB" onclick="selectClassNameB()"><label for="classNameB">授課名稱</label><input id="classNameInputB" type="text" name="classNameB"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生" onclick="selectGradB()"><label for="GradB">指導研究生</label></td>
+                                <td>每週時數<input id="hoursB" type="number" name="hoursB" min="0" max="4"></td>
+                                <td><p>必選修</p><input id="compulsoryB" type="radio" name="subjectB" value="必"><label for="compulsoryB">必</label><input id="requiredB" type="radio" name="subjectB" value="選"><label for="requiredB">選</label></td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
 
                 <tr>
-                    <td>授課學期<input id="SEMNoB" type="number" name="SEMNoB" min="1" max="2" readonly></td>
-                    <td><input id="classNameB" type="radio" name="classNameB" onclick="selectClassNameB()"><label for="classNameB">授課名稱</label><input id="classNameInputB" type="text" name="classNameB"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生" onclick="selectGradB()"><label for="GradB">指導研究生</label></td>
-                    <td>每週時數<input id="hoursB" type="number" name="hoursB" min="0" max="4"></td>
-                    <td><p>必選修</p><input id="compulsoryB" type="radio" name="subjectB" value="必"><label for="compulsoryB">必</label><input id="requiredB" type="radio" name="subjectB" value="選"><label for="requiredB">選</label></td>
+                    <td style="text-align: center;">備註</td>
+                    <td colspan="5"><textarea name="notes" rows="4" cols="50"></textarea></td>
                 </tr>
 
                 <tr>
-                    <td colspan="5" style="text-align: center"><p><input type="submit" name="submit" value="新增資料"></p></td>
+                    <td colspan="6" style="text-align: center;"><p><input type="submit" name="submit" value="新增資料"></p><!--<input type="image" src="assets/images/testbutton.png" border="0" alt="Submit" width="100px" >--></td>
                 </tr>
 
             </table>
@@ -250,11 +266,12 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 		            <th rowspan='2'>職稱</th>
 		            <th rowspan='2'>姓名</th>
 		            <th rowspan='2'>擬授課學期別</th>
-		            <th rowspan='2'>專職單位及職稱</th>
+                    <th rowspan='2'>本職服務機關學校</th>
+                    <th rowspan='2'>本職服務單位</th>
+		            <th rowspan='2'>本職職稱</th>
 		            <th colspan='4'>再聘情形</th>
 		            <th rowspan='2'>備註</th>
-                    <th rowspan='2' colspan='2'>動作</th>
-                        
+                    <th rowspan='2' colspan='2'>動作</th>    
 	            </tr>
 
 	            <tr>
@@ -279,6 +296,8 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 		            <td rowspan='2'>".$row["job_title"]."</td>
                     <td rowspan='2'>".$row["name"]."</td>
 		            <td rowspan='2'>".$row["semester"]."</td>
+                    <td rowspan='2'>".$row["service_school"]."</td>
+                    <td rowspan='2'>".$row["service_unit"]."</td>
 		            <td rowspan='2'>".$stra."</td>
 		            <td>".$row["first_semester"]."</td>
 		            <td>".$row["first_class_name"]."</td>

@@ -52,6 +52,8 @@ $id = null;
 $jobtitle = null;
 $name = null;
 $semester = null;
+$serviceSchool = null;
+$serviceUnit = null;
 $jobname = null;
 $SEMNoA = null;
 $classNameA = null;
@@ -64,7 +66,7 @@ $subjectB = null;
 $notes = null;
 
 // Attempt select query execution
-$sql = "SELECT * FROM $myselect WHERE job_title NOT LIKE '合聘%'";
+$sql = "SELECT * FROM $myselect WHERE job_title LIKE '兼任%'";
 if($result = mysqli_query($connect, $sql)){
     
 	while($row = mysqli_fetch_array($result)){
@@ -72,6 +74,8 @@ if($result = mysqli_query($connect, $sql)){
 		$jobtitle[$i]=$row['job_title'];
 		$name[$i]=$row['name'];
 		$semester[$i]=$row['semester'];
+		$serviceSchool[$i]=$row['service_school'];
+		$serviceUnit[$i]=$row['service_unit'];
 		$jobname[$i]=str_replace("\r\n","<br>", $row["job_name"]);;
 		$SEMNoA[$i]=$row['first_semester'];
 		$classNameA[$i]=$row['first_class_name'];
@@ -104,9 +108,11 @@ $htmla = '
 
 	<tr>
 		<th rowspan="2" width="12%"><font size="6"><small color="#FFFFFF">small</small><br></font>職稱</th>
-		<th rowspan="2" width="12%">姓名</th>
-		<th rowspan="2" width="12%">擬授課學期別</th>
-		<th rowspan="2" width="12%">專職單位及職稱</th>
+		<th rowspan="2" width="10%">姓名</th>
+		<th rowspan="2" width="8%">擬授課學期別</th>
+		<th rowspan="2" width="6%">本職服務機關學校</th>
+		<th rowspan="2" width="6%">本職服務單位</th>
+		<th rowspan="2" width="6%">本職職稱</th>
 		<th colspan="4" width="40%">再聘情形</th>
 		<th rowspan="2" width="12%">備註</th>
 	</tr>
@@ -129,9 +135,11 @@ for($j = 0; $j < $i; $j++){
 
 		<tr>
 			<td rowspan="2" width="12%">'.$jobtitle[$j].'</td>
-			<td rowspan="2" width="12%">'.$name[$j].'</td>
-			<td rowspan="2" width="12%">'.$semester[$j].'</td>
-			<td rowspan="2" width="12%">'.$jobname[$j].'</td>
+			<td rowspan="2" width="10%">'.$name[$j].'</td>
+			<td rowspan="2" width="8%">'.$semester[$j].'</td>
+			<td rowspan="2" width="6%">'.$serviceSchool[$j].'</td>
+			<td rowspan="2" width="6%">'.$serviceUnit[$j].'</td>
+			<td rowspan="2" width="6%">'.$jobname[$j].'</td>
 			<td width="6%">'.$SEMNoA[$j].'</td>
 			<td width="22%">'.$classNameA[$j].'</td>
 			<td width="6%">'.$hoursA[$j].'</td>
@@ -154,15 +162,15 @@ $htmlc = '
 <table border="1" align="center">
 
 	<tr>
-		<td colspan="9" align="left"><small color="#FFFFFF">small</small><br>系所承辦人：<font color="#FFFFFF">天天都在測試中</font>單位主管：<font color="#FFFFFF">天天都在測試中</font>院級主管：<font color="#FFFFFF">天天都在測試中</font>人數：  人<br><small color="#FFFFFF">small</small><br>系級教評會 109年 　   月 　   日 108學年度第 2 學期第  次會議審議通過<br><small color="#FFFFFF">small</small><br>院級教評會 109年 　   月 　   日 108學年度第 2 學期第  次會議報告(審議)通過</td>
+		<td colspan="9" align="left"><small color="#FFFFFF">small</small><br>系所承辦人：<font color="#FFFFFF">天天都在測試中</font>單位主管：<font color="#FFFFFF">天天都在測試中</font>院級主管：<font color="#FFFFFF">天天都在測試中</font>人數：  人<br><small color="#FFFFFF">small</small><br>系級教評會 110年 　   月 　   日 109學年度第 2 學期第  次會議審議通過<br><small color="#FFFFFF">small</small><br>院級教評會 110年 　   月 　   日 109學年度第 2 學期第  次會議報告(審議)通過</td>
 	</tr>
 
 </table>
 備註：<br>
-一、請確認貴單位兼任教研人員再聘名單，如需再聘者請於「擬授課學期別」欄位內勾選，並於「再聘情形」欄填具課程資訊，如未開課僅指導研究生論文者，請註明「指導研究生」，本室將依再聘情形核發聘書;不再聘任者，請於備註欄位註明「不予再聘」。<br>
-二、請確認兼任教研人員之專職單位及職稱，如有誤請逕予更正。<br>
+一、請確實登打貴單位兼任教研人員再聘名單，如需再聘者請於「擬授課學期別」欄位內勾選，並於「再聘情形」欄填具課程資訊，如未開課僅指導研究生論文者，請註明「指導研究生」，本室將依再聘情形核發聘書。<br>
+二、請詳實填寫兼任教研人員之本職服務機關學校、單位及職稱。<br>
 三、依本校三級教評會分工一覽表規定，兼任教研人員之再聘應經系教評會審議通過及院教評會報告，惟如係講授必修課程者，則需經院教評會審議。<br>
-四、本名冊請於109年5月6日前，由各院級單位彙送人事室。<br>
+四、本名冊請於109年5月20日前，由各院級單位彙送人事室。<br>
 ';
 // output the HTML content
 
