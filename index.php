@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="themes/easydropdown.css"/>
     <link rel="SHORTCUT ICON" href="assets/images/NCU.ico" />
     <title>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="src/jquery.easydropdown.js"></script>
 </head>
 <body>
