@@ -3,8 +3,8 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <link href="styles/style.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="themes/easydropdown.css"/>
+    <link href="styles/style.css?032301" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="themes/easydropdown.css?032301"/>
     <link rel="SHORTCUT ICON" href="assets/images/NCU.ico" />
     <title>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -26,85 +26,74 @@
     <!--<div class="select-style">-->
 
     <select name="pets" id="mySelect" onchange="mySelect()" class="dropdown" data-settings='{"cutOff": 12}'>    
-        <option class="label">-----------請選擇你的單位-----------</option>
-        <option value="library" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "library") echo "selected='selected'";?> >01 圖書館                           </option>
-        <option>02 總教學中心                       </option>
-        <option value="pe_office" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "pe_office") echo "selected='selected'";?> >03 體育室                           </option>
-        <option value="ge">04 通識教育中心                     </option>
-        <option>05 語言中心                         </option>
-        <option>06 太空及遙測研究中心               </option>
-        <option>07 光電科學研究中心                 </option>
-        <option>08 環境研究中心                     </option>
-        <option>09 通訊系統研究中心                 </option>
-        <?php if(substr($myIP, 0, 10) === "192.168.42") echo"<option>10 臺灣經濟發展研究中心             </option>"; ?>
-        <option>11 人文研究中心                     </option>
-        <option>12 數據分析方法研究中心             </option>
-        <option>13 前瞻科技研究中心                 </option>
-        <option>14 聯合研究中心                     </option>
-        <option>15 軟體研究中心                     </option>
-        <option>16 災害防治研究中心                 </option>
-        <option>17 學習科技研究中心                 </option>
-        <option>18 奈米科技研究中心                 </option>
-        <option>19 全球定位科學與應用研究中心       </option>
-        <option>20 新世代光驅動電池模組研究中心     </option>
-        <option>21 文學院                           </option>
-        <option>22 中國文學系                       </option>
-        <option>23 英美語文學系                     </option>
-        <option>24 法國語文學系                     </option>
-        <option>25 哲學研究所                       </option>
-        <option>26 歷史研究所                       </option>
-        <option>27 藝術學研究所                     </option>
-        <option>28 學習與教學研究所                 </option>
-        <option>29 師資培育中心                     </option>
-        <option>30 文學院學士班                     </option>
-        <option>31 理學院                           </option>
-        <option>32 數學系                           </option>
-        <option>33 物理學系                         </option>
-        <option>34 化學學系                         </option>
-        <option>35 統計研究所                       </option>
-        <option>36 光電科學與工程學系               </option>
-        <option>37 天文研究所                       </option>
-        <option>38 工學院                           </option>
-        <option>39 土木工程學系                     </option>
-        <option>40 機械工程學系                     </option>
-        <option>41 能源工程研究所                   </option>
-        <option>42 化學工程與材料工程學系           </option>
-        <option>43 營建管理研究所                   </option>
-        <option>44 環境工程研究所                   </option>
-        <option>45 材料科學與工程研究所             </option>
-        <option>46 管理學院                         </option>
-        <option>47 企業管理學系                     </option>
-        <option>48 產業經濟研究所                   </option>
-        <option>49 資訊管理學系                     </option>
-        <option>50 經濟學系                         </option>
-        <option>51 工業管理研究所                   </option>
-        <option>52 人力資源管理研究所               </option>
-        <option>53 財務金融學系                     </option>
-        <option>54 會計研究所                       </option>
-        <option>55 資訊電機學院                     </option>
-        <option>56 電機工程學系                     </option>
-        <option>57 資訊工程學系                     </option>
-        <option>58 通訊工程學系                     </option>
-        <option>59 網路學習科技研究所               </option>
-        <option>60 地球科學學院                     </option>
-        <option>61 地球科學學系                     </option>
-        <option>62 大氣科學學系                     </option>
-        <option>63 太空科學與工程學系               </option>
-        <option>64 應用地質研究所                   </option>
-        <option>65 水文與海洋科學研究所             </option>
-        <option>66 客家學院                         </option>
-        <option>67 法律與政府研究所                 </option>
-        <option>68 客家語文暨社會科學學系           </option>
-        <option>69 生醫理工學院                     </option>
-        <option>70 生命科學系                       </option>
-        <option>71 生醫科學與工程學系               </option>
-        <option>72 認知神經科學研究所               </option>
-        <option>73 高能與強場物理研究中心           </option>
-        <option>74 太空科學與科技研究中心           </option>
-        <option>75 新世代光驅動電池模組研究中心     </option>
-        <option>76 地震災害鏈風險評估及管理研究中心 </option>
-        <option>77 環境監測技術聯合中心             </option>
-        <option>78 認知智慧與精準健康照護研究中心   </option>
+        <option class="label">---------- 請選擇您的單位 ----------</option>
+        <option value= "ipla" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ipla" ) echo "selected='selected'";?>>01　文學院學士班                           </option>
+        <option value= "chinese_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "chinese_department" ) echo "selected='selected'";?>>02　中國文學系                         </option>
+        <option value= "english_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "english_department" ) echo "selected='selected'";?>>03　英美語文學系                     </option>
+        <option value= "french_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "french_department" ) echo "selected='selected'";?>>04　法國語文學系                     </option>
+        <option value= "phi_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "phi_gra_ins" ) echo "selected='selected'";?>>05　哲學研究所                       </option>
+        <option value= "his_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "his_gra_ins" ) echo "selected='selected'";?>>06　歷史研究所                       </option>
+        <option value= "art_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "art_gra_ins" ) echo "selected='selected'";?>>07　藝術學研究所                     </option>
+        <option value= "lea_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "lea_gra_ins" ) echo "selected='selected'";?>>08　學習與教學研究所                 </option>
+        <option value= "iacs_ust" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "iacs_ust" ) echo "selected='selected'";?>>09　亞際文化研究學位學程             </option>
+        <option value= "te_center" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "te_center" ) echo "selected='selected'";?>>10　師資培育中心                     </option>
+        <option value= "jsp" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "jsp" ) echo "selected='selected'";?>>11　理學院學士班                     </option>
+        <option value= "math_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "math_department" ) echo "selected='selected'";?>>12　數學系                           </option>
+        <option value= "physics_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "physics_department" ) echo "selected='selected'";?>>13　物理學系                         </option>
+        <option value= "chem_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "chem_department" ) echo "selected='selected'";?>>14　化學學系                         </option>
+        <option value= "sta_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "sta_gra_ins" ) echo "selected='selected'";?>>15　統計研究所                       </option>
+        <option value= "op_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "op_department" ) echo "selected='selected'";?>>16　光電科學與工程學系               </option>
+        <option value= "ast_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ast_gra_ins" ) echo "selected='selected'";?>>17　天文研究所                       </option>
+        <option value= "ipe" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ipe" ) echo "selected='selected'";?>>18　工學院學士班                     </option>
+        <option value= "civil_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "civil_department" ) echo "selected='selected'";?>>19　土木工程學系                     </option>
+        <option value= "mech_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "mech_department" ) echo "selected='selected'";?>>20　機械工程學系                     </option>
+        <option value= "cme_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "cme_department" ) echo "selected='selected'";?>>21　化學工程與材料工程學系           </option>
+        <option value= "env_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "env_gra_ins" ) echo "selected='selected'";?>>22　環境工程研究所                   </option>
+        <option value= "mat_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "mat_gra_ins" ) echo "selected='selected'";?>>23　材料科學與工程研究所             </option>
+        <option value= "ene_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ene_gra_ins" ) echo "selected='selected'";?>>24　能源工程研究所                   </option>
+        <option value= "ba_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ba_department" ) echo "selected='selected'";?>>25　企業管理學系                     </option>
+        <option value= "im_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "im_department" ) echo "selected='selected'";?>>26　資訊管理學系                     </option>
+        <option value= "finance_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "finance_department" ) echo "selected='selected'";?>>27　財務金融學系                     </option>
+        <option value= "ec_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ec_department" ) echo "selected='selected'";?>>28　經濟學系                         </option>
+        <option value= "ie_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ie_gra_ins" ) echo "selected='selected'";?>>29　產業經濟研究所                   </option>
+        <option value= "hrm_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "hrm_gra_ins" ) echo "selected='selected'";?>>30　人力資源管理研究所               </option>
+        <option value= "ia_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ia_gra_ins" ) echo "selected='selected'";?>>31　工業管理研究所                   </option>
+        <option value= "acc_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "acc_gra_ins" ) echo "selected='selected'";?>>32　會計研究所                       </option>
+        <option value= "ipeecs" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ipeecs" ) echo "selected='selected'";?>>33　資訊電機學院學士班               </option>
+        <option value= "ee_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ee_department" ) echo "selected='selected'";?>>34　電機工程學系                     </option>
+        <option value= "csie_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "csie_department" ) echo "selected='selected'";?>>35　資訊工程學系                     </option>
+        <option value= "ce_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ce_department" ) echo "selected='selected'";?>>36　通訊工程學系                     </option>
+        <option value= "nlt_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "nlt_gra_ins" ) echo "selected='selected'";?>>37　網路學習科技研究所               </option>
+        <option value= "ipes" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ipes" ) echo "selected='selected'";?>>38　地球科學學院學士班               </option>
+        <option value= "atm_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "atm_department" ) echo "selected='selected'";?>>39　大氣科學學系                     </option>
+        <option value= "es_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "es_department" ) echo "selected='selected'";?>>40　地球科學學系                     </option>
+        <option value= "sse_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "sse_department" ) echo "selected='selected'";?>>41　太空科學與工程學系               </option>
+        <option value= "ag_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ag_gra_ins" ) echo "selected='selected'";?>>42　應用地質研究所                   </option>
+        <option value= "hos_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "hos_gra_ins" ) echo "selected='selected'";?>>43　水文與海洋科學研究所             </option>
+        <option value= "hakka_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "hakka_department" ) echo "selected='selected'";?>>44　客家語文暨社會科學學系           </option>
+        <option value= "lawgov_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "lawgov_gra_ins" ) echo "selected='selected'";?>>45　法律與政府研究所                 </option>
+        <option value= "ls_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ls_department" ) echo "selected='selected'";?>>46　生命科學系                       </option>
+        <option value= "cn_gra_ins" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "cn_gra_ins" ) echo "selected='selected'";?>>47　認知神經科學研究所               </option>
+        <option value= "bse_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "bse_department" ) echo "selected='selected'";?>>48　生醫科學與工程學系               </option>
+        <option value= "ge_center" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ge_center" ) echo "selected='selected'";?>>49　通識教育中心                     </option>
+        <option value= "lc_office" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "lc_office" ) echo "selected='selected'";?>>50　語言中心                         </option>
+        <option value= "pe_office" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "pe_office" ) echo "selected='selected'";?>>51　體育室                           </option>
+        <option value= "art_center" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "art_center" ) echo "selected='selected'";?>>52　藝文中心                         </option>
+        <option value= "srsr_center" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "srsr_center" ) echo "selected='selected'";?>>53　太空及遙測研究中心               </option>
+        <option value= "os_center" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "os_center" ) echo "selected='selected'";?>>54　光電科學研究中心                 </option>
+        <option value= "env_center" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "env_center" ) echo "selected='selected'";?>>55　環境研究中心                     </option>
+        <option value= "rc_ted" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "rc_ted" ) echo "selected='selected'";?>>56　臺灣經濟發展研究中心             </option>
+        <option value= "humanities" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "humanities" ) echo "selected='selected'";?>>57　人文研究中心                     </option>
+        <option value= "rc_ast" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "rc_ast" ) echo "selected='selected'";?>>58　前瞻科技研究中心                 </option>
+        <option value= "ape_center" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ape_center" ) echo "selected='selected'";?>>59　太空科學與科技研究中心           </option>
+        <option value= "e_dream" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "e_dream" ) echo "selected='selected'";?>>60　地震災害鏈風險評估及管理研究中心 </option>
+        <option value= "hhp_center" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "hhp_center" ) echo "selected='selected'";?>>61　高能與強場物理研究中心           </option>
+        <option value= "emt_center" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "emt_center" ) echo "selected='selected'";?>>62　環境監測技術聯合中心             </option>
+        <option value= "rc_ciph" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "rc_ciph" ) echo "selected='selected'";?>>63　認知智慧與精準健康照護研究中心   </option>
+        <option value= "rc_hmp" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "rc_hmp" ) echo "selected='selected'";?>>64　災害防治研究中心                 </option>
+        <option value= "rc_stl" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "rc_stl" ) echo "selected='selected'";?>>65　學習科技研究中心                 </option>
+        <option value= "gpsa_rc" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "gpsa_rc" ) echo "selected='selected'";?>>66　全球定位科學與應用研究中心       </option>
+        <option value= "rc_npv" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "rc_npv" ) echo "selected='selected'";?>>67　新世代光驅動電池模組研究中心     </option>
     </select><br>
     
     <!--</div>-->
