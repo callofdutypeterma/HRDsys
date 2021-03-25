@@ -147,7 +147,7 @@ if(isset($_POST['submit'])){
     }
     $notes = $_POST['notes'];
  
-    $insertSql = "INSERT INTO $myselect (job_title,name,semester,service_school,service_unit,job_name,first_semester,first_class_name,first_class_hours,first_class_subject,second_semester,second_class_name,second_class_hours,second_class_subject,notes) VALUES ('$jobtitle','$name', '$semester','$serviceSchool','$serviceUnit','$jobname','$SEMNoA','$classNameA','$hoursA','$subjectA','$SEMNoB','$classNameB','$hoursB','$subjectB','$notes')";
+    $insertSql = "INSERT INTO $myselect (job_title,name,semester,service_school,service_unit,job_name,first_semester,first_class_name,first_class_hours,first_class_subject,second_semester,second_class_name,second_class_hours,second_class_subject,notes,status) VALUES ('$jobtitle','$name', '$semester','$serviceSchool','$serviceUnit','$jobname','$SEMNoA','$classNameA','$hoursA','$subjectA','$SEMNoB','$classNameB','$hoursB','$subjectB','$notes','new')";
     $status = mysqli_query($connect, $insertSql);
  
     if ($status) {

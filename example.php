@@ -37,14 +37,207 @@ $myselect = $_GET['myselect'];
 $officeName = "";
 
 switch ($myselect) {
+	case "ipla":
+		$officeName = "文學院學士班";
+		break;
+	case "chinese_department":
+		$officeName = "中國文學系";
+		break;
+	case "english_department":
+		$officeName = "英美語文學系";
+		break;
+	case "french_department":
+		$officeName = "法國語文學系";
+		break;
+	case "phi_gra_ins":
+		$officeName = "哲學研究所";
+		break;
+	case "his_gra_ins":
+		$officeName = "歷史研究所";
+		break;
+	case "art_gra_ins":
+		$officeName = "藝術學研究所";
+		break;
+	case "lea_gra_ins":
+		$officeName = "學習與教學研究所";
+		break;
+	case "iacs_ust":
+		$officeName = "亞際文化研究學位學程";
+		break;
+	case "te_center":
+		$officeName = "師資培育中心";
+		break;
+	case "jsp":
+		$officeName = "理學院學士班";
+		break;
+	case "math_department":
+		$officeName = "數學系";
+		break;
+	case "physics_department":
+		$officeName = "物理學系";
+		break;
+	case "chem_department":
+		$officeName = "化學學系";
+		break;
+	case "sta_gra_ins":
+		$officeName = "統計研究所";
+		break;
+	case "op_department":
+		$officeName = "光電科學與工程學系";
+		break;
+	case "ast_gra_ins":
+		$officeName = "天文研究所";
+		break;
+	case "ipe":
+		$officeName = "工學院學士班";
+		break;
+	case "civil_department":
+		$officeName = "土木工程學系";
+		break;
+	case "mech_department":
+		$officeName = "機械工程學系";
+		break;
+	case "cme_department":
+		$officeName = "化學工程與材料工程學系";
+		break;
+	case "env_gra_ins":
+		$officeName = "環境工程研究所";
+		break;
+	case "mat_gra_ins":
+		$officeName = "材料科學與工程研究所";
+		break;
+	case "ene_gra_ins":
+		$officeName = "能源工程研究所";
+		break;
+	case "ba_department":
+		$officeName = "企業管理學系";
+		break;
+	case "im_department":
+		$officeName = "資訊管理學系";
+		break;
+	case "finance_department":
+		$officeName = "財務金融學系";
+		break;
+	case "ec_department":
+		$officeName = "經濟學系";
+		break;
+	case "ie_gra_ins":
+		$officeName = "產業經濟研究所";
+		break;
+	case "hrm_gra_ins":
+		$officeName = "人力資源管理研究所";
+		break;
+	case "ia_gra_ins":
+		$officeName = "工業管理研究所";
+		break;
+	case "acc_gra_ins":
+		$officeName = "會計研究所";
+		break;
+	case "ipeecs":
+		$officeName = "資訊電機學院學士班";
+		break;
+	case "ee_department":
+		$officeName = "電機工程學系";
+		break;
+	case "csie_department":
+		$officeName = "資訊工程學系";
+		break;
+	case "ce_department":
+		$officeName = "通訊工程學系";
+		break;
+	case "nlt_gra_ins":
+		$officeName = "網路學習科技研究所";
+		break;
+	case "ipes":
+		$officeName = "地球科學學院學士班";
+		break;
+	case "atm_department":
+		$officeName = "大氣科學學系";
+		break;
+	case "es_department":
+		$officeName = "地球科學學系";
+		break;
+	case "sse_department":
+		$officeName = "太空科學與工程學系";
+		break;
+	case "ag_gra_ins":
+		$officeName = "應用地質研究所";
+		break;
+	case "hos_gra_ins":
+		$officeName = "水文與海洋科學研究所";
+		break;
+	case "hakka_department":
+		$officeName = "客家語文暨社會科學學系";
+		break;
+	case "lawgov_gra_ins":
+		$officeName = "法律與政府研究所";
+		break;
+	case "ls_department":
+		$officeName = "生命科學系";
+		break;
+	case "cn_gra_ins":
+		$officeName = "認知神經科學研究所";
+		break;
+	case "bse_department":
+		$officeName = "生醫科學與工程學系";
+		break;
+	case "ge_center":
+		$officeName = "通識教育中心";
+		break;
+	case "lc_office":
+		$officeName = "語言中心";
+		break;
 	case "pe_office":
 		$officeName = "體育室";
 		break;
-	case "library":
-		$officeName = "圖書館";
+	case "art_center":
+		$officeName = "藝文中心";
 		break;
-	
-  
+	case "srsr_center":
+		$officeName = "太空及遙測研究中心";
+		break;
+	case "os_center":
+		$officeName = "光電科學研究中心";
+		break;
+	case "env_center":
+		$officeName = "環境研究中心";
+		break;
+	case "rc_ted":
+		$officeName = "臺灣經濟發展研究中心";
+		break;
+	case "humanities":
+		$officeName = "人文研究中心";
+		break;
+	case "rc_ast":
+		$officeName = "前瞻科技研究中心";
+		break;
+	case "ape_center":
+		$officeName = "太空科學與科技研究中心";
+		break;
+	case "e_dream":
+		$officeName = "地震災害鏈風險評估及管理研究中心";
+		break;
+	case "hhp_center":
+		$officeName = "高能與強場物理研究中心";
+		break;
+	case "emt_center":
+		$officeName = "環境監測技術聯合中心";
+		break;
+	case "rc_ciph":
+		$officeName = "認知智慧與精準健康照護研究中心";
+		break;
+	case "rc_hmp":
+		$officeName = "災害防治研究中心";
+		break;
+	case "rc_stl":
+		$officeName = "學習科技研究中心";
+		break;
+	case "gpsa_rc":
+		$officeName = "全球定位科學與應用研究中心";
+		break;
+	case "rc_npv":
+		$officeName = "新世代光驅動電池模組研究中心";
+		break;
 }
 
 $i=0;
