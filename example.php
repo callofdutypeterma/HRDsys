@@ -302,8 +302,8 @@ $htmla = '
 	<tr>
 		<th rowspan="2" width="12%"><font size="6"><small color="#FFFFFF">small</small><br></font>職稱</th>
 		<th rowspan="2" width="10%">姓名</th>
-		<th rowspan="2" width="8%">擬授課學期別</th>
-		<th rowspan="2" width="6%">本職服務機關學校</th>
+		<th rowspan="2" width="8%"><b>擬授課學期別</b></th>
+		<th rowspan="2" width="6%"><span style="font-weight:bold">本職服務機關學校</span></th>
 		<th rowspan="2" width="6%">本職服務單位</th>
 		<th rowspan="2" width="6%">本職職稱</th>
 		<th colspan="4" width="40%">再聘情形</th>
@@ -325,7 +325,7 @@ for($j = 0; $j < $i; $j++){
 
 	$htmlb = '
 	<table border="1" align="center">
-
+		
 		<tr>
 			<td rowspan="2" width="12%">'.$jobtitle[$j].'</td>
 			<td rowspan="2" width="10%">'.$name[$j].'</td>
