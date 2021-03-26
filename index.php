@@ -3,8 +3,8 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <link href="styles/style.css?032301" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="themes/easydropdown.css?032301"/>
+    <link href="styles/style.css?032601" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="themes/easydropdown.css?032601"/>
     <link rel="SHORTCUT ICON" href="assets/images/NCU.ico" />
     <title>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -333,11 +333,11 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         }
 
         function selectFirst() {
-        document.getElementById("SEMNoA").value = 1;
+        document.getElementById("SEMNoA").value = "1";
         document.getElementById("hoursA").value = "";
-        document.getElementById("SEMNoB").value = 0;
+        document.getElementById("SEMNoB").value = "";
         document.getElementById("classNameInputB").value = "";
-        document.getElementById("hoursB").value = 0;
+        document.getElementById("hoursB").value = "0";
         //document.getElementById("SEMNoA").readOnly = false;
         document.getElementById("SEMNoA").style.backgroundColor = "#FFF";
         document.getElementById("classNameA").disabled = false;
@@ -363,10 +363,10 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         }
 
         function selectSecond() {
-        document.getElementById("SEMNoA").value = 0;
+        document.getElementById("SEMNoA").value = "";
         document.getElementById("classNameInputA").value = "";
-        document.getElementById("hoursA").value = 0;
-        document.getElementById("SEMNoB").value = 2;
+        document.getElementById("hoursA").value = "0";
+        document.getElementById("SEMNoB").value = "2";
         document.getElementById("hoursB").value = "";
         //document.getElementById("SEMNoA").readOnly = true;
         document.getElementById("SEMNoA").style.backgroundColor = "#ccc";
@@ -393,8 +393,8 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         }
 
         function selectAll() {
-        document.getElementById("SEMNoA").value = 1;
-        document.getElementById("SEMNoB").value = 2;
+        document.getElementById("SEMNoA").value = "1";
+        document.getElementById("SEMNoB").value = "2";
         document.getElementById("hoursA").value = "";
         document.getElementById("hoursB").value = "";
         //document.getElementById("SEMNoA").readOnly = false;
@@ -425,7 +425,7 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         document.getElementById("classNameInputA").value = "";
         document.getElementById("hoursA").readOnly = true;
         document.getElementById("hoursA").style.backgroundColor = "#ccc";
-        document.getElementById("hoursA").value = 0;
+        document.getElementById("hoursA").value = "0";
         document.getElementById("compulsoryA").disabled = true;
         document.getElementById("compulsoryA").checked = false;
         document.getElementById("requiredA").disabled = true;
@@ -448,7 +448,7 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         document.getElementById("classNameInputB").value = "";
         document.getElementById("hoursB").readOnly = true;
         document.getElementById("hoursB").style.backgroundColor = "#ccc";
-        document.getElementById("hoursB").value = 0;
+        document.getElementById("hoursB").value = "0";
         document.getElementById("compulsoryB").disabled = true;
         document.getElementById("compulsoryB").checked = false;
         document.getElementById("requiredB").disabled = true;

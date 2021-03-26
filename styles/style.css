@@ -77,9 +77,9 @@ ul, li {
 input[type=submit] {
     padding: 5px 15px;
     background: #FFFFFF;
-    border: 0px;
+    border: 1px;
     border-style: solid;
-    border-color: #C6BF00;
+    border-color: #DCDCDC;
     cursor: pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px;

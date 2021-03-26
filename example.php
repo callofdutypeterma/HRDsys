@@ -23,8 +23,8 @@ $pdf->setPrintHeader(false);
 $pdf->setPrintFooter(false);
 
 // Print a table
-$fontname = TCPDF_FONTS::addTTFfont('fonts/kaiu.ttf', 'TrueTypeUnicode');
-$pdf->SetFont($fontname, '', 12, '', false);
+//$fontname = TCPDF_FONTS::addTTFfont('fonts/kaiu.ttf', 'TrueTypeUnicode');
+$pdf->SetFont('kaiu', '', 12, '', false);
 //$pdf->SetFont('msungstdlight', '', 12);
 
 // add a page
@@ -257,6 +257,7 @@ $classNameB = null;
 $hoursB = null;
 $subjectB = null;
 $notes = null;
+$status = null;
 
 // Attempt select query execution
 $sql = "SELECT * FROM $myselect WHERE job_title LIKE '兼任%'";
@@ -279,6 +280,7 @@ if($result = mysqli_query($connect, $sql)){
 		$hoursB[$i]=$row['second_class_hours'];
 		$subjectB[$i]=$row['second_class_subject'];
 		$notes[$i]=str_replace("\r\n","<br>", $row["notes"]);
+		$status[$i]=$row['status'];
 		$i++;
     }
     // Free result set
@@ -302,8 +304,8 @@ $htmla = '
 	<tr>
 		<th rowspan="2" width="12%"><font size="6"><small color="#FFFFFF">small</small><br></font>職稱</th>
 		<th rowspan="2" width="10%">姓名</th>
-		<th rowspan="2" width="8%"><b>擬授課學期別</b></th>
-		<th rowspan="2" width="6%"><span style="font-weight:bold">本職服務機關學校</span></th>
+		<th rowspan="2" width="8%">擬授課學期別</th>
+		<th rowspan="2" width="6%">本職服務機關學校</th>
 		<th rowspan="2" width="6%">本職服務單位</th>
 		<th rowspan="2" width="6%">本職職稱</th>
 		<th colspan="4" width="40%">再聘情形</th>
@@ -322,33 +324,63 @@ $htmla = '
 $pdf->writeHTML($htmla, false, 0, false, false, 'L');
 
 for($j = 0; $j < $i; $j++){
-
-	$htmlb = '
-	<table border="1" align="center">
+	
+	if($status[$j] == "old"){
+		$htmlb = '
+		<table border="1" align="center">
 		
-		<tr>
-			<td rowspan="2" width="12%">'.$jobtitle[$j].'</td>
-			<td rowspan="2" width="10%">'.$name[$j].'</td>
-			<td rowspan="2" width="8%">'.$semester[$j].'</td>
-			<td rowspan="2" width="6%">'.$serviceSchool[$j].'</td>
-			<td rowspan="2" width="6%">'.$serviceUnit[$j].'</td>
-			<td rowspan="2" width="6%">'.$jobname[$j].'</td>
-			<td width="6%">'.$SEMNoA[$j].'</td>
-			<td width="22%">'.$classNameA[$j].'</td>
-			<td width="6%">'.$hoursA[$j].'</td>
-			<td width="6%">'.$subjectA[$j].'</td>
-			<td rowspan="2" width="12%">'.$notes[$j].'</td>
-		</tr>
+			<tr>
+				<td rowspan="2" width="12%">'.$jobtitle[$j].'</td>
+				<td rowspan="2" width="10%">'.$name[$j].'</td>
+				<td rowspan="2" width="8%">'.$semester[$j].'</td>
+				<td rowspan="2" width="6%">'.$serviceSchool[$j].'</td>
+				<td rowspan="2" width="6%">'.$serviceUnit[$j].'</td>
+				<td rowspan="2" width="6%">'.$jobname[$j].'</td>
+				<td width="6%">'.$SEMNoA[$j].'</td>
+				<td width="22%">'.$classNameA[$j].'</td>
+				<td width="6%">'.$hoursA[$j].'</td>
+				<td width="6%">'.$subjectA[$j].'</td>
+				<td rowspan="2" width="12%">'.$notes[$j].'</td>
+			</tr>
 
-		<tr>
-			<td width="6%">'.$SEMNoB[$j].'</td>
-			<td width="22%">'.$classNameB[$j].'</td>
-			<td width="6%">'.$hoursB[$j].'</td>
-			<td width="6%">'.$subjectB[$j].'</td>
-		</tr>
+			<tr>
+				<td width="6%">'.$SEMNoB[$j].'</td>
+				<td width="22%">'.$classNameB[$j].'</td>
+				<td width="6%">'.$hoursB[$j].'</td>
+				<td width="6%">'.$subjectB[$j].'</td>
+			</tr>
 
-	</table>
-	';
+		</table>
+		';
+	}else if($status[$j] == "new"){
+		$htmlb = '
+		<table border="1" align="center" style="font-weight:bold">
+		
+			<tr>
+				<td rowspan="2" width="12%">'.$jobtitle[$j].'</td>
+				<td rowspan="2" width="10%">'.$name[$j].'</td>
+				<td rowspan="2" width="8%">'.$semester[$j].'</td>
+				<td rowspan="2" width="6%">'.$serviceSchool[$j].'</td>
+				<td rowspan="2" width="6%">'.$serviceUnit[$j].'</td>
+				<td rowspan="2" width="6%">'.$jobname[$j].'</td>
+				<td width="6%">'.$SEMNoA[$j].'</td>
+				<td width="22%">'.$classNameA[$j].'</td>
+				<td width="6%">'.$hoursA[$j].'</td>
+				<td width="6%">'.$subjectA[$j].'</td>
+				<td rowspan="2" width="12%">'.$notes[$j].'</td>
+			</tr>
+
+			<tr>
+				<td width="6%">'.$SEMNoB[$j].'</td>
+				<td width="22%">'.$classNameB[$j].'</td>
+				<td width="6%">'.$hoursB[$j].'</td>
+				<td width="6%">'.$subjectB[$j].'</td>
+			</tr>
+
+		</table>
+		';
+	}
+
 	$pdf->writeHTML($htmlb, false, 0, false, false, 'L');
 }
 $htmlc = '
@@ -360,10 +392,10 @@ $htmlc = '
 
 </table>
 備註：<br>
-一、請確實登打貴單位兼任教研人員再聘名單，如需再聘者請於「擬授課學期別」欄位內勾選，並於「再聘情形」欄填具課程資訊，如未開課僅指導研究生論文者，請註明「指導研究生」，本室將依再聘情形核發聘書。<br>
+一、請確實登打貴單位兼任教研人員再聘名單，如需再聘者請於「擬授課學期別」欄位內勾選，並於<br><font color="#FFFFFF">一、</font>「再聘情形」欄填具課程資訊，如未開課僅指導研究生論文者，請註明「指導研究生」，本室將<br><font color="#FFFFFF">一、</font>依再聘情形核發聘書；<b>不再聘任者，請於備註欄註明「不予再聘」，請勿刪除該人員。</b><br>
 二、請詳實填寫兼任教研人員之本職服務機關學校、單位及職稱。<br>
-三、依本校三級教評會分工一覽表規定，兼任教研人員之再聘應經系教評會審議通過及院教評會報告，惟如係講授必修課程者，則需經院教評會審議。<br>
-四、本名冊請於109年5月20日前，由各院級單位彙送人事室。<br>
+三、依本校三級教評會分工一覽表規定，兼任教研人員之再聘應經系教評會審議通過及院教評會報告<br><font color="#FFFFFF">三、</font>，惟如<b>係講授必修課程者，則需經院教評會審議。</b><br>
+四、本名冊<b>請於110年5月20日前，由各院級單位彙送人事室。</b><br>
 ';
 // output the HTML content
 
