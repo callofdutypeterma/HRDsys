@@ -234,22 +234,37 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         </p>
 
     ';
+    
+    echo "<hr class='new5'>";
 
-    echo $myselect;
+    echo "
+    
+        <table border='1' width='90%' align='center'>
+            <tr>
+    
+    ";
+    
+    $sql = "SELECT chinese_name FROM units_information where unit_name = '".$myselect."';";
+    $result = mysqli_query($connect, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_array($result)) {
+            echo "<td colspan = '13'><h2 style='background:yellow'>".$row["chinese_name"]; 
+        }
+    }
 
     $sql = "SELECT * FROM ".$myselect.";";
     $result = mysqli_query($connect, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         
-        printf("有 %d 筆資料\n", mysqli_num_rows($result));
+        printf("有 %d 筆資料</h2></td>", mysqli_num_rows($result));
 
         // output data of each row
         $i=0;
 
         echo "
         
-            <table border='1' width='70%' align='center'>
+                </tr>
 	
 	            <tr>
 		            <th rowspan='2'>職稱</th>
@@ -264,10 +279,10 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 	            </tr>
 
 	            <tr>
-		            <td>授課學期</td>
-		            <td>授課名稱</td>
-		            <td>每週時數</td>
-		            <td>必選修</td>
+		            <th>授課學期</th>
+		            <th>授課名稱</th>
+		            <th>每週時數</th>
+		            <th>必選修</th>
 	            </tr>
 
         ";
@@ -314,7 +329,13 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
             <p><a href="exampleB.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出合聘PDF</a></p>
         ';
     } else {
-        echo "無資料";
+        echo "無資料</h2>
+            
+              </tr>
+
+            </table>
+
+        ";
     }
 
     
