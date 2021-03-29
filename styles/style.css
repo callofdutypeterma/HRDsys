@@ -76,16 +76,16 @@ ul, li {
 
 input[type=submit] {
     padding: 5px 15px;
-    background: #FFFFFF;
+    background: #cfed5b;
     border: 1px;
     border-style: solid;
-    border-color: #DCDCDC;
+    border-color: #cfed5b;
     cursor: pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     font-family: SimHei;
     font-size: 18px;
-    color: #FF0000;
+    color: #FFFFFF;
 }
 
 hr.new5 {

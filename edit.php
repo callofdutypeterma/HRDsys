@@ -92,7 +92,7 @@ if(isset($_POST['submit'])){
                     <option value="合聘研究員" <?php if(strcmp($row['job_title'],'合聘研究員')==0) echo 'selected'; ?> >合聘研究員                 </option>
                 </select>
                 </td>
-                <td><p>姓名</p><input type="text" name="name" value="<?php echo $row['name'] ?>"></td>
+                <td><p>姓名</p><input type="text" name="name" value="<?php echo $row['name'].'"'; if($row['status'] == 'old') echo 'readonly'; ?> ></td>
                 <td><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" <?php if(strcmp($row['semester'],'全學年')==0) echo 'checked'; ?> onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" <?php if(strcmp($row['semester'],'上學期')==0) echo 'checked'; ?> onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" <?php if(strcmp($row['semester'],'下學期')==0) echo 'checked'; ?> onclick="selectSecond()"><label for="second">下學期</label></td>
                 <td><p>本職服務機關學校</p><input type="text" name="serviceSchool" value="<?php echo $row['service_school'] ?>"></td>
                 <td><p>本職服務單位</p><input type="text" name="serviceUnit" value="<?php echo $row['service_unit'] ?>"></td>
