@@ -27,7 +27,7 @@ $content = '"'.$row["job_title"].'
 '.$row["name"].'",'.$row["semester"].',"'.$row["job_name"].'"';
 $contentB = "標題一,標題二,標題三,標題五,";
 $fp=fopen($file,"w")
-	or exit ("檔案 $file 開啟錯誤<br/>");
+	or exit ("file $file error<br/>");
 
 fwrite($fp, $contentB."\r\n");
 fwrite($fp, mb_convert_encoding($content,"big5"));  //註1
@@ -51,7 +51,7 @@ fclose($fp);
 
 echo $row["name"];
 
-$string = "轉碼測試功蓋銹abc轉碼測試"; 
+$string = "<a href='formData.csv' download='formData.csv'>點選下載</a>"; 
 $result = mb_convert_encoding($string,"utf-8","big5");
 echo $result;
 

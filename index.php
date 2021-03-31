@@ -325,8 +325,8 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 
         echo '
                 </table>
-            <p><a href="example.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出兼任PDF</a></p>
-            <p><a href="exampleB.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出合聘PDF</a></p>
+            <p><a href="example.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出兼任教研人員名單</a></p>
+            <p><a href="exampleB.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出合聘教研人員名單</a></p>
         ';
     } else {
         echo "無資料</h2>
@@ -350,11 +350,11 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         
         <tr>
             <td>
-            備註：<br>
-            一、請確實登打貴單位兼任教研人員再聘名單，如需再聘者請於「擬授課學期別」欄位內勾選，並於「再聘情形」欄填具課程資訊，如未開課僅指導研究生論文者，請註明「指導研究生」，本室將依再聘情形核發聘書；不再聘任者，請於備註欄註明「不予再聘」，請勿刪除該人員。<br>
-            二、請詳實填寫兼任教研人員之本職服務機關學校、單位及職稱。<br>
+            <font size="5">備註：<br>
+            一、請確實登打貴單位兼任、合聘教研人員再聘名單，如需再聘者請於「擬授課學期別」欄位內勾選，並於「再聘情形」欄填具課程資訊，如未開課者，<b>請註明「指導研究生」或「協助合作研究」</b>，本室將依再聘情形核發聘書；不再聘任者，請於備註欄註明「不予再聘」，請勿刪除該人員。<br>
+            二、請詳實填寫兼任、合聘教研人員之本職服務機關學校、單位及職稱<b>(均填寫全銜)</b>。<br>
             三、依本校三級教評會分工一覽表規定，兼任教研人員之再聘應經系教評會審議通過及院教評會報告，惟如係講授必修課程者，則需經院教評會審議。<br>
-            四、本名冊請於110年5月20日前，由各院級單位彙送人事室。<br>
+            四、<b>「再聘兼任教研人員名冊」</b>及<b>「繼續合聘教研人員名冊」</b>請於<b>110年5月20日</b>前，由各院級單位彙送人事室。</font><br>
             </td>
         <tr>
 

@@ -138,7 +138,7 @@ if(isset($_POST['submit'])){
     function selectFirst() {
     document.getElementById("SEMNoA").value = "1";
     document.getElementById("hoursA").value = "";
-    document.getElementById("SEMNoB").value = "0";
+    document.getElementById("SEMNoB").value = "";
     document.getElementById("classNameInputB").value = "";
     document.getElementById("hoursB").value = "0";
     //document.getElementById("SEMNoA").readOnly = false;
@@ -166,7 +166,7 @@ if(isset($_POST['submit'])){
     }
 
     function selectSecond() {
-    document.getElementById("SEMNoA").value = "0";
+    document.getElementById("SEMNoA").value = "";
     document.getElementById("classNameInputA").value = "";
     document.getElementById("hoursA").value = "0";
     document.getElementById("SEMNoB").value = "2";
