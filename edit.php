@@ -26,6 +26,8 @@ if(isset($_POST['submit'])){
     $jobtitle = $_POST['jobtitle'];
     $name = $_POST['name'];
     $semester = $_POST['semester'];
+    $serviceSchool = $_POST['serviceSchool'];
+    $serviceUnit = $_POST['serviceUnit'];
     $jobname = $_POST['jobname'];
     $SEMNoA = $_POST['SEMNoA'];
     $classNameA = $_POST['classNameA'];
@@ -45,7 +47,7 @@ if(isset($_POST['submit'])){
     }
     $notes = $_POST['notes'];
  
-    $updateSql = "UPDATE $myselect SET job_title='$jobtitle',name='$name',semester='$semester',job_name='$jobname',first_semester=$SEMNoA,first_class_name='$classNameA',first_class_hours=$hoursA,first_class_subject='$subjectA',second_semester=$SEMNoB,second_class_name='$classNameB',second_class_hours=$hoursB,second_class_subject='$subjectB',notes='$notes' WHERE id=$id";
+    $updateSql = "UPDATE $myselect SET job_title='$jobtitle',name='$name',semester='$semester',service_school='$serviceSchool',service_unit='$serviceUnit',job_name='$jobname',first_semester='$SEMNoA',first_class_name='$classNameA',first_class_hours='$hoursA',first_class_subject='$subjectA',second_semester='$SEMNoB',second_class_name='$classNameB',second_class_hours='$hoursB',second_class_subject='$subjectB',notes='$notes' WHERE id=$id";
     $status = mysqli_query($connect, $updateSql);
  
     if ($status) {
@@ -92,7 +94,7 @@ if(isset($_POST['submit'])){
                     <option value="合聘研究員" <?php if(strcmp($row['job_title'],'合聘研究員')==0) echo 'selected'; ?> >合聘研究員                 </option>
                 </select>
                 </td>
-                <td><p>姓名</p><input type="text" name="name" value="<?php echo $row['name'].'"'; if($row['status'] == 'old') echo 'readonly'; ?> ></td>
+                <td><p>姓名</p><input type="text" name="name" value="<?php echo $row['name']; ?>" <?php if($row['status'] == 'old') echo 'readonly'; ?> ></td>
                 <td><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" <?php if(strcmp($row['semester'],'全學年')==0) echo 'checked'; ?> onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" <?php if(strcmp($row['semester'],'上學期')==0) echo 'checked'; ?> onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" <?php if(strcmp($row['semester'],'下學期')==0) echo 'checked'; ?> onclick="selectSecond()"><label for="second">下學期</label></td>
                 <td><p>本職服務機關學校</p><input type="text" name="serviceSchool" value="<?php echo $row['service_school'] ?>"></td>
                 <td><p>本職服務單位</p><input type="text" name="serviceUnit" value="<?php echo $row['service_unit'] ?>"></td>
@@ -125,8 +127,6 @@ if(isset($_POST['submit'])){
             </tr>
 
         </table>
-
-    </form>
 
     <p><input type="submit" name="submit" value="儲存"> <a href="index.php?myselect=<?php echo $myselect; ?>" class="cancel_btn" >取消</a></p>
             

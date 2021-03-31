@@ -314,7 +314,7 @@ $htmla = '
 
 	<tr>
 		<td width="6%">授課學期</td>
-		<td width="22%">授課名稱</td>
+		<td width="22%">授課名稱或「指導研究生」</td>
 		<td width="6%">每週時數</td>
 		<td width="6%">必選修</td>
 	</tr>
@@ -387,7 +387,7 @@ $htmlc = '
 <table border="1" align="center">
 
 	<tr>
-		<td colspan="9" align="left"><small color="#FFFFFF">small</small><br>系所承辦人：<font color="#FFFFFF">天天都在測試中</font>單位主管：<font color="#FFFFFF">天天都在測試中</font>院級主管：<font color="#FFFFFF">天天都在測試中</font>人數：  人<br><small color="#FFFFFF">small</small><br>系級教評會 110年 　   月 　   日 109學年度第 2 學期第  次會議審議通過<br><small color="#FFFFFF">small</small><br>院級教評會 110年 　   月 　   日 109學年度第 2 學期第  次會議報告(審議)通過</td>
+		<td colspan="9" align="left"><small color="#FFFFFF">small</small><br>系所承辦人：<font color="#FFFFFF">天天都在測試中</font>單位主管：<font color="#FFFFFF">天天都在測試中</font>院級主管：<font color="#FFFFFF">天天都在測試中</font>人數： '.$i.'人<br><small color="#FFFFFF">small</small><br>系級教評會 110年 　   月 　   日 109學年度第 2 學期第  次會議審議通過<br><small color="#FFFFFF">small</small><br>院級教評會 110年 　   月 　   日 109學年度第 2 學期第  次會議報告(審議)通過</td>
 	</tr>
 
 </table>

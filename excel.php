@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <link href="styles/style.css" rel="stylesheet" type="text/css">
     <link rel="SHORTCUT ICON" href="/assets/images/NCU.ico" />
-    <title>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</title>
+    <title>EXCEL</title>
 </head>
 <body>
 
@@ -18,14 +18,14 @@
 
 include('connect.php');
 
-$sel = mysqli_query($connect,"SELECT * FROM library;"); 
+$sel = mysqli_query($connect,"SELECT * FROM pe_office;"); 
 
 $row = mysqli_fetch_assoc($sel);
 
 $file = "formData.csv";
 $content = '"'.$row["job_title"].'
 '.$row["name"].'",'.$row["semester"].',"'.$row["job_name"].'"';
-$contentB = "標題一,標題二,標題三,標題四,";
+$contentB = "標題一,標題二,標題三,標題五,";
 $fp=fopen($file,"w")
 	or exit ("檔案 $file 開啟錯誤<br/>");
 

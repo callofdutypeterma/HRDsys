@@ -3,8 +3,8 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <link href="styles/style.css?032601" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="themes/easydropdown.css?032601"/>
+    <link href="styles/style.css?033001" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="themes/easydropdown.css?033001"/>
     <link rel="SHORTCUT ICON" href="assets/images/NCU.ico" />
     <title>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -17,7 +17,6 @@
     <div class="wrap">
 
     <a href='/' class='index'>回首頁</a><br>
-    <!--<a href='excel.php'>EXCEL</a><br>-->
 
     <H1>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</H1>
 
@@ -94,6 +93,7 @@
         <option value= "rc_stl" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "rc_stl" ) echo "selected='selected'";?>>65　學習科技研究中心                 </option>
         <option value= "gpsa_rc" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "gpsa_rc" ) echo "selected='selected'";?>>66　全球定位科學與應用研究中心       </option>
         <option value= "rc_npv" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "rc_npv" ) echo "selected='selected'";?>>67　新世代光驅動電池模組研究中心     </option>
+        <option value= "ncu7060" >人事室</option>
     </select><br>
     
     <!--</div>-->
@@ -346,11 +346,30 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
     
 ?>
     
+    <table border="0" width="90%" align="center" style="text-align: left;">
+        
+        <tr>
+            <td>
+            備註：<br>
+            一、請確實登打貴單位兼任教研人員再聘名單，如需再聘者請於「擬授課學期別」欄位內勾選，並於「再聘情形」欄填具課程資訊，如未開課僅指導研究生論文者，請註明「指導研究生」，本室將依再聘情形核發聘書；不再聘任者，請於備註欄註明「不予再聘」，請勿刪除該人員。<br>
+            二、請詳實填寫兼任教研人員之本職服務機關學校、單位及職稱。<br>
+            三、依本校三級教評會分工一覽表規定，兼任教研人員之再聘應經系教評會審議通過及院教評會報告，惟如係講授必修課程者，則需經院教評會審議。<br>
+            四、本名冊請於110年5月20日前，由各院級單位彙送人事室。<br>
+            </td>
+        <tr>
+
+    </table>
+
     <script type="text/javascript">
 
         function mySelect() {
           var x = document.getElementById("mySelect").value;
-          window.location.href = 'index.php?myselect='+ x;
+          if(x == "ncu7060"){
+            window.location.href = 'excel.php';
+          }else{
+            window.location.href = 'index.php?myselect='+ x;
+          }
+          
         }
 
         function selectFirst() {
