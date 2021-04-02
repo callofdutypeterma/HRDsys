@@ -21,10 +21,8 @@
     <H1>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</H1>
 
     <br>
-
-    <!--<div class="select-style">-->
-
-    <select name="pets" id="mySelect" onchange="mySelect()" class="dropdown" data-settings='{"cutOff": 12}'>    
+    
+    <select id="mySelect" onchange="mySelect()" class="dropdown" data-settings='{"cutOff": 12}'>    
         <option class="label">---------- 請選擇您的單位 ----------</option>
         <option value= "ipla" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "ipla" ) echo "selected='selected'";?>>01　文學院學士班                           </option>
         <option value= "chinese_department" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "chinese_department" ) echo "selected='selected'";?>>02　中國文學系                         </option>
@@ -95,31 +93,26 @@
         <option value= "rc_npv" <?php if (isset($_GET['myselect'])==true && $_GET['myselect'] == "rc_npv" ) echo "selected='selected'";?>>67　新世代光驅動電池模組研究中心     </option>
         <option value= "ncu7060" >人事室</option>
     </select><br>
-    
-    <!--</div>-->
 
 <?php
 
-//header("Content-type:text/html;charset=utf-8");
-
 include('connect.php');
-
-//${'m' . $m2} = 3;
 
 $myselect = "";
 
-//echo $_SERVER['REMOTE_ADDR']."<br>";
-//echo $_SERVER['HTTP_X_FORWARDED_FOR']."<br>";
-echo "你的ip：".$_SERVER['HTTP_X_REAL_IP']."<br>";
-
+echo "您的ip：".$_SERVER['HTTP_X_REAL_IP']."<br>";
 
 if (isset($_GET['myselect'])==true) {
 
     $myselect = $_GET['myselect'];
-    //$exportecl = "select * from $myselect into outfile 'd:/test.xls';";
-    //mysqli_query($connect, $exportecl);
 }
 
+$sql = "select * from units_information,ip_information where ip_information.uid = units_information.id and ip_information.ip_address = '140.115.86.';";
+$result = mysqli_query($connect, $sql);
+
+$row = mysqli_fetch_array($result);
+        
+if(mysqli_num_rows($result) > 0 && $row["unit_name"] == $myselect){
 
 if(isset($_POST['submit'])){
     
@@ -259,7 +252,6 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         
         printf("有 %d 筆資料</h2></td>", mysqli_num_rows($result));
 
-        // output data of each row
         $i=0;
 
         echo "
@@ -331,18 +323,21 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
     } else {
         echo "無資料</h2>
             
-              </tr>
+            </tr>
 
             </table>
 
         ";
     }
 
-    
-
     /* free result set */
-    //mysqli_free_result($result);
+    mysqli_free_result($result);
 }
+}else{
+    echo "您不屬於此單位ip";
+
+}
+
     
 ?>
     
@@ -506,6 +501,6 @@ if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
         }
 
     </script>
-    </div>
+    
 </body>
 </html>

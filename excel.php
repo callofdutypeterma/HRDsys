@@ -18,20 +18,27 @@
 
 include('connect.php');
 
-$sel = mysqli_query($connect,"SELECT * FROM pe_office;"); 
 
-$row = mysqli_fetch_assoc($sel);
+$selA = mysqli_query($connect,"SELECT * FROM units_information;"); 
 
 $file = "formData.csv";
-$content = '"'.$row["job_title"].'
-'.$row["name"].'",'.$row["semester"].',"'.$row["job_name"].'"';
-$contentB = "標題一,標題二,標題三,標題五,";
+//$content = '"'.$row["job_title"].'
+//'.$row["name"].'",'.$row["semester"].',"'.$row["job_name"].'"'; //同格斷行要用雙引號標起來，然後在編輯器直接斷行
+$contentB = "單位,職稱,姓名,擬授課學期別,本職服務機關學校,本職服務單位,本職職稱,授課學期一,授課名稱,每週時數,必選修,授課學期二,授課名稱,每週時數,必選修,備註,";
 $fp=fopen($file,"w")
 	or exit ("file $file error<br/>");
-
 fwrite($fp, $contentB."\r\n");
-fwrite($fp, mb_convert_encoding($content,"big5"));  //註1
 
+while($rowA = mysqli_fetch_assoc($selA)) {
+
+    $selB = mysqli_query($connect,"SELECT * FROM ".$rowA['unit_name'].";");
+    while($rowB = mysqli_fetch_assoc($selB)) {
+
+        $contentA = $rowA["chinese_name"].',"'.$rowB["job_title"].'",'.$rowB["name"].','.$rowB["semester"].','.$rowB["service_school"].','.$rowB["service_unit"].',"'.$rowB["job_name"].'",'.$rowB["first_semester"].','.$rowB["first_class_name"].','.$rowB["first_class_hours"].','.$rowB["first_class_subject"].','.$rowB["second_semester"].','.$rowB["second_class_name"].','.$rowB["second_class_hours"].','.$rowB["second_class_subject"].',"'.$rowB["notes"].'",';
+        fwrite($fp, mb_convert_encoding($contentA,"big5")."\r\n");  //註1
+
+    }
+}
 
 //fwrite($fp, $content);  //註2
 
@@ -48,8 +55,6 @@ if(fwrite($fp, "\xEF\xBB\xBF".$content) ){
 */
 
 fclose($fp);
-
-echo $row["name"];
 
 $string = "<a href='formData.csv' download='formData.csv'>點選下載</a>"; 
 $result = mb_convert_encoding($string,"utf-8","big5");
