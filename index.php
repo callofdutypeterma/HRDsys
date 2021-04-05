@@ -107,235 +107,236 @@ if (isset($_GET['myselect'])==true) {
     $myselect = $_GET['myselect'];
 }
 
-$sql = "select * from units_information,ip_information where ip_information.uid = units_information.id and ip_information.ip_address = '140.115.86.';";
+$sql = "select * from units_information,ip_information where ip_information.uid = units_information.unit_id and ip_information.ip_address = '140.115.86.';";
 $result = mysqli_query($connect, $sql);
 
 $row = mysqli_fetch_array($result);
         
 if(mysqli_num_rows($result) > 0 && $row["unit_name"] == $myselect){
 
-if(isset($_POST['submit'])){
+    if(isset($_POST['submit'])){
     
-    $jobtitle = $_POST['jobtitle'];
-    $name = $_POST['name'];
-    $semester = $_POST['semester'];
-    $serviceSchool = $_POST['serviceSchool'];
-    $serviceUnit = $_POST['serviceUnit'];
-    $jobname = $_POST['jobname'];
-    $SEMNoA = $_POST['SEMNoA'];
-    $classNameA = $_POST['classNameA'];
-    $hoursA = $_POST['hoursA'];
-    if(isset($_POST['subjectA'])){
-        $subjectA = $_POST['subjectA'];
-    }else{
-        $subjectA = "無";
-    }
-    $SEMNoB = $_POST['SEMNoB'];
-    $classNameB = $_POST['classNameB'];
-    $hoursB = $_POST['hoursB'];
-    if(isset($_POST['subjectB'])){
-        $subjectB = $_POST['subjectB'];
-    }else{
-        $subjectB = "無";
-    }
-    $notes = $_POST['notes'];
+        $jobtitle = $_POST['jobtitle'];
+        $name = $_POST['name'];
+        $semester = $_POST['semester'];
+        $serviceSchool = $_POST['serviceSchool'];
+        $serviceUnit = $_POST['serviceUnit'];
+        $jobname = $_POST['jobname'];
+        $SEMNoA = $_POST['SEMNoA'];
+        $classNameA = $_POST['classNameA'];
+        $hoursA = $_POST['hoursA'];
+        if(isset($_POST['subjectA'])){
+            $subjectA = $_POST['subjectA'];
+        }else{
+            $subjectA = "無";
+        }
+        $SEMNoB = $_POST['SEMNoB'];
+        $classNameB = $_POST['classNameB'];
+        $hoursB = $_POST['hoursB'];
+        if(isset($_POST['subjectB'])){
+            $subjectB = $_POST['subjectB'];
+        }else{
+            $subjectB = "無";
+        }
+        $notes = $_POST['notes'];
  
-    $insertSql = "INSERT INTO $myselect (job_title,name,semester,service_school,service_unit,job_name,first_semester,first_class_name,first_class_hours,first_class_subject,second_semester,second_class_name,second_class_hours,second_class_subject,notes,status) VALUES ('$jobtitle','$name', '$semester','$serviceSchool','$serviceUnit','$jobname','$SEMNoA','$classNameA','$hoursA','$subjectA','$SEMNoB','$classNameB','$hoursB','$subjectB','$notes','new')";
-    $status = mysqli_query($connect, $insertSql);
+        $insertSql = "INSERT INTO $myselect (job_title,name,semester,service_school,service_unit,job_name,first_semester,first_class_name,first_class_hours,first_class_subject,second_semester,second_class_name,second_class_hours,second_class_subject,notes,status) VALUES ('$jobtitle','$name', '$semester','$serviceSchool','$serviceUnit','$jobname','$SEMNoA','$classNameA','$hoursA','$subjectA','$SEMNoB','$classNameB','$hoursB','$subjectB','$notes','new')";
+        $status = mysqli_query($connect, $insertSql);
  
-    if ($status) {
-        echo '新增成功';
-    } else {
-        echo "錯誤: " . $insertSql . "<br>" . $connect->error;
-    }
-}
-
-if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
-
-    echo'
-        <p>
-        <form action="" method="post">
-        
-            <table border="1" width="90%" align="center" style="border-collapse: collapse; text-align: left; background-color: #DCDCDC;">
-	
-	            <tr>
-		            <td><p>職稱</p>
-                    <select name="jobtitle">
-                        <option value="兼任講師">兼任講師                   </option>
-                        <option value="兼任講師級專業技術人員">兼任講師級專業技術人員     </option>
-                        <option value="兼任助理教授">兼任助理教授               </option>
-                        <option value="兼任助理教授級專業技術人員">兼任助理教授級專業技術人員 </option>
-                        <option value="兼任副教授">兼任副教授                 </option>
-                        <option value="兼任副教授級專業技術人員">兼任副教授級專業技術人員   </option>
-                        <option value="兼任教授">兼任教授                   </option>
-                        <option value="兼任教授級專業技術人員">兼任教授級專業技術人員     </option>
-                        <option value="兼任助理研究員">兼任助理研究員             </option>
-                        <option value="兼任副研究員">兼任副研究員               </option>
-                        <option value="兼任研究員">兼任研究員                 </option>
-                        <option value="合聘講師">合聘講師                   </option>
-                        <option value="合聘講師級專業技術人員">合聘講師級專業技術人員     </option>
-                        <option value="合聘助理教授">合聘助理教授               </option>
-                        <option value="合聘助理教授級專業技術人員">合聘助理教授級專業技術人員 </option>
-                        <option value="合聘副教授">合聘副教授                 </option>
-                        <option value="合聘副教授級專業技術人員">合聘副教授級專業技術人員   </option>
-                        <option value="合聘教授">合聘教授                   </option>
-                        <option value="合聘教授級專業技術人員">合聘教授級專業技術人員     </option>
-                        <option value="合聘助理研究員">合聘助理研究員             </option>
-                        <option value="合聘副研究員">合聘副研究員               </option>
-                        <option value="合聘研究員">合聘研究員                 </option>
-                    </select>
-                    </td>
-                    <td><p>姓名</p><input type="text" name="name"></td>
-                    <td><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
-                    <td><p>本職服務機關學校</p><input type="text" name="serviceSchool"></td>
-                    <td><p>本職服務單位</p><input type="text" name="serviceUnit"></td>
-                    <td><p>本職職稱</p><textarea name="jobname" rows="4" cols="40"></textarea></td>  
-	            </tr>
-                
-                <tr>
-                    <td colspan="6">
-                        <table border="0" width="100%" align="center" style="border-collapse: collapse; text-align: left;">
-                            <tr>
-                                <td>授課學期<input id="SEMNoA" type="number" name="SEMNoA" min="1" max="2" readonly></td>
-                                <td><input id="classNameA" type="radio" name="classNameA" onclick="selectClassNameA()"><label for="classNameA">授課名稱</label><input id="classNameInputA" type="text" name="classNameA"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生" onclick="selectGradA()"><label for="GradA">指導研究生</label></td>
-                                <td>每週時數<input id="hoursA" type="number" name="hoursA" min="0" max="4"></td>
-                                <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必"><label for="compulsoryA">必</label><input id="requiredA" type="radio" name="subjectA" value="選"><label for="requiredA">選</label></td>
-                            </tr>
-
-                            <tr>
-                                <td>授課學期<input id="SEMNoB" type="number" name="SEMNoB" min="1" max="2" readonly></td>
-                                <td><input id="classNameB" type="radio" name="classNameB" onclick="selectClassNameB()"><label for="classNameB">授課名稱</label><input id="classNameInputB" type="text" name="classNameB"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生" onclick="selectGradB()"><label for="GradB">指導研究生</label></td>
-                                <td>每週時數<input id="hoursB" type="number" name="hoursB" min="0" max="4"></td>
-                                <td><p>必選修</p><input id="compulsoryB" type="radio" name="subjectB" value="必"><label for="compulsoryB">必</label><input id="requiredB" type="radio" name="subjectB" value="選"><label for="requiredB">選</label></td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="text-align: center;">備註</td>
-                    <td colspan="5"><textarea name="notes" rows="4" cols="50"></textarea></td>
-                </tr>
-
-                <tr>
-                    <td colspan="6" style="text-align: center;"><p><input type="submit" name="submit" value="新增資料"></p><!--<input type="image" src="assets/images/testbutton.png" border="0" alt="Submit" width="100px" >--></td>
-                </tr>
-
-            </table>
-
-        </form>
-        </p>
-
-    ';
-    
-    echo "<hr class='new5'>";
-
-    echo "
-    
-        <table border='1' width='90%' align='center'>
-            <tr>
-    
-    ";
-    
-    $sql = "SELECT chinese_name FROM units_information where unit_name = '".$myselect."';";
-    $result = mysqli_query($connect, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_array($result)) {
-            echo "<td colspan = '13'><h2 style='background:yellow'>".$row["chinese_name"]; 
+        if ($status) {
+            echo '新增成功';
+        } else {
+            echo "錯誤: " . $insertSql . "<br>" . $connect->error;
         }
     }
 
-    $sql = "SELECT * FROM ".$myselect.";";
-    $result = mysqli_query($connect, $sql);
+    if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 
-    if (mysqli_num_rows($result) > 0) {
+        echo'
+            <p>
+            <form action="" method="post">
         
-        printf("有 %d 筆資料</h2></td>", mysqli_num_rows($result));
+                <table border="1" width="90%" align="center" style="border-collapse: collapse; text-align: left; background-color: #DCDCDC;">
+	
+	                <tr>
+		                <td><p>職稱</p>
+                        <select name="jobtitle">
+                            <option value="兼任講師">兼任講師                   </option>
+                            <option value="兼任講師級專業技術人員">兼任講師級專業技術人員     </option>
+                            <option value="兼任助理教授">兼任助理教授               </option>
+                            <option value="兼任助理教授級專業技術人員">兼任助理教授級專業技術人員 </option>
+                            <option value="兼任副教授">兼任副教授                 </option>
+                            <option value="兼任副教授級專業技術人員">兼任副教授級專業技術人員   </option>
+                            <option value="兼任教授">兼任教授                   </option>
+                            <option value="兼任教授級專業技術人員">兼任教授級專業技術人員     </option>
+                            <option value="兼任助理研究員">兼任助理研究員             </option>
+                            <option value="兼任副研究員">兼任副研究員               </option>
+                            <option value="兼任研究員">兼任研究員                 </option>
+                            <option value="合聘講師">合聘講師                   </option>
+                            <option value="合聘講師級專業技術人員">合聘講師級專業技術人員     </option>
+                            <option value="合聘助理教授">合聘助理教授               </option>
+                            <option value="合聘助理教授級專業技術人員">合聘助理教授級專業技術人員 </option>
+                            <option value="合聘副教授">合聘副教授                 </option>
+                            <option value="合聘副教授級專業技術人員">合聘副教授級專業技術人員   </option>
+                            <option value="合聘教授">合聘教授                   </option>
+                            <option value="合聘教授級專業技術人員">合聘教授級專業技術人員     </option>
+                            <option value="合聘助理研究員">合聘助理研究員             </option>
+                            <option value="合聘副研究員">合聘副研究員               </option>
+                            <option value="合聘研究員">合聘研究員                 </option>
+                        </select>
+                        </td>
+                        <td><p>姓名</p><input type="text" name="name"></td>
+                        <td><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
+                        <td><p>本職服務機關學校</p><input type="text" name="serviceSchool"></td>
+                        <td><p>本職服務單位</p><input type="text" name="serviceUnit"></td>
+                        <td><p>本職職稱</p><textarea name="jobname" rows="4" cols="40"></textarea></td>  
+	                </tr>
+                
+                    <tr>
+                        <td colspan="6">
+                            <table border="0" width="100%" align="center" style="border-collapse: collapse; text-align: left;">
+                                <tr>
+                                    <td>授課學期<input id="SEMNoA" type="number" name="SEMNoA" min="1" max="2" readonly></td>
+                                    <td><input id="classNameA" type="radio" name="classNameA" onclick="selectClassNameA()"><label for="classNameA">授課名稱</label><input id="classNameInputA" type="text" name="classNameA"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生" onclick="selectGradA()"><label for="GradA">指導研究生</label></td>
+                                    <td>每週時數<input id="hoursA" type="number" name="hoursA" min="0" max="4"></td>
+                                    <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必"><label for="compulsoryA">必</label><input id="requiredA" type="radio" name="subjectA" value="選"><label for="requiredA">選</label></td>
+                                </tr>
 
-        $i=0;
+                                <tr>
+                                    <td>授課學期<input id="SEMNoB" type="number" name="SEMNoB" min="1" max="2" readonly></td>
+                                    <td><input id="classNameB" type="radio" name="classNameB" onclick="selectClassNameB()"><label for="classNameB">授課名稱</label><input id="classNameInputB" type="text" name="classNameB"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生" onclick="selectGradB()"><label for="GradB">指導研究生</label></td>
+                                    <td>每週時數<input id="hoursB" type="number" name="hoursB" min="0" max="4"></td>
+                                    <td><p>必選修</p><input id="compulsoryB" type="radio" name="subjectB" value="必"><label for="compulsoryB">必</label><input id="requiredB" type="radio" name="subjectB" value="選"><label for="requiredB">選</label></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: center;">備註</td>
+                        <td colspan="5"><textarea name="notes" rows="4" cols="50"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="6" style="text-align: center;"><p><input type="submit" name="submit" value="新增資料"></p><!--<input type="image" src="assets/images/testbutton.png" border="0" alt="Submit" width="100px" >--></td>
+                    </tr>
+
+                </table>
+
+            </form>
+            </p>
+
+        ';
+    
+        echo "<hr class='new5'>";
 
         echo "
-        
-                </tr>
-	
-	            <tr>
-		            <th rowspan='2'>職稱</th>
-		            <th rowspan='2'>姓名</th>
-		            <th rowspan='2'>擬授課學期別</th>
-                    <th rowspan='2'>本職服務機關學校</th>
-                    <th rowspan='2'>本職服務單位</th>
-		            <th rowspan='2'>本職職稱</th>
-		            <th colspan='4'>再聘情形</th>
-		            <th rowspan='2'>備註</th>
-                    <th rowspan='2' colspan='2'>動作</th>    
-	            </tr>
-
-	            <tr>
-		            <th>授課學期</th>
-		            <th>授課名稱</th>
-		            <th>每週時數</th>
-		            <th>必選修</th>
-	            </tr>
-
-        ";
-
-        while($row = mysqli_fetch_assoc($result)) {
-            
-            ${'id_' . $i} = $row["id"];
-            
-            $stra = str_replace("\r\n","<br>", $row["job_name"]);
-            $strb = str_replace("\r\n","<br>", $row["notes"]);
-
-            echo "
-	
-	            <tr>
-		            <td rowspan='2'>".$row["job_title"]."</td>
-                    <td rowspan='2'>".$row["name"]."</td>
-		            <td rowspan='2'>".$row["semester"]."</td>
-                    <td rowspan='2'>".$row["service_school"]."</td>
-                    <td rowspan='2'>".$row["service_unit"]."</td>
-		            <td rowspan='2'>".$stra."</td>
-		            <td>".$row["first_semester"]."</td>
-		            <td>".$row["first_class_name"]."</td>
-		            <td>".$row["first_class_hours"]."</td>
-		            <td>".$row["first_class_subject"]."</td>
-                    <td rowspan='2'>".$strb."</td>
-                    <td rowspan='2'><a href='edit.php?id=".$row['id']."&myselect=".$myselect."' class='edit_btn'>修改</a></td>
-                    <td rowspan='2'><a href='delete.php?id=".$row['id']."&myselect=".$myselect."' class='del_btn'>刪除</a></td>
-                </tr>
-
+    
+            <table border='1' width='90%' align='center'>
                 <tr>
-                    <td>".$row["second_semester"]."</td>
-		            <td>".$row["second_class_name"]."</td>
-		            <td>".$row["second_class_hours"]."</td>
-		            <td>".$row["second_class_subject"]."</td>
-	            </tr>
-
-            ";
-            $i++;
+    
+        ";
+    
+        $sql = "SELECT chinese_name FROM units_information where unit_name = '".$myselect."';";
+        $result = mysqli_query($connect, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_array($result)) {
+                echo "<td colspan = '13'><h2 style='background:yellow'>".$row["chinese_name"]; 
+            }
         }
 
-        echo '
-                </table>
-            <p><a href="example.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出兼任教研人員名單</a></p>
-            <p><a href="exampleB.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出合聘教研人員名單</a></p>
-        ';
-    } else {
-        echo "無資料</h2>
+        $sql = "SELECT * FROM ".$myselect.";";
+        $result = mysqli_query($connect, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+        
+            printf("有 %d 筆資料</h2></td>", mysqli_num_rows($result));
+
+            $i=0;
+
+            echo "
+        
+                    </tr>
+	
+	                <tr>
+		                <th rowspan='2'>職稱</th>
+		                <th rowspan='2'>姓名</th>
+		                <th rowspan='2'>擬授課學期別</th>
+                        <th rowspan='2'>本職服務機關學校</th>
+                        <th rowspan='2'>本職服務單位</th>
+		                <th rowspan='2'>本職職稱</th>
+		                <th colspan='4'>再聘情形</th>
+		                <th rowspan='2'>備註</th>
+                        <th rowspan='2' colspan='2'>動作</th>    
+	                </tr>
+
+	                <tr>
+		                <th>授課學期</th>
+		                <th>授課名稱</th>
+		                <th>每週時數</th>
+		                <th>必選修</th>
+	                </tr>
+
+            ";
+
+            while($row = mysqli_fetch_assoc($result)) {
             
-            </tr>
+                ${'id_' . $i} = $row["id"];
+            
+                $stra = str_replace("\r\n","<br>", $row["job_name"]);
+                $strb = str_replace("\r\n","<br>", $row["notes"]);
 
-            </table>
+                echo "
+	
+	                <tr>
+		                <td rowspan='2'>".$row["job_title"]."</td>
+                        <td rowspan='2'>".$row["name"]."</td>
+		                <td rowspan='2'>".$row["semester"]."</td>
+                        <td rowspan='2'>".$row["service_school"]."</td>
+                        <td rowspan='2'>".$row["service_unit"]."</td>
+		                <td rowspan='2'>".$stra."</td>
+		                <td>".$row["first_semester"]."</td>
+		                <td>".$row["first_class_name"]."</td>
+		                <td>".$row["first_class_hours"]."</td>
+		                <td>".$row["first_class_subject"]."</td>
+                        <td rowspan='2'>".$strb."</td>
+                        <td rowspan='2'><a href='edit.php?id=".$row['id']."&myselect=".$myselect."' class='edit_btn'>修改</a></td>
+                        <td rowspan='2'><a href='delete.php?id=".$row['id']."&myselect=".$myselect."' class='del_btn'>刪除</a></td>
+                    </tr>
 
-        ";
+                    <tr>
+                        <td>".$row["second_semester"]."</td>
+		                <td>".$row["second_class_name"]."</td>
+		                <td>".$row["second_class_hours"]."</td>
+		                <td>".$row["second_class_subject"]."</td>
+	                </tr>
+
+                ";
+                $i++;
+            }
+
+            echo '
+                    </table>
+                <p><a href="example.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出兼任教研人員名單</a></p>
+                <p><a href="exampleB.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出合聘教研人員名單</a></p>
+            ';
+        } else {
+            echo "無資料</h2>
+            
+                </tr>
+
+                </table>
+
+            ";
+        }
+
+        /* free result set */
+        mysqli_free_result($result);
     }
-
-    /* free result set */
-    mysqli_free_result($result);
-}
+}else if($myselect == ""){
+    echo "";
 }else{
-    echo "您不屬於此單位ip";
-
+    echo "<h2 style='background:red'>您的ip位址不屬於所選單位</h2>";
 }
 
     
