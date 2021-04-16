@@ -46,8 +46,10 @@ if(isset($_POST['submit'])){
         $subjectB = "無";
     }
     $notes = $_POST['notes'];
+    $ipStatus = $_SERVER['HTTP_X_REAL_IP'];
+    $timeStatus = gmdate('Y-m-d H:i:s',time() + 8*3600);
  
-    $updateSql = "UPDATE $myselect SET job_title='$jobtitle',name='$name',semester='$semester',service_school='$serviceSchool',service_unit='$serviceUnit',job_name='$jobname',first_semester='$SEMNoA',first_class_name='$classNameA',first_class_hours='$hoursA',first_class_subject='$subjectA',second_semester='$SEMNoB',second_class_name='$classNameB',second_class_hours='$hoursB',second_class_subject='$subjectB',notes='$notes' WHERE id=$id";
+    $updateSql = "UPDATE $myselect SET job_title='$jobtitle',name='$name',semester='$semester',service_school='$serviceSchool',service_unit='$serviceUnit',job_name='$jobname',first_semester='$SEMNoA',first_class_name='$classNameA',first_class_hours='$hoursA',first_class_subject='$subjectA',second_semester='$SEMNoB',second_class_name='$classNameB',second_class_hours='$hoursB',second_class_subject='$subjectB',notes='$notes',ip_status = '$ipStatus',time_status = '$timeStatus' WHERE id=$id";
     $status = mysqli_query($connect, $updateSql);
  
     if ($status) {

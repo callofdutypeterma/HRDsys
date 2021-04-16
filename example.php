@@ -302,7 +302,7 @@ $htmla = '
 	</tr>
 
 	<tr>
-		<th rowspan="2" width="12%"><font size="6"><small color="#FFFFFF">small</small><br></font>職稱</th>
+		<th rowspan="2" width="12%"><!--<font size="6"><small color="#FFFFFF">small</small><br></font>-->職稱</th>
 		<th rowspan="2" width="10%">姓名</th>
 		<th rowspan="2" width="8%">擬授課學期別</th>
 		<th rowspan="2" width="6%">本職服務機關學校</th>

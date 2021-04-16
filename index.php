@@ -102,17 +102,26 @@ $myselect = "";
 
 echo "您的ip：".$_SERVER['HTTP_X_REAL_IP']."<br>";
 
+//echo '今天日期是: '.gmdate('Y-m-d H:i:s',time() + 8*3600).'<br>';
+//echo '今天日期是: '.time().'<br>';
+
 if (isset($_GET['myselect'])==true) {
 
     $myselect = $_GET['myselect'];
+    $ipStatus = $_SERVER['HTTP_X_REAL_IP'];
+    $timeStatus = gmdate('Y-m-d H:i:s',time() + 8*3600);
+    
+    $insertSql = "INSERT INTO sys_log (unit_log,ip_log,time_log) VALUES ('$myselect','$ipStatus','$timeStatus');";
+    $status = mysqli_query($connect, $insertSql);
+
 }
 
-$sql = "select * from units_information,ip_information where ip_information.uid = units_information.unit_id and ip_information.ip_address = '140.115.86.';";
-$result = mysqli_query($connect, $sql);
+//$sql = "select * from units_information,ip_information where ip_information.uid = units_information.unit_id and ip_information.ip_address = '140.115.86.';";
+//$result = mysqli_query($connect, $sql);
 
-$row = mysqli_fetch_array($result);
+//$row = mysqli_fetch_array($result);
         
-if(mysqli_num_rows($result) > 0 && $row["unit_name"] == $myselect){
+//if(mysqli_num_rows($result) > 0 && $row["unit_name"] == $myselect){
 
     if(isset($_POST['submit'])){
     
@@ -139,8 +148,10 @@ if(mysqli_num_rows($result) > 0 && $row["unit_name"] == $myselect){
             $subjectB = "無";
         }
         $notes = $_POST['notes'];
+        $ipStatus = $_SERVER['HTTP_X_REAL_IP'];
+        $timeStatus = gmdate('Y-m-d H:i:s',time() + 8*3600);
  
-        $insertSql = "INSERT INTO $myselect (job_title,name,semester,service_school,service_unit,job_name,first_semester,first_class_name,first_class_hours,first_class_subject,second_semester,second_class_name,second_class_hours,second_class_subject,notes,status) VALUES ('$jobtitle','$name', '$semester','$serviceSchool','$serviceUnit','$jobname','$SEMNoA','$classNameA','$hoursA','$subjectA','$SEMNoB','$classNameB','$hoursB','$subjectB','$notes','new')";
+        $insertSql = "INSERT INTO $myselect (job_title,name,semester,service_school,service_unit,job_name,first_semester,first_class_name,first_class_hours,first_class_subject,second_semester,second_class_name,second_class_hours,second_class_subject,notes,status,ip_status,time_status) VALUES ('$jobtitle','$name', '$semester','$serviceSchool','$serviceUnit','$jobname','$SEMNoA','$classNameA','$hoursA','$subjectA','$SEMNoB','$classNameB','$hoursB','$subjectB','$notes','new','$ipStatus','$timeStatus');";
         $status = mysqli_query($connect, $insertSql);
  
         if ($status) {
@@ -333,11 +344,11 @@ if(mysqli_num_rows($result) > 0 && $row["unit_name"] == $myselect){
         /* free result set */
         mysqli_free_result($result);
     }
-}else if($myselect == ""){
-    echo "";
-}else{
-    echo "<h2 style='background:red'>您的ip位址不屬於所選單位</h2>";
-}
+//}else if($myselect == ""){
+//    echo "";
+//}else{
+//    echo "<h2 style='background:red'>您的ip位址不屬於所選單位</h2>";
+//}
 
     
 ?>
