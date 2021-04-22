@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <link href="styles/style.css" rel="stylesheet" type="text/css">
     <link rel="SHORTCUT ICON" href="/assets/images/NCU.ico" />
-    <title>EXCEL</title>
+    <title>Excel</title>
 </head>
 <body>
 
@@ -56,7 +56,7 @@ if(fwrite($fp, "\xEF\xBB\xBF".$content) ){
 
 fclose($fp);
 
-$string = "<a href='formData.csv' download='formData.csv'>點選下載</a>"; 
+$string = "<a href='formData.csv' download='各處室資料.csv'>點選下載</a>"; 
 $result = mb_convert_encoding($string,"utf-8","big5");
 echo $result;
 

@@ -9,7 +9,7 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Peter Ma');
-$pdf->SetTitle('PDF Example');
+$pdf->SetTitle('合聘教研人員名單');
 $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
@@ -404,8 +404,10 @@ $pdf->writeHTML($htmlc, false, 0, false, false, 'L');
 // reset pointer to the last page
 $pdf->lastPage();
 
+$fileName = $officeName.'合聘教研人員名單.pdf';
+
 //Close and output PDF document
-$pdf->Output('example.pdf', 'I');
+$pdf->Output($fileName, 'I');
 
 //============================================================+
 // END OF FILE
