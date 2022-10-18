@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 
 <html>
+<?php include('connect.php'); ?>
 <head>
     <meta charset="UTF-8" />
-    <link href="styles/style.css" rel="stylesheet" type="text/css">
-    <title>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</title>
+    <link href="styles/style.css?202207" rel="stylesheet" type="text/css">
+    <title>國立中央大學<?php $sql = "SELECT * FROM backend_table;";$result = mysqli_query($connect, $sql);$row = mysqli_fetch_assoc($result);echo $row['academic_year']; ?>學年度各單位再聘兼任、繼續合聘教研人員系統</title>
 </head>
 <body>
 
@@ -108,15 +109,15 @@ if(isset($_POST['submit'])){
                     <table border="0" width="100%" align="center" style="border-collapse: collapse; text-align: left;">
                         <tr>
                             <td>授課學期<input id="SEMNoA" type="number" name="SEMNoA" value="<?php echo $row['first_semester'] ?>" min="1" max="2" readonly></td>
-                            <td><input id="classNameA" type="radio" name="classNameA" <?php if(strcmp($row['first_class_name'],'指導研究生') != 0 && $row['first_semester'] == '1') echo 'checked'; ?> onclick="selectClassNameA()"><label for="classNameA">授課名稱</label><input id="classNameInputA" type="text" name="classNameA" value="<?php if(strcmp($row['first_class_name'],'指導研究生') != 0) echo $row['first_class_name']; ?>"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生" <?php if(strcmp($row['first_class_name'],'指導研究生')==0) echo 'checked'; ?> onclick="selectGradA()"><label for="GradA">指導研究生</label></td>
-                            <td>每週時數<input id="hoursA" type="number" name="hoursA" value="<?php echo $row['first_class_hours'] ?>" min="0" max="4"></td>
+                            <td><input id="classNameA" type="radio" name="classNameA" <?php if(strpos($row['first_class_name'],'指導研究生') === false && $row['first_semester'] == '1') echo 'checked'; ?> onclick="selectClassNameA()"><label for="classNameA">授課名稱</label><input id="classNameInputA" type="text" name="classNameA" value="<?php if(strpos($row['first_class_name'],'指導研究生') === false) echo $row['first_class_name']; ?>"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生" <?php if(strcmp($row['first_class_name'],'指導研究生')==0) echo 'checked'; ?> onclick="selectGradA()"><label for="GradA">指導研究生</label><br><input type="radio" id="coresearchA" name="classNameA" value="指導研究生 + 協助合作研究" <?php if(strcmp($row['first_class_name'],'指導研究生 + 協助合作研究')==0) echo 'checked'; ?> onclick="selectGradA()"><label for="coresearchA">指導研究生 + 協助合作研究</label></td>
+                            <td>每週時數<input id="hoursA" type="number" name="hoursA" value="<?php echo $row['first_class_hours'] ?>" min="0.0" max="4.0" step="0.1"></td>
                             <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必" <?php if(strcmp($row['first_class_subject'],'必')==0) echo 'checked'; ?> ><label for="compulsoryA">必</label><input id="requiredA" type="radio" name="subjectA" value="選" <?php if(strcmp($row['first_class_subject'],'選')==0) echo 'checked'; ?> ><label for="requiredA">選</label></td>
                         </tr>
 
                         <tr>
                             <td>授課學期<input id="SEMNoB" type="number" name="SEMNoB" value="<?php echo $row['second_semester'] ?>" min="1" max="2" readonly></td>
-                            <td><input id="classNameB" type="radio" name="classNameB" <?php if(strcmp($row['second_class_name'],'指導研究生') != 0 && $row['second_semester'] == '2') echo 'checked'; ?> onclick="selectClassNameB()"><label for="classNameB">授課名稱</label><input id="classNameInputB" type="text" name="classNameB" value="<?php if(strcmp($row['second_class_name'],'指導研究生')!=0) echo $row['second_class_name']; ?>"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生" <?php if(strcmp($row['second_class_name'],'指導研究生')==0) echo 'checked'; ?> onclick="selectGradB()"><label for="GradB">指導研究生</label></td>
-                            <td>每週時數<input id="hoursB" type="number" name="hoursB" value="<?php echo $row['second_class_hours'] ?>" min="0" max="4"></td>
+                            <td><input id="classNameB" type="radio" name="classNameB" <?php if(strpos($row['second_class_name'],'指導研究生') === false && $row['second_semester'] == '2') echo 'checked'; ?> onclick="selectClassNameB()"><label for="classNameB">授課名稱</label><input id="classNameInputB" type="text" name="classNameB" value="<?php if(strpos($row['second_class_name'],'指導研究生') === false) echo $row['second_class_name']; ?>"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生" <?php if(strcmp($row['second_class_name'],'指導研究生')==0) echo 'checked'; ?> onclick="selectGradB()"><label for="GradB">指導研究生</label><br><input type="radio" id="coresearchB" name="classNameB" value="指導研究生 + 協助合作研究" <?php if(strcmp($row['second_class_name'],'指導研究生 + 協助合作研究')==0) echo 'checked'; ?> onclick="selectGradB()"><label for="coresearchB">指導研究生 + 協助合作研究</label></td>
+                            <td>每週時數<input id="hoursB" type="number" name="hoursB" value="<?php echo $row['second_class_hours'] ?>" min="0.0" max="4.0" step="0.1"></td>
                             <td><p>必選修</p><input id="compulsoryB" type="radio" name="subjectB" value="必" <?php if(strcmp($row['second_class_subject'],'必')==0) echo 'checked'; ?>><label for="compulsoryB">必</label><input id="requiredB" type="radio" name="subjectB" value="選" <?php if(strcmp($row['second_class_subject'],'選')==0) echo 'checked'; ?>><label for="requiredB">選</label></td>
                         </tr>
                     </table>

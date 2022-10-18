@@ -1,24 +1,23 @@
 ﻿<!DOCTYPE html>
 
 <html>
+<?php include('connect.php'); ?>
 <head>
     <meta charset="UTF-8" />
-    <link href="styles/style.css?033001" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="themes/easydropdown.css?033001"/>
+    <link href="styles/style.css?202207" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="themes/easydropdown.css?202207"/>
     <link rel="SHORTCUT ICON" href="assets/images/NCU.ico" />
-    <title>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</title>
+    <title>國立中央大學<?php $sql = "SELECT * FROM backend_table;";$result = mysqli_query($connect, $sql);$row = mysqli_fetch_assoc($result);echo $row['academic_year']; ?>學年度各單位再聘兼任、繼續合聘教研人員系統</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="src/jquery.easydropdown.js"></script>
 </head>
 <body>
-    
-    <?php $myIP = "192.168.43.51"; ?>
 
     <div class="wrap">
 
     <a href='/' class='index'>回首頁</a><br>
 
-    <H1>國立中央大學110學年度各單位再聘兼任、繼續合聘教研人員系統</H1>
+    <H1>國立中央大學<?php $sql = "SELECT * FROM backend_table;";$result = mysqli_query($connect, $sql);$row = mysqli_fetch_assoc($result);echo $row['academic_year']; ?>學年度各單位再聘兼任、繼續合聘教研人員系統</H1>
 
     <br>
     
@@ -100,419 +99,403 @@ include('connect.php');
 
 $myselect = "";
 
-echo "您的ip：".$_SERVER['HTTP_X_REAL_IP']."<br>";
-
-//echo '今天日期是: '.gmdate('Y-m-d H:i:s',time() + 8*3600).'<br>';
-//echo '今天日期是: '.time().'<br>';
+//echo "您的ip：".$_SERVER['HTTP_X_REAL_IP']."<br>";
 
 if (isset($_GET['myselect'])==true) {
-
     $myselect = $_GET['myselect'];
     $ipStatus = $_SERVER['HTTP_X_REAL_IP'];
     $timeStatus = gmdate('Y-m-d H:i:s',time() + 8*3600);
     
     $insertSql = "INSERT INTO sys_log (unit_log,ip_log,time_log) VALUES ('$myselect','$ipStatus','$timeStatus');";
     $status = mysqli_query($connect, $insertSql);
-
 }
 
-//$sql = "select * from units_information,ip_information where ip_information.uid = units_information.unit_id and ip_information.ip_address = '140.115.86.';";
-//$result = mysqli_query($connect, $sql);
-
-//$row = mysqli_fetch_array($result);
-        
-//if(mysqli_num_rows($result) > 0 && $row["unit_name"] == $myselect){
-
-    if(isset($_POST['submit'])){
-    
-        $jobtitle = $_POST['jobtitle'];
-        $name = $_POST['name'];
-        $semester = $_POST['semester'];
-        $serviceSchool = $_POST['serviceSchool'];
-        $serviceUnit = $_POST['serviceUnit'];
-        $jobname = $_POST['jobname'];
-        $SEMNoA = $_POST['SEMNoA'];
-        $classNameA = $_POST['classNameA'];
-        $hoursA = $_POST['hoursA'];
-        if(isset($_POST['subjectA'])){
-            $subjectA = $_POST['subjectA'];
-        }else{
-            $subjectA = "無";
-        }
-        $SEMNoB = $_POST['SEMNoB'];
-        $classNameB = $_POST['classNameB'];
-        $hoursB = $_POST['hoursB'];
-        if(isset($_POST['subjectB'])){
-            $subjectB = $_POST['subjectB'];
-        }else{
-            $subjectB = "無";
-        }
-        $notes = $_POST['notes'];
-        $ipStatus = $_SERVER['HTTP_X_REAL_IP'];
-        $timeStatus = gmdate('Y-m-d H:i:s',time() + 8*3600);
- 
-        $insertSql = "INSERT INTO $myselect (job_title,name,semester,service_school,service_unit,job_name,first_semester,first_class_name,first_class_hours,first_class_subject,second_semester,second_class_name,second_class_hours,second_class_subject,notes,status,ip_status,time_status) VALUES ('$jobtitle','$name', '$semester','$serviceSchool','$serviceUnit','$jobname','$SEMNoA','$classNameA','$hoursA','$subjectA','$SEMNoB','$classNameB','$hoursB','$subjectB','$notes','new','$ipStatus','$timeStatus');";
-        $status = mysqli_query($connect, $insertSql);
- 
-        if ($status) {
-            echo '新增成功';
-        } else {
-            echo "錯誤: " . $insertSql . "<br>" . $connect->error;
-        }
+if(isset($_POST['submit'])){
+    $jobtitle = $_POST['jobtitle'];
+    $name = $_POST['name'];
+    $semester = $_POST['semester'];
+    $serviceSchool = $_POST['serviceSchool'];
+    $serviceUnit = $_POST['serviceUnit'];
+    $jobname = $_POST['jobname'];
+    $SEMNoA = $_POST['SEMNoA'];
+    $classNameA = $_POST['classNameA'];
+    $hoursA = $_POST['hoursA'];
+    if(isset($_POST['subjectA'])){
+        $subjectA = $_POST['subjectA'];
+    }else{
+        $subjectA = "無";
     }
+    $SEMNoB = $_POST['SEMNoB'];
+    $classNameB = $_POST['classNameB'];
+    $hoursB = $_POST['hoursB'];
+    if(isset($_POST['subjectB'])){
+        $subjectB = $_POST['subjectB'];
+    }else{
+        $subjectB = "無";
+    }
+    $notes = $_POST['notes'];
+    $ipStatus = $_SERVER['HTTP_X_REAL_IP'];
+    $timeStatus = gmdate('Y-m-d H:i:s',time() + 8*3600);
+ 
+    $insertSql = "INSERT INTO $myselect (job_title,name,semester,service_school,service_unit,job_name,first_semester,first_class_name,first_class_hours,first_class_subject,second_semester,second_class_name,second_class_hours,second_class_subject,notes,status,ip_status,time_status) VALUES ('$jobtitle','$name', '$semester','$serviceSchool','$serviceUnit','$jobname','$SEMNoA','$classNameA','$hoursA','$subjectA','$SEMNoB','$classNameB','$hoursB','$subjectB','$notes','new','$ipStatus','$timeStatus');";
+    $status = mysqli_query($connect, $insertSql);
+ 
+    if ($status) {
+        echo '新增成功';
+    } else {
+        echo "錯誤: " . $insertSql . "<br>" . $connect->error;
+    }
+}
 
-    if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
+if (isset($_POST['submit'])==true || isset($_GET['myselect'])==true) {
 
-        echo'
-            <p>
-            <form action="" method="post">
+    echo'
+        <p>
+        <form action="" method="post">
         
-                <table border="1" width="90%" align="center" style="border-collapse: collapse; text-align: left; background-color: #DCDCDC;">
+            <table border="1" width="90%" align="center" style="border-collapse: collapse; text-align: left; background-color: #DCDCDC;">
 	
-	                <tr>
-		                <td><p>職稱</p>
-                        <select name="jobtitle">
-                            <option value="兼任講師">兼任講師                   </option>
-                            <option value="兼任講師級專業技術人員">兼任講師級專業技術人員     </option>
-                            <option value="兼任助理教授">兼任助理教授               </option>
-                            <option value="兼任助理教授級專業技術人員">兼任助理教授級專業技術人員 </option>
-                            <option value="兼任副教授">兼任副教授                 </option>
-                            <option value="兼任副教授級專業技術人員">兼任副教授級專業技術人員   </option>
-                            <option value="兼任教授">兼任教授                   </option>
-                            <option value="兼任教授級專業技術人員">兼任教授級專業技術人員     </option>
-                            <option value="兼任助理研究員">兼任助理研究員             </option>
-                            <option value="兼任副研究員">兼任副研究員               </option>
-                            <option value="兼任研究員">兼任研究員                 </option>
-                            <option value="合聘講師">合聘講師                   </option>
-                            <option value="合聘講師級專業技術人員">合聘講師級專業技術人員     </option>
-                            <option value="合聘助理教授">合聘助理教授               </option>
-                            <option value="合聘助理教授級專業技術人員">合聘助理教授級專業技術人員 </option>
-                            <option value="合聘副教授">合聘副教授                 </option>
-                            <option value="合聘副教授級專業技術人員">合聘副教授級專業技術人員   </option>
-                            <option value="合聘教授">合聘教授                   </option>
-                            <option value="合聘教授級專業技術人員">合聘教授級專業技術人員     </option>
-                            <option value="合聘助理研究員">合聘助理研究員             </option>
-                            <option value="合聘副研究員">合聘副研究員               </option>
-                            <option value="合聘研究員">合聘研究員                 </option>
-                        </select>
-                        </td>
-                        <td><p>姓名</p><input type="text" name="name"></td>
-                        <td><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
-                        <td><p>本職服務機關學校</p><input type="text" name="serviceSchool"></td>
-                        <td><p>本職服務單位</p><input type="text" name="serviceUnit"></td>
-                        <td><p>本職職稱</p><textarea name="jobname" rows="4" cols="40"></textarea></td>  
-	                </tr>
+	            <tr>
+		            <td><p>職稱</p>
+                    <select name="jobtitle">
+                        <option value="兼任講師">兼任講師                   </option>
+                        <option value="兼任講師級專業技術人員">兼任講師級專業技術人員     </option>
+                        <option value="兼任助理教授">兼任助理教授               </option>
+                        <option value="兼任助理教授級專業技術人員">兼任助理教授級專業技術人員 </option>
+                        <option value="兼任副教授">兼任副教授                 </option>
+                        <option value="兼任副教授級專業技術人員">兼任副教授級專業技術人員   </option>
+                        <option value="兼任教授">兼任教授                   </option>
+                        <option value="兼任教授級專業技術人員">兼任教授級專業技術人員     </option>
+                        <option value="兼任助理研究員">兼任助理研究員             </option>
+                        <option value="兼任副研究員">兼任副研究員               </option>
+                        <option value="兼任研究員">兼任研究員                 </option>
+                        <option value="合聘講師">合聘講師                   </option>
+                        <option value="合聘講師級專業技術人員">合聘講師級專業技術人員     </option>
+                        <option value="合聘助理教授">合聘助理教授               </option>
+                        <option value="合聘助理教授級專業技術人員">合聘助理教授級專業技術人員 </option>
+                        <option value="合聘副教授">合聘副教授                 </option>
+                        <option value="合聘副教授級專業技術人員">合聘副教授級專業技術人員   </option>
+                        <option value="合聘教授">合聘教授                   </option>
+                        <option value="合聘教授級專業技術人員">合聘教授級專業技術人員     </option>
+                        <option value="合聘助理研究員">合聘助理研究員             </option>
+                        <option value="合聘副研究員">合聘副研究員               </option>
+                        <option value="合聘研究員">合聘研究員                 </option>
+                    </select>
+                    </td>
+                    <td><p>姓名</p><input type="text" name="name"></td>
+                    <td><p>擬授課學期別</p><input id="whole" type="radio" name="semester" value="全學年" onclick="selectAll()"><label for="whole">全學年</label><input id="first" type="radio" name="semester" value="上學期" onclick="selectFirst()"><label for="first">上學期</label><input id="second" type="radio" name="semester" value="下學期" onclick="selectSecond()"><label for="second">下學期</label></td>
+                    <td><p>本職服務機關學校</p><input type="text" name="serviceSchool"></td>
+                    <td><p>本職服務單位</p><input type="text" name="serviceUnit"></td>
+                    <td><p>本職職稱</p><textarea name="jobname" rows="4" cols="40"></textarea></td>  
+	            </tr>
                 
-                    <tr>
-                        <td colspan="6">
-                            <table border="0" width="100%" align="center" style="border-collapse: collapse; text-align: left;">
-                                <tr>
-                                    <td>授課學期<input id="SEMNoA" type="number" name="SEMNoA" min="1" max="2" readonly></td>
-                                    <td><input id="classNameA" type="radio" name="classNameA" onclick="selectClassNameA()"><label for="classNameA">授課名稱</label><input id="classNameInputA" type="text" name="classNameA"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生" onclick="selectGradA()"><label for="GradA">指導研究生</label></td>
-                                    <td>每週時數<input id="hoursA" type="number" name="hoursA" min="0" max="4"></td>
-                                    <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必"><label for="compulsoryA">必</label><input id="requiredA" type="radio" name="subjectA" value="選"><label for="requiredA">選</label></td>
-                                </tr>
-
-                                <tr>
-                                    <td>授課學期<input id="SEMNoB" type="number" name="SEMNoB" min="1" max="2" readonly></td>
-                                    <td><input id="classNameB" type="radio" name="classNameB" onclick="selectClassNameB()"><label for="classNameB">授課名稱</label><input id="classNameInputB" type="text" name="classNameB"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生" onclick="selectGradB()"><label for="GradB">指導研究生</label></td>
-                                    <td>每週時數<input id="hoursB" type="number" name="hoursB" min="0" max="4"></td>
-                                    <td><p>必選修</p><input id="compulsoryB" type="radio" name="subjectB" value="必"><label for="compulsoryB">必</label><input id="requiredB" type="radio" name="subjectB" value="選"><label for="requiredB">選</label></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td style="text-align: center;">備註</td>
-                        <td colspan="5"><textarea name="notes" rows="4" cols="50"></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="6" style="text-align: center;"><p><input type="submit" name="submit" value="新增資料"></p><!--<input type="image" src="assets/images/testbutton.png" border="0" alt="Submit" width="100px" >--></td>
-                    </tr>
-
-                </table>
-
-            </form>
-            </p>
-
-        ';
-    
-        echo "<hr class='new5'>";
-
-        echo "
-    
-            <table border='1' width='90%' align='center'>
                 <tr>
-    
-        ";
-    
-        $sql = "SELECT chinese_name FROM units_information where unit_name = '".$myselect."';";
-        $result = mysqli_query($connect, $sql);
-        if (mysqli_num_rows($result) > 0) {
-            while($row = mysqli_fetch_array($result)) {
-                echo "<td colspan = '13'><h2 style='background:yellow'>".$row["chinese_name"]; 
-            }
-        }
+                    <td colspan="6">
+                        <table border="1" width="100%" align="center" style="border-collapse: collapse; text-align: left;">
+                            <tr>
+                                <td>授課學期 <input id="SEMNoA" type="number" name="SEMNoA" min="1" max="2" readonly></td>
+                                <td><input id="classNameA" type="radio" name="classNameA" onclick="selectClassNameA()"><label for="classNameA">授課名稱 </label><input id="classNameInputA" type="text" name="classNameA"><br><input id="GradA" type="radio" name="classNameA" value="指導研究生" onclick="selectGradA()"><label for="GradA">指導研究生</label><br><input type="radio" id="coresearchA" name="classNameA" value="指導研究生 + 協助合作研究" onclick="selectGradA()"><label for="coresearchA">指導研究生 + 協助合作研究</label></td>
+                                <td>每週時數 <input id="hoursA" type="number" name="hoursA" min="0.0" max="4.0" step="0.1"></td>
+                                <td><p>必選修</p><input id="compulsoryA" type="radio" name="subjectA" value="必"><label for="compulsoryA">必</label><input id="requiredA" type="radio" name="subjectA" value="選"><label for="requiredA">選</label></td>
+                            </tr>
 
-        $sql = "SELECT * FROM ".$myselect.";";
-        $result = mysqli_query($connect, $sql);
-
-        if (mysqli_num_rows($result) > 0) {
-        
-            printf("有 %d 筆資料</h2></td>", mysqli_num_rows($result));
-
-            $i=0;
-
-            echo "
-        
-                    </tr>
-	
-	                <tr>
-		                <th rowspan='2'>職稱</th>
-		                <th rowspan='2'>姓名</th>
-		                <th rowspan='2'>擬授課學期別</th>
-                        <th rowspan='2'>本職服務機關學校</th>
-                        <th rowspan='2'>本職服務單位</th>
-		                <th rowspan='2'>本職職稱</th>
-		                <th colspan='4'>再聘情形</th>
-		                <th rowspan='2'>備註</th>
-                        <th rowspan='2' colspan='2'>動作</th>    
-	                </tr>
-
-	                <tr>
-		                <th>授課學期</th>
-		                <th>授課名稱</th>
-		                <th>每週時數</th>
-		                <th>必選修</th>
-	                </tr>
-
-            ";
-
-            while($row = mysqli_fetch_assoc($result)) {
-            
-                ${'id_' . $i} = $row["id"];
-            
-                $stra = str_replace("\r\n","<br>", $row["job_name"]);
-                $strb = str_replace("\r\n","<br>", $row["notes"]);
-
-                echo "
-	
-	                <tr>
-		                <td rowspan='2'>".$row["job_title"]."</td>
-                        <td rowspan='2'>".$row["name"]."</td>
-		                <td rowspan='2'>".$row["semester"]."</td>
-                        <td rowspan='2'>".$row["service_school"]."</td>
-                        <td rowspan='2'>".$row["service_unit"]."</td>
-		                <td rowspan='2'>".$stra."</td>
-		                <td>".$row["first_semester"]."</td>
-		                <td>".$row["first_class_name"]."</td>
-		                <td>".$row["first_class_hours"]."</td>
-		                <td>".$row["first_class_subject"]."</td>
-                        <td rowspan='2'>".$strb."</td>
-                        <td rowspan='2'><a href='edit.php?id=".$row['id']."&myselect=".$myselect."' class='edit_btn'>修改</a></td>
-                        <td rowspan='2'><a href='delete.php?id=".$row['id']."&myselect=".$myselect."' class='del_btn'>刪除</a></td>
-                    </tr>
-
-                    <tr>
-                        <td>".$row["second_semester"]."</td>
-		                <td>".$row["second_class_name"]."</td>
-		                <td>".$row["second_class_hours"]."</td>
-		                <td>".$row["second_class_subject"]."</td>
-	                </tr>
-
-                ";
-                $i++;
-            }
-
-            echo '
-                    </table>
-                <p><a href="example.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出兼任教研人員名單</a></p>
-                <p><a href="exampleB.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出合聘教研人員名單</a></p>
-            ';
-        } else {
-            echo "無資料</h2>
-            
+                            <tr>
+                                <td>授課學期 <input id="SEMNoB" type="number" name="SEMNoB" min="1" max="2" readonly></td>
+                                <td><input id="classNameB" type="radio" name="classNameB" onclick="selectClassNameB()"><label for="classNameB">授課名稱 </label><input id="classNameInputB" type="text" name="classNameB"><br><input id="GradB" type="radio" name="classNameB" value="指導研究生" onclick="selectGradB()"><label for="GradB">指導研究生</label><br><input type="radio" id="coresearchB" name="classNameB" value="指導研究生 + 協助合作研究" onclick="selectGradB()"><label for="coresearchB">指導研究生 + 協助合作研究</label></td>
+                                <td>每週時數 <input id="hoursB" type="number" name="hoursB" min="0.0" max="4.0" step="0.1"></td>
+                                <td><p>必選修</p><input id="compulsoryB" type="radio" name="subjectB" value="必"><label for="compulsoryB">必</label><input id="requiredB" type="radio" name="subjectB" value="選"><label for="requiredB">選</label></td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
 
-                </table>
+                <tr>
+                    <td style="text-align: center;">備註</td>
+                    <td colspan="5"><textarea name="notes" rows="4" cols="50"></textarea></td>
+                </tr>
 
+                <tr>
+                    <td colspan="6" style="text-align: center;"><p><input type="submit" name="submit" value="新增資料"></p></td>
+                </tr>
+
+            </table>
+
+        </form>
+        </p>
+
+    ';
+    
+    echo "<hr class='new5'>";
+
+    echo "
+    
+        <table border='1' width='90%' align='center'>
+            <tr>
+    
+    ";
+    
+    $sql = "SELECT chinese_name FROM units_information where unit_name = '".$myselect."';";
+    $result = mysqli_query($connect, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_array($result)) {
+            echo "<td colspan = '13'><h2 style='background:yellow'>".$row["chinese_name"]; 
+        }
+    }
+
+    $sql = "SELECT * FROM ".$myselect.";";
+    $result = mysqli_query($connect, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        
+        printf("有 %d 筆資料</h2></td>", mysqli_num_rows($result));
+
+        $i=0;
+
+        echo "
+        
+                </tr>
+	
+	            <tr>
+		            <th rowspan='2'>職稱</th>
+		            <th rowspan='2'>姓名</th>
+		            <th rowspan='2'>擬授課學期別</th>
+                    <th rowspan='2'>本職服務機關學校</th>
+                    <th rowspan='2'>本職服務單位</th>
+		            <th rowspan='2'>本職職稱</th>
+		            <th colspan='4'>再聘情形</th>
+		            <th rowspan='2'>備註</th>
+                    <th rowspan='2' colspan='2'>動作</th>    
+	            </tr>
+
+	            <tr>
+		            <th>授課學期</th>
+		            <th>授課名稱</th>
+		            <th>每週時數</th>
+		            <th>必選修</th>
+	            </tr>
+
+        ";
+
+        while($row = mysqli_fetch_assoc($result)) {
+            
+            ${'id_' . $i} = $row["id"];
+            
+            $stra = str_replace("\r\n","<br>", $row["job_name"]);
+            $strb = str_replace("\r\n","<br>", $row["notes"]);
+
+            echo "
+	            <tr>
+		            <td rowspan='2'>".$row["job_title"]."</td>
+                    <td rowspan='2'>".$row["name"]."</td>
+		            <td rowspan='2'>".$row["semester"]."</td>
+                    <td rowspan='2'>".$row["service_school"]."</td>
+                    <td rowspan='2'>".$row["service_unit"]."</td>
+		            <td rowspan='2'>".$stra."</td>
+		            <td>".$row["first_semester"]."</td>
+		            <td>".$row["first_class_name"]."</td>
+		            <td>".$row["first_class_hours"]."</td>
+		            <td>".$row["first_class_subject"]."</td>
+                    <td rowspan='2'>".$strb."</td>
+                    <td rowspan='2'><a href='edit.php?id=".$row['id']."&myselect=".$myselect."' class='edit_btn'>修改</a></td>
+                    <td rowspan='2'><a href='delete.php?id=".$row['id']."&myselect=".$myselect."' class='del_btn'>刪除</a></td>
+                </tr>
+
+                <tr>
+                    <td>".$row["second_semester"]."</td>
+		            <td>".$row["second_class_name"]."</td>
+		            <td>".$row["second_class_hours"]."</td>
+		            <td>".$row["second_class_subject"]."</td>
+	            </tr>
             ";
+            $i++;
         }
 
-        /* free result set */
-        mysqli_free_result($result);
-    }
-//}else if($myselect == ""){
-//    echo "";
-//}else{
-//    echo "<h2 style='background:red'>您的ip位址不屬於所選單位</h2>";
-//}
+        echo '
+                </table>
+            <p><a href="adjunct.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出兼任教研人員名單</a></p>
+            <p><a href="joint_appointment.php?myselect='.$myselect.'" title="PDF [new window]" target="_blank" class="pdf">匯出合聘教研人員名單</a></p>
+        ';
+    } else {
+        echo "無資料</h2>
+            
+            </tr>
 
-    
+            </table>
+
+        ";
+    }
+}
+
+$sql = "SELECT * FROM backend_table;";
+$result = mysqli_query($connect, $sql);
+
+echo'
+<table border="0" width="90%" align="center" style="text-align: left;">
+    <tr>
+        <td>';
+                
+            if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                    echo $row['note']; 
+                }
+            }
+        echo'
+        </td>
+    <tr>
+</table>
+';
+
+/* free result set */
+mysqli_free_result($result);
+
 ?>
     
-    <table border="0" width="90%" align="center" style="text-align: left;">
-        
-        <tr>
-            <td>
-            <font size="5">備註：<br>
-            一、請確實登打貴單位兼任、合聘教研人員再聘名單，如需再聘者請於「擬授課學期別」欄位內勾選，並於「再聘情形」欄填具課程資訊，如未開課者，<b>請註明「指導研究生」或「協助合作研究」</b>，本室將依再聘情形核發聘書；不再聘任者，請於備註欄註明「不予再聘」，請勿刪除該人員。<br>
-            二、請詳實填寫兼任、合聘教研人員之本職服務機關學校、單位及職稱<b>(均填寫全銜)</b>。<br>
-            三、依本校三級教評會分工一覽表規定，兼任教研人員之再聘應經系教評會審議通過及院教評會報告，惟如係講授必修課程者，則需經院教評會審議。<br>
-            四、<b>「再聘兼任教研人員名冊」</b>及<b>「繼續合聘教研人員名冊」</b>請於<b>110年5月20日</b>前，由各院級單位彙送人事室。</font><br>
-            </td>
-        <tr>
+<script type="text/javascript">
 
-    </table>
-
-    <script type="text/javascript">
-
-        function mySelect() {
-          var x = document.getElementById("mySelect").value;
-          if(x == "ncu7060"){
-            window.location.href = 'excel.php';
-          }else{
-            window.location.href = 'index.php?myselect='+ x;
-          }
+    function mySelect() {
+        var x = document.getElementById("mySelect").value;
+        if(x == "ncu7060"){
+        window.location.href = 'personnelofficeindex.php';
+        }else{
+        window.location.href = 'index.php?myselect='+ x;
+        }
           
-        }
+    }
 
-        function selectFirst() {
-        document.getElementById("SEMNoA").value = "1";
-        document.getElementById("hoursA").value = "";
-        document.getElementById("SEMNoB").value = "";
-        document.getElementById("classNameInputB").value = "";
-        document.getElementById("hoursB").value = "0";
-        //document.getElementById("SEMNoA").readOnly = false;
-        document.getElementById("SEMNoA").style.backgroundColor = "#FFF";
-        document.getElementById("classNameA").disabled = false;
-        document.getElementById("GradA").disabled = false;
-        document.getElementById("classNameInputA").readOnly = false;
-        document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
-        document.getElementById("hoursA").readOnly = false;
-        document.getElementById("hoursA").style.backgroundColor = "#FFF";
-        document.getElementById("compulsoryA").disabled = false;
-        document.getElementById("requiredA").disabled = false;
-        //document.getElementById("SEMNoB").readOnly = true;
-        document.getElementById("SEMNoB").style.backgroundColor = "#ccc";
-        document.getElementById("classNameB").disabled = true;
-        document.getElementById("GradB").disabled = true;
-        document.getElementById("classNameInputB").readOnly = true;
-        document.getElementById("classNameInputB").style.backgroundColor = "#ccc";
-        document.getElementById("hoursB").readOnly = true;
-        document.getElementById("hoursB").style.backgroundColor = "#ccc";
-        document.getElementById("compulsoryB").disabled = true;
-        document.getElementById("compulsoryB").checked = false;
-        document.getElementById("requiredB").disabled = true;
-        document.getElementById("requiredB").checked = false;
-        }
+    function selectFirst() {
+    document.getElementById("SEMNoA").value = "1";
+    document.getElementById("hoursA").value = "";
+    document.getElementById("SEMNoB").value = "";
+    document.getElementById("classNameInputB").value = "";
+    document.getElementById("hoursB").value = "0";
+    //document.getElementById("SEMNoA").readOnly = false;
+    document.getElementById("SEMNoA").style.backgroundColor = "#FFF";
+    document.getElementById("classNameA").disabled = false;
+    document.getElementById("GradA").disabled = false;
+    document.getElementById("classNameInputA").readOnly = false;
+    document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
+    document.getElementById("hoursA").readOnly = false;
+    document.getElementById("hoursA").style.backgroundColor = "#FFF";
+    document.getElementById("compulsoryA").disabled = false;
+    document.getElementById("requiredA").disabled = false;
+    //document.getElementById("SEMNoB").readOnly = true;
+    document.getElementById("SEMNoB").style.backgroundColor = "#ccc";
+    document.getElementById("classNameB").disabled = true;
+    document.getElementById("GradB").disabled = true;
+    document.getElementById("classNameInputB").readOnly = true;
+    document.getElementById("classNameInputB").style.backgroundColor = "#ccc";
+    document.getElementById("hoursB").readOnly = true;
+    document.getElementById("hoursB").style.backgroundColor = "#ccc";
+    document.getElementById("compulsoryB").disabled = true;
+    document.getElementById("compulsoryB").checked = false;
+    document.getElementById("requiredB").disabled = true;
+    document.getElementById("requiredB").checked = false;
+    }
 
-        function selectSecond() {
-        document.getElementById("SEMNoA").value = "";
-        document.getElementById("classNameInputA").value = "";
-        document.getElementById("hoursA").value = "0";
-        document.getElementById("SEMNoB").value = "2";
-        document.getElementById("hoursB").value = "";
-        //document.getElementById("SEMNoA").readOnly = true;
-        document.getElementById("SEMNoA").style.backgroundColor = "#ccc";
-        document.getElementById("classNameA").disabled = true;
-        document.getElementById("GradA").disabled = true;
-        document.getElementById("classNameInputA").readOnly = true;
-        document.getElementById("classNameInputA").style.backgroundColor = "#ccc";
-        document.getElementById("hoursA").readOnly = true;
-        document.getElementById("hoursA").style.backgroundColor = "#ccc";
-        document.getElementById("compulsoryA").disabled = true;
-        document.getElementById("compulsoryA").checked = false;
-        document.getElementById("requiredA").disabled = true;
-        document.getElementById("requiredA").checked = false;
-        //document.getElementById("SEMNoB").readOnly = false;
-        document.getElementById("SEMNoB").style.backgroundColor = "#FFF";
-        document.getElementById("classNameB").disabled = false;
-        document.getElementById("GradB").disabled = false;
-        document.getElementById("classNameInputB").readOnly = false;
-        document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
-        document.getElementById("hoursB").readOnly = false;
-        document.getElementById("hoursB").style.backgroundColor = "#FFF";
-        document.getElementById("compulsoryB").disabled = false;
-        document.getElementById("requiredB").disabled = false; 
-        }
+    function selectSecond() {
+    document.getElementById("SEMNoA").value = "";
+    document.getElementById("classNameInputA").value = "";
+    document.getElementById("hoursA").value = "0";
+    document.getElementById("SEMNoB").value = "2";
+    document.getElementById("hoursB").value = "";
+    //document.getElementById("SEMNoA").readOnly = true;
+    document.getElementById("SEMNoA").style.backgroundColor = "#ccc";
+    document.getElementById("classNameA").disabled = true;
+    document.getElementById("GradA").disabled = true;
+    document.getElementById("classNameInputA").readOnly = true;
+    document.getElementById("classNameInputA").style.backgroundColor = "#ccc";
+    document.getElementById("hoursA").readOnly = true;
+    document.getElementById("hoursA").style.backgroundColor = "#ccc";
+    document.getElementById("compulsoryA").disabled = true;
+    document.getElementById("compulsoryA").checked = false;
+    document.getElementById("requiredA").disabled = true;
+    document.getElementById("requiredA").checked = false;
+    //document.getElementById("SEMNoB").readOnly = false;
+    document.getElementById("SEMNoB").style.backgroundColor = "#FFF";
+    document.getElementById("classNameB").disabled = false;
+    document.getElementById("GradB").disabled = false;
+    document.getElementById("classNameInputB").readOnly = false;
+    document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
+    document.getElementById("hoursB").readOnly = false;
+    document.getElementById("hoursB").style.backgroundColor = "#FFF";
+    document.getElementById("compulsoryB").disabled = false;
+    document.getElementById("requiredB").disabled = false; 
+    }
 
-        function selectAll() {
-        document.getElementById("SEMNoA").value = "1";
-        document.getElementById("SEMNoB").value = "2";
-        document.getElementById("hoursA").value = "";
-        document.getElementById("hoursB").value = "";
-        //document.getElementById("SEMNoA").readOnly = false;
-        document.getElementById("SEMNoA").style.backgroundColor = "#FFF";
-        document.getElementById("classNameA").disabled = false;
-        document.getElementById("GradA").disabled = false;
-        document.getElementById("classNameInputA").readOnly = false;
-        document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
-        document.getElementById("hoursA").readOnly = false;
-        document.getElementById("hoursA").style.backgroundColor = "#FFF";
-        document.getElementById("compulsoryA").disabled = false;
-        document.getElementById("requiredA").disabled = false;
-        //document.getElementById("SEMNoB").readOnly = false;
-        document.getElementById("SEMNoB").style.backgroundColor = "#FFF";
-        document.getElementById("classNameB").disabled = false;
-        document.getElementById("GradB").disabled = false;
-        document.getElementById("classNameInputB").readOnly = false;
-        document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
-        document.getElementById("hoursB").readOnly = false;
-        document.getElementById("hoursB").style.backgroundColor = "#FFF";
-        document.getElementById("compulsoryB").disabled = false;
-        document.getElementById("requiredB").disabled = false;
-        }
+    function selectAll() {
+    document.getElementById("SEMNoA").value = "1";
+    document.getElementById("SEMNoB").value = "2";
+    document.getElementById("hoursA").value = "";
+    document.getElementById("hoursB").value = "";
+    //document.getElementById("SEMNoA").readOnly = false;
+    document.getElementById("SEMNoA").style.backgroundColor = "#FFF";
+    document.getElementById("classNameA").disabled = false;
+    document.getElementById("GradA").disabled = false;
+    document.getElementById("classNameInputA").readOnly = false;
+    document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
+    document.getElementById("hoursA").readOnly = false;
+    document.getElementById("hoursA").style.backgroundColor = "#FFF";
+    document.getElementById("compulsoryA").disabled = false;
+    document.getElementById("requiredA").disabled = false;
+    //document.getElementById("SEMNoB").readOnly = false;
+    document.getElementById("SEMNoB").style.backgroundColor = "#FFF";
+    document.getElementById("classNameB").disabled = false;
+    document.getElementById("GradB").disabled = false;
+    document.getElementById("classNameInputB").readOnly = false;
+    document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
+    document.getElementById("hoursB").readOnly = false;
+    document.getElementById("hoursB").style.backgroundColor = "#FFF";
+    document.getElementById("compulsoryB").disabled = false;
+    document.getElementById("requiredB").disabled = false;
+    }
 
-        function selectGradA() {
-        document.getElementById("classNameInputA").readOnly = true;
-        document.getElementById("classNameInputA").style.backgroundColor = "#ccc";
-        document.getElementById("classNameInputA").value = "";
-        document.getElementById("hoursA").readOnly = true;
-        document.getElementById("hoursA").style.backgroundColor = "#ccc";
-        document.getElementById("hoursA").value = "0";
-        document.getElementById("compulsoryA").disabled = true;
-        document.getElementById("compulsoryA").checked = false;
-        document.getElementById("requiredA").disabled = true;
-        document.getElementById("requiredA").checked = false;
-        }
+    function selectGradA() {
+    document.getElementById("classNameInputA").readOnly = true;
+    document.getElementById("classNameInputA").style.backgroundColor = "#ccc";
+    document.getElementById("classNameInputA").value = "";
+    document.getElementById("hoursA").readOnly = true;
+    document.getElementById("hoursA").style.backgroundColor = "#ccc";
+    document.getElementById("hoursA").value = "0";
+    document.getElementById("compulsoryA").disabled = true;
+    document.getElementById("compulsoryA").checked = false;
+    document.getElementById("requiredA").disabled = true;
+    document.getElementById("requiredA").checked = false;
+    }
 
-        function selectClassNameA() {
-        document.getElementById("classNameInputA").readOnly = false;
-        document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
-        document.getElementById("hoursA").readOnly = false;
-        document.getElementById("hoursA").style.backgroundColor = "#FFF";
-        document.getElementById("hoursA").value = "";
-        document.getElementById("compulsoryA").disabled = false;
-        document.getElementById("requiredA").disabled = false;
-        }
+    function selectClassNameA() {
+    document.getElementById("classNameInputA").readOnly = false;
+    document.getElementById("classNameInputA").style.backgroundColor = "#FFF";
+    document.getElementById("hoursA").readOnly = false;
+    document.getElementById("hoursA").style.backgroundColor = "#FFF";
+    document.getElementById("hoursA").value = "";
+    document.getElementById("compulsoryA").disabled = false;
+    document.getElementById("requiredA").disabled = false;
+    }
 
-        function selectGradB() {
-        document.getElementById("classNameInputB").readOnly = true;
-        document.getElementById("classNameInputB").style.backgroundColor = "#ccc";
-        document.getElementById("classNameInputB").value = "";
-        document.getElementById("hoursB").readOnly = true;
-        document.getElementById("hoursB").style.backgroundColor = "#ccc";
-        document.getElementById("hoursB").value = "0";
-        document.getElementById("compulsoryB").disabled = true;
-        document.getElementById("compulsoryB").checked = false;
-        document.getElementById("requiredB").disabled = true;
-        document.getElementById("requiredB").checked = false;
-        }
+    function selectGradB() {
+    document.getElementById("classNameInputB").readOnly = true;
+    document.getElementById("classNameInputB").style.backgroundColor = "#ccc";
+    document.getElementById("classNameInputB").value = "";
+    document.getElementById("hoursB").readOnly = true;
+    document.getElementById("hoursB").style.backgroundColor = "#ccc";
+    document.getElementById("hoursB").value = "0";
+    document.getElementById("compulsoryB").disabled = true;
+    document.getElementById("compulsoryB").checked = false;
+    document.getElementById("requiredB").disabled = true;
+    document.getElementById("requiredB").checked = false;
+    }
 
-        function selectClassNameB() {
-        document.getElementById("classNameInputB").readOnly = false;
-        document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
-        document.getElementById("hoursB").readOnly = false;
-        document.getElementById("hoursB").style.backgroundColor = "#FFF";
-        document.getElementById("hoursB").value = "";
-        document.getElementById("compulsoryB").disabled = false;
-        document.getElementById("requiredB").disabled = false;
-        }
+    function selectClassNameB() {
+    document.getElementById("classNameInputB").readOnly = false;
+    document.getElementById("classNameInputB").style.backgroundColor = "#FFF";
+    document.getElementById("hoursB").readOnly = false;
+    document.getElementById("hoursB").style.backgroundColor = "#FFF";
+    document.getElementById("hoursB").value = "";
+    document.getElementById("compulsoryB").disabled = false;
+    document.getElementById("requiredB").disabled = false;
+    }
 
-    </script>
+</script>
     
 </body>
 </html>

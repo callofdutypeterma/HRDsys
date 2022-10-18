@@ -1,1 +1,7 @@
 .vs
+
+#忽略連線檔
+connect.php
+
+#不用存csv檔
+formData.csv
