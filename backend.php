@@ -69,7 +69,9 @@ if(isset($_GET["num"])) {
 
 if(isset($_POST['submit'])){
     $indexnote = $_POST['indexnote'];
-    $updateSql = "UPDATE backend_table SET note = '$indexnote' WHERE id = 1";
+    $adjunctnote = $_POST['adjunctnote'];
+    $jointappointmentnote = $_POST['jointappointmentnote'];
+    $updateSql = "UPDATE backend_table SET note = '$indexnote', adjunct_note = '$adjunctnote', joint_appointment_note = '$jointappointmentnote'  WHERE id = 1";
     $status = mysqli_query($connect, $updateSql);
 }
 
@@ -87,8 +89,11 @@ echo "
 ";
 
 echo "<form action='' method='post''>";
-echo "<textarea name='indexnote' id='index_note' style='font-size:16px;width:100%;height:200px;'>".$row['note']."</textarea><button type='submit' name='submit' id='editButton' onclick='myFunction();toggleText(this.id)'>修改</button></form><br>";
-echo "<script>document.getElementById('index_note').readOnly = true;</script>";
+echo "<textarea name='indexnote' class='textarea' id='index_note' style='font-size:16px;width:100%;height:200px;'>".$row['note']."</textarea>
+<textarea name='adjunctnote' class='textarea' id='adjunct_note' style='font-size:16px;width:100%;height:200px;'>".$row['adjunct_note']."</textarea>
+<textarea name='jointappointmentnote' class='textarea' id='joint_appointment_note' style='font-size:16px;width:100%;height:200px;'>".$row['joint_appointment_note']."</textarea>
+<button type='submit' name='submit' id='editButton' onclick='myFunction();toggleText(this.id)'>修改</button></form><br>";
+echo "<script>document.getElementById('index_note').readOnly = true;document.getElementById('adjunct_note').readOnly = true;document.getElementById('joint_appointment_note').readOnly = true;</script>";
 
 $string = "
     各處室資料：<a href='formData.csv' download='各處室資料.csv'>點選下載</a><br><br>
@@ -111,12 +116,15 @@ window.onload=function(){
 }
 
 function myFunction() {
-  var textarea = document.getElementById("index_note");
+  /*var textarea = document.getElementById("index_note");*/
+  var textarea = document.querySelectorAll('#index_note, #adjunct_note, #joint_appointment_note');
 
-  if(textarea.readOnly == true){
-    textarea.readOnly = false;
-  }else{
-    textarea.readOnly = true;
+  for (var i = 0; i < textarea.length; i++){
+    if(textarea[i].readOnly == true){
+        textarea[i].readOnly = false;
+    }else{
+        textarea[i].readOnly = true;
+    }
   }
 }
 

@@ -40,6 +40,7 @@ $sql = "SELECT * FROM backend_table;";
 $result = mysqli_query($connect, $sql);
 $row = mysqli_fetch_assoc($result);
 $academic_year = $row['academic_year'];
+$adjunct_note = $row['adjunct_note'];
 
 switch ($myselect) {
 	case "ipla":
@@ -395,13 +396,7 @@ $htmlc = '
 		<td colspan="9" align="left"><small color="#FFFFFF">small</small><br>系所承辦人：<font color="#FFFFFF">天天都在測試中</font>單位主管：<font color="#FFFFFF">天天都在測試中</font>院級主管：<font color="#FFFFFF">天天都在測試中</font>人數： '.$i.'人<br><small color="#FFFFFF">small</small><br>系級教評會 <font color="#FFFFFF">111</font>年 　   月 　   日 <font color="#FFFFFF">111</font>學年度第 學期第  次會議審議通過<br><small color="#FFFFFF">small</small><br>院級教評會 <font color="#FFFFFF">111</font>年 　   月 　   日 <font color="#FFFFFF">111</font>學年度第 學期第  次會議報告(審議)通過</td>
 	</tr>
 
-</table>
-備註：<br>
-一、請確實登打貴單位兼任教研人員再聘名單，如需再聘者請於「擬授課學期別」欄位內勾選，並於<br><font color="#FFFFFF">一、</font>「再聘情形」欄填具課程資訊，如未開課僅指導研究生論文者，請註明「指導研究生」，本室將<br><font color="#FFFFFF">一、</font>依再聘情形核發聘書；<b>不再聘任者，請於備註欄註明「不予再聘」，請勿刪除該人員。</b><br>
-二、請詳實填寫兼任教研人員之本職服務機關學校、單位及職稱。<br>
-三、依本校三級教評會分工一覽表規定，兼任教研人員之再聘應經系教評會審議通過及院教評會報告<br><font color="#FFFFFF">三、</font>，惟如<b>係講授必修課程者，則需經院教評會審議。</b><br>
-四、本名冊<b>請於110年5月20日前，由各院級單位彙送人事室。</b><br>
-';
+</table>'.$adjunct_note;
 // output the HTML content
 
 $pdf->writeHTML($htmlc, false, 0, false, false, 'L');
