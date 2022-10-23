@@ -92,6 +92,7 @@ echo "<form action='' method='post''>";
 echo "<textarea name='indexnote' class='textarea' id='index_note' style='font-size:16px;width:100%;height:200px;'>".$row['note']."</textarea>
 <textarea name='adjunctnote' class='textarea' id='adjunct_note' style='font-size:16px;width:100%;height:200px;'>".$row['adjunct_note']."</textarea>
 <textarea name='jointappointmentnote' class='textarea' id='joint_appointment_note' style='font-size:16px;width:100%;height:200px;'>".$row['joint_appointment_note']."</textarea>
+<font color='red'><b>如要修改文字框中內容，請點選「修改」按鈕，即可編輯文字。完成編輯後再點選「儲存」按鈕，即可儲存剛剛修改過後的內容。</b></font>
 <button type='submit' name='submit' id='editButton' onclick='myFunction();toggleText(this.id)'>修改</button></form><br>";
 echo "<script>document.getElementById('index_note').readOnly = true;document.getElementById('adjunct_note').readOnly = true;document.getElementById('joint_appointment_note').readOnly = true;</script>";
 
